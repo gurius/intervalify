@@ -1,0 +1,35 @@
+:host{
+  display: flex;
+  flex-flow: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 80%;
+}
+
+.constuctor-element,
+mat-form-field{
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+}
+.narrow-input{
+  width: 4rem;
+}
+.wide-input{
+  width: 10rem;
+}
+.editor__item{
+  display: flex;
+  flex-flow: row;
+  align-items: baseline;
+  justify-content: center;
+}
+.add-countdown{
+  align-self: flex-start;
+}
+.main-bar{
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
+}

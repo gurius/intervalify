@@ -3,8 +3,8 @@ import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 
-import { OpenNav, CloseNav } from './actions/layout.actions';
-import * as fromRedusers from './reducers';
+import { OpenNav, CloseNav } from '../../actions/layout.actions';
+import * as fromRedusers from '../../reducers';
 
 @Component({
   selector: 'jt-root',

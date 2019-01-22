@@ -1,0 +1,16 @@
+:host{
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+}
+header{
+  width: 100%;
+}
+.routerOutlet{
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+}

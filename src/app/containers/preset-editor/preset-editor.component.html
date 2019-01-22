@@ -1,0 +1,96 @@
+<div class="constuctor-element">
+  <mat-form-field>
+    <input matInput type="text" value="title" placeholder="presets title">
+  </mat-form-field>
+</div>
+
+<div class="constuctor-element">
+  <mat-accordion displayMode="flat" hideToggle="true" multi="true">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Squats
+        </mat-panel-title>
+        <mat-panel-description>
+          x 3
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <p>w 1 min. 15 sec.</p>
+      <p>r 45 sec.</p>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Jump
+        </mat-panel-title>
+        <mat-panel-description>
+          x 3
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <p>w 1 min. 15 sec.</p>
+      <p>r 45 sec.</p>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
+
+<div class="constuctor-element">
+  <div class="editor">
+    <div class="editor__item">
+      <mat-form-field class="narrow-input">
+        <input matInput type="color" value="#1c9bba">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="exercise" value="exercise">
+      </mat-form-field>
+      <mat-form-field class="narrow-input">
+        <input matInput type="number" placeholder="repetitions" min="0" step="1" value="5">
+      </mat-form-field>
+    </div>
+
+    <div class="editor__item">
+      <button mat-icon-button>
+        <mat-icon>rowing</mat-icon>
+      </button>
+      <mat-form-field class="narrow-input">
+        <input matInput type="number" min="0" placeholder="minutes">
+      </mat-form-field>:
+      <mat-form-field class="narrow-input">
+        <input matInput type="number" min="0" placeholder="seconds">
+      </mat-form-field>
+      <button mat-icon-button>
+        <mat-icon>indeterminate_check_box</mat-icon>
+      </button>
+    </div>
+
+    <div class="editor__item">
+      <button mat-icon-button>
+        <mat-icon>airline_seat_recline_extra</mat-icon>
+      </button>
+      <mat-form-field class="narrow-input">
+        <input matInput type="number" placeholder="minutes">
+      </mat-form-field>:
+      <mat-form-field class="narrow-input">
+        <input matInput type="number" placeholder="seconds">
+      </mat-form-field>
+      <button mat-icon-button>
+        <mat-icon>indeterminate_check_box</mat-icon>
+      </button>
+    </div>
+
+    <div class="editor__item">
+      <button mat-icon-button class="add-countdown">
+        <mat-icon>add_box</mat-icon>
+      </button>
+    </div>
+    <div class="editor__item">
+      <button mat-raised-button>add exercise</button>
+    </div>
+  </div>
+
+  <div class="constuctor-element">
+    <div class="main-bar">
+      <button mat-raised-button>delete preset</button>
+      <button mat-raised-button>save and launch</button>
+    </div>
+  </div>
+</div>

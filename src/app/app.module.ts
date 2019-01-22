@@ -1,26 +1,36 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { StoreModule } from '@ngrx/store';
+import { MaterialModule } from './material/material.module';
+import { AppComponent } from './containers/app/app.component';
 import { reducers, metaReducers } from './reducers';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { IconButtonComponent } from './components/icon-button/icon-button.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PresetEditorComponent } from './containers/preset-editor/preset-editor.component';
+import { HomeComponent } from './containers/home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    IconButtonComponent
+    IconButtonComponent,
+    PresetEditorComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument({ maxAge: 10 }) : [],
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FormsModule,
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]
