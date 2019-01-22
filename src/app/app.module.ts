@@ -8,6 +8,7 @@ import { reducers, metaReducers } from './reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { IconButtonComponent } from './components/icon-button/icon-button.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { IconButtonComponent } from './components/icon-button/icon-button.compon
     BrowserModule,
     AppRoutingModule,
     StoreModule.forRoot(reducers, { metaReducers }),
-    !environment.production ? StoreDevtoolsModule.instrument({ maxAge: 10 }) : []
+    !environment.production ? StoreDevtoolsModule.instrument({ maxAge: 10 }) : [],
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
