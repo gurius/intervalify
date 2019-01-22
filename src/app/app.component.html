@@ -1,2 +1,14 @@
-
+<header>
+  <jt-icon-button (click)="onClick()">
+    |||
+  </jt-icon-button>
+</header>
+<nav [hidden]='!visibleNav'>
+  <div class="">
+    link 1
+  </div>
+  <div class="">
+    link 2
+  </div>
+</nav>
 <router-outlet></router-outlet>
