@@ -7,14 +7,18 @@ import {
 } from '@ngrx/store';
 import { environment } from '../../environments/environment';
 
-import * as fromLayoutReduser from './layout.reducer';
+import * as fromLayoutReduser from './app.reducer';
+import * as fromPreset from './preset.reducer';
 
 export interface State {
   layout: fromLayoutReduser.State;
+  preset: fromPreset.State;
 }
 
 export const reducers: ActionReducerMap<State> = {
-  layout: fromLayoutReduser.reducer
+  layout: fromLayoutReduser.reducer,
+  preset: fromPreset.reducer
+
 };
 
 

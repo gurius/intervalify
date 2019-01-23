@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 
-import { OpenNav, CloseNav } from '../../actions/layout.actions';
+import { CloseNav, OpenNav } from './app.actions';
 import * as fromRedusers from '../../reducers';
 
 @Component({

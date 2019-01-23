@@ -9,12 +9,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { MaterialModule } from './material/material.module';
-import { AppComponent } from './containers/app/app.component';
+import { AppComponent } from './pages/app/app.component';
 import { reducers, metaReducers } from './reducers';
 import { environment } from '../environments/environment';
 import { IconButtonComponent } from './components/icon-button/icon-button.component';
-import { PresetEditorComponent } from './containers/preset-editor/preset-editor.component';
-import { HomeComponent } from './containers/home/home.component';
+import { PresetEditorComponent } from './pages/preset-editor/preset-editor.component';
+import { HomeComponent } from './pages/home/home.component';
 
 @NgModule({
   declarations: [

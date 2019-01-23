@@ -1,5 +1,4 @@
-
-import { LayoutActions, LayoutActionTypes } from '../actions/layout.actions';
+import { AppActions, AppActionTypes } from '../pages/app/app.actions';
 
 
 export interface State {
@@ -10,12 +9,12 @@ export const initialState: State = {
   showNav: false
 };
 
-export function reducer(state = initialState, action: LayoutActions): State {
+export function reducer(state = initialState, action: AppActions): State {
   switch (action.type) {
-    case LayoutActionTypes.CloseNav:
+    case AppActionTypes.CloseNav:
       return { showNav: false };
 
-    case LayoutActionTypes.OpenNav:
+    case AppActionTypes.OpenNav:
       return { showNav: true };
 
     default:
