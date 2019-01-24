@@ -15,6 +15,8 @@ import { environment } from '../environments/environment';
 import { IconButtonComponent } from './components/icon-button/icon-button.component';
 import { PresetEditorComponent } from './pages/preset-editor/preset-editor.component';
 import { HomeComponent } from './pages/home/home.component';
+import { EffectsModule } from '@ngrx/effects';
+import { PresetEditorEffects } from './pages/preset-editor/preset-editor.effects';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import { HomeComponent } from './pages/home/home.component';
     !environment.production ? StoreDevtoolsModule.instrument({ maxAge: 10 }) : [],
     BrowserAnimationsModule,
     FormsModule,
-    MaterialModule
+    MaterialModule,
+    EffectsModule.forRoot([PresetEditorEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]

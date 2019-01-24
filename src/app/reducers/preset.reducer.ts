@@ -2,7 +2,7 @@ import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 
 import { Preset } from '../models/preset.model';
 import { PresetActions, PresetActionTypes }
-from '../pages/preset-editor/preset-editor.actions';
+  from '../pages/preset-editor/preset-editor.actions';
 
 
 export interface State extends EntityState<Preset> {
@@ -54,6 +54,16 @@ export function reducer(
 
     case PresetActionTypes.LoadPresets: {
       return adapter.addAll(action.payload.presets, state);
+    }
+
+    case PresetActionTypes.PresetsLoaded: {
+      if (action.payload.presets){
+        return adapter.addAll(action.payload.presets, state);
+      }
+    }
+
+    case PresetActionTypes.PresetsLoadingError: {
+
     }
 
     case PresetActionTypes.ClearPresets: {

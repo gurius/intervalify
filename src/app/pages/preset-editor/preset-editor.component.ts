@@ -6,6 +6,7 @@ import { Store, select } from '@ngrx/store';
 import * as fromReducers from '../../reducers';
 import * as fromSelectors from './preset-editor.selectors';
 import { Preset } from 'src/app/models/preset.model';
+import { AddPreset, UpdatePreset } from './preset-editor.actions';
 
 
 
@@ -15,16 +16,40 @@ import { Preset } from 'src/app/models/preset.model';
   styleUrls: ['./preset-editor.component.css']
 })
 export class PresetEditorComponent implements OnInit {
-  presets$: Observable<Preset[]>
+  preset$: Observable<Preset>
+  preset: Preset;
 
   constructor(private store: Store<fromReducers.State>) {
-    this.presets$ = this.store.pipe(select(fromSelectors.selectAllPresets));
-    this.presets$.subscribe(presets => {
-      presets;
+    this.preset$ = this.store.pipe(select(fromSelectors.selectPreset(1)));
+    this.preset$.subscribe(preset => {
+      if (!preset) {
+
+        this.store.dispatch(new AddPreset({
+          preset: {
+            id: 1,
+            title: '',
+            exercisesIds: [],
+            repetitions: 0,
+            default: true
+          }
+        }));
+
+      } else {
+        this.preset = preset;
+      }
     })
   }
 
-  ngOnInit() {
+  ngOnInit() { }
+
+  onBlur(title) {
+    this.store.dispatch(new UpdatePreset({
+      preset: {
+        id: this.preset.id,
+        changes: { title }
+      }
+    }))
+    return true;
   }
 
 }

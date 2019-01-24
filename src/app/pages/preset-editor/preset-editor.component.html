@@ -1,7 +1,13 @@
 <div class="constuctor-element">
-  <mat-form-field>
-    <input matInput type="text" value="title" placeholder="presets title">
+  <mat-form-field *ngIf="editingTitle">
+    <input matInput
+           type="text"
+           value="{{preset.title}}"
+           (blur)="onBlur(titleInput.value) && (editingTitle = false)"
+           placeholder="presets title"
+           #titleInput>
   </mat-form-field>
+  <p [hidden]="editingTitle" (click)="editingTitle = true">{{preset.title}}</p>
 </div>
 
 <div class="constuctor-element">
