@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Store, select } from '@ngrx/store';
+import { capitalize } from 'lodash';
 
 import * as fromReducers from '../../reducers';
 import * as fromSelectors from './preset-editor.selectors';
@@ -15,41 +16,62 @@ import { AddPreset, UpdatePreset } from './preset-editor.actions';
   templateUrl: './preset-editor.component.html',
   styleUrls: ['./preset-editor.component.css']
 })
-export class PresetEditorComponent implements OnInit {
+export class PresetEditorComponent implements OnInit, OnDestroy {
   preset$: Observable<Preset>
   preset: Preset;
+  presetSubscription: Subscription;
+  editingTitle: boolean;
+  editingRepetitions: boolean;
+
+  @ViewChild('titleInput') private titleInput: ElementRef<HTMLInputElement>;
+  @ViewChild('repetitionsInput') private repetitionsInput: ElementRef<HTMLInputElement>;
 
   constructor(private store: Store<fromReducers.State>) {
     this.preset$ = this.store.pipe(select(fromSelectors.selectPreset(1)));
-    this.preset$.subscribe(preset => {
-      if (!preset) {
 
-        this.store.dispatch(new AddPreset({
-          preset: {
-            id: 1,
-            title: '',
-            exercisesIds: [],
-            repetitions: 0,
-            default: true
-          }
-        }));
+    this.presetSubscription = this.preset$
+      .subscribe(preset => {
 
-      } else {
-        this.preset = preset;
-      }
-    })
+        if (!preset) {
+
+          this.store.dispatch(new AddPreset({
+            preset: {
+              id: 1,
+              title: '',
+              exercisesIds: [],
+              repetitions: 1
+            }
+          }));
+
+        } else {
+          this.preset = preset;
+        }
+
+      })
+
   }
 
   ngOnInit() { }
 
-  onBlur(title) {
+  ngOnDestroy() {
+    this.presetSubscription.unsubscribe();
+  }
+
+  onBlur(prop, val) {
     this.store.dispatch(new UpdatePreset({
       preset: {
         id: this.preset.id,
-        changes: { title }
+        changes: { [prop]: val }
       }
     }))
-    return true;
+    let editingField = 'editing'+capitalize(prop);
+    this[editingField] = false;
+  }
+
+  editProperty(prop) {
+    let editingField = 'editing'+capitalize(prop);
+    this[editingField] = true;
+    setTimeout(() => this[prop+'Input'].nativeElement.focus(), 100)
   }
 
 }

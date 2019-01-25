@@ -3,5 +3,4 @@ export interface Preset {
   title: string;
   exercisesIds: Array<number | string>;
   repetitions: number;
-  default: boolean;
 }

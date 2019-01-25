@@ -1,13 +1,27 @@
 <div class="constuctor-element">
-  <mat-form-field *ngIf="editingTitle">
-    <input matInput
-           type="text"
-           value="{{preset.title}}"
-           (blur)="onBlur(titleInput.value) && (editingTitle = false)"
-           placeholder="presets title"
-           #titleInput>
-  </mat-form-field>
-  <p [hidden]="editingTitle" (click)="editingTitle = true">{{preset.title}}</p>
+  <div class="workout-title">
+    <mat-form-field *ngIf="editingTitle || preset.title === ''">
+      <input matInput
+      type="text"
+      value="{{preset.title}}"
+      (blur)="onBlur('title', titleInput.value)"
+      placeholder="presets title"
+      #titleInput>
+    </mat-form-field>
+    <p [hidden]="editingTitle" (click)="editProperty('title')">{{preset.title}}</p>
+  </div>
+  <div class="workout-repetitions">
+    <mat-form-field *ngIf="editingRepetitions">
+      <input matInput
+             type="number"
+             min="1"
+             placeholder="repetitions"
+             (blur)="onBlur('repetitions', repetitionsInput.value)"
+             value="{{preset.repetitions}}"
+             #repetitionsInput>
+    </mat-form-field>
+    <p [hidden]="editingRepetitions" (click)="editProperty('repetitions')">{{preset.repetitions}}</p>
+  </div>
 </div>
 
 <div class="constuctor-element">
