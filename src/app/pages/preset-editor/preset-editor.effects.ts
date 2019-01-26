@@ -13,6 +13,11 @@ import {
   PresetUpdatingError,
   PresetUpdated
 } from './preset-editor.actions';
+import {
+  RequestExercises,
+  ExerciseActionTypes,
+  AddExercise
+} from 'src/app/actions/exercise.actions';
 import { DataSourceService } from 'src/app/data-source.service';
 
 
@@ -32,7 +37,7 @@ export class PresetEditorEffects {
 
     catchError(() => of({ type: PresetActionTypes.PresetsLoadingError }))
 
-  )
+  );
 
   @Effect()
   addPreset$ = this.actions$
@@ -47,7 +52,7 @@ export class PresetEditorEffects {
 
       catchError(() => of({ type: PresetActionTypes.PresetAddingError }))
 
-    )
+    );
 
   @Effect()
   updatePreset$ = this.actions$
@@ -68,6 +73,37 @@ export class PresetEditorEffects {
       }),
 
       catchError(() => of({ type: PresetActionTypes.PresetUpdatingError }))
+
+    );
+
+  @Effect()
+  loadExercises$ = this.actions$
+    .pipe(
+
+      ofType<RequestExercises>(ExerciseActionTypes.RequestExercises),
+
+      mergeMap(() => of({
+        type: ExerciseActionTypes.LoadExercises,
+        payload: { exercises: this.dataSource.getExercises() }
+      })),
+
+      catchError(() => of({ type: ExerciseActionTypes.ExercisesLoadingError }))
+
+    );
+
+  @Effect()
+  addExercise$ = this.actions$
+    .pipe(
+
+      ofType<AddExercise>(ExerciseActionTypes.AddExercise),
+
+      mergeMap(action => {
+        this.dataSource.addExercise(action.payload.exercise);
+        return of({ type: ExerciseActionTypes.ExerciseAdded })
+      }
+    ),
+
+      catchError(() => of({ type: ExerciseActionTypes.ExerciseAddingError }))
 
     )
 

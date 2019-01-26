@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Preset } from './models/preset.model';
 import { findIndex } from 'lodash';
 
+import { Exercise } from './models/exercise.model';
 
 
 @Injectable({
@@ -12,31 +13,71 @@ export class DataSourceService {
 
   constructor() { }
 
-  getPresets = () => JSON.parse(localStorage.getItem(`presets`));
+  getData() {
+    return JSON.parse(localStorage.getItem('tonus-data'));
+  }
+
+  setData(data) {
+    localStorage.setItem('tonus-data', JSON.stringify(data));
+  }
+
+  // presets
+  getPresets = () => this.getData().presets;
+
 
   addPreset = (preset: Preset) => {
-    let presets = JSON.parse(localStorage.getItem(`presets`));
+    let data = this.getData();
+
+    if (!data) {
+      data = {};
+    }
+
+    let { presets } = data;
 
     if (!presets) {
       presets = []
     }
 
     presets.push(preset);
-    localStorage.setItem(`presets`, JSON.stringify(presets));
+
+    data.presets = presets;
+    this.setData(data);
   }
 
   updatePreset = (preset) => {
-    const presets = JSON.parse(localStorage.getItem(`presets`));
+    const data = this.getData();
+    let { presets } = data;
 
     if (!presets) {
       return { errorOccured: true };
     }
 
-    const index = findIndex(presets, {id: preset.id});
+    const index = findIndex(presets, { id: preset.id });
 
     presets[index] = Object.assign({}, presets[index], preset.changes);
-
-    localStorage.setItem(`presets`, JSON.stringify(presets));
-
+    data.presets = presets;
+    this.setData(data);
   }
+
+  //exercises
+  getExercises = () => this.getData().exercises;
+
+  addExercise = (exercise: Exercise) => {
+    let data = this.getData();
+
+    let { exercises } = data;
+
+    if (!exercises){
+      exercises = [];
+    }
+
+    exercises.push(exercise);
+
+    data.exercises = exercises;
+
+    this.setData(data);
+  }
+
+  //countdowns
+
 }

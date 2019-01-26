@@ -24,32 +24,24 @@
   </div>
 </div>
 
-<div class="constuctor-element">
+<div  *ngIf="exercise" class="constuctor-element">
   <mat-accordion displayMode="flat" hideToggle="true" multi="true">
-    <mat-expansion-panel>
+    <mat-expansion-panel *ngFor="let exercise of exercises">
       <mat-expansion-panel-header>
         <mat-panel-title>
-          Squats
+          {{exercise.title}}
+          _x          {{exercise.repetitions}}
         </mat-panel-title>
         <mat-panel-description>
-          x 3
+          <button (clicl)="onEditExercise($event)" mat-icon-button>
+            <mat-icon>edit</mat-icon>
+          </button>
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <p>w 1 min. 15 sec.</p>
-      <p>r 45 sec.</p>
+      <!-- <p>w 1 min. 15 sec.</p>
+      <p>r 45 sec.</p> -->
     </mat-expansion-panel>
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Jump
-        </mat-panel-title>
-        <mat-panel-description>
-          x 3
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-      <p>w 1 min. 15 sec.</p>
-      <p>r 45 sec.</p>
-    </mat-expansion-panel>
+
   </mat-accordion>
 </div>
 
@@ -57,13 +49,17 @@
   <div class="editor">
     <div class="editor__item">
       <mat-form-field class="narrow-input">
-        <input matInput type="color" value="#1c9bba">
+        <input matInput type="color" [(ngModel)]="exercise.color">
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="exercise" value="exercise">
+        <input matInput placeholder="exercise" [(ngModel)]="exercise.title">
       </mat-form-field>
       <mat-form-field class="narrow-input">
-        <input matInput type="number" placeholder="repetitions" min="0" step="1" value="5">
+        <input matInput
+               type="number"
+               placeholder="repetitions"
+               [(ngModel)]="exercise.repetitions"
+               min="0" step="1">
       </mat-form-field>
     </div>
 
@@ -103,7 +99,7 @@
       </button>
     </div>
     <div class="editor__item">
-      <button mat-raised-button>add exercise</button>
+      <button mat-raised-button (click)="addExercise()">add exercise</button>
     </div>
   </div>
 

@@ -5,23 +5,23 @@ import { Preset } from 'src/app/models/preset.model';
 
 
 export enum PresetActionTypes {
-  RequestPresets = '[Preset] Request Presets',
+  RequestPresets = '[Preset Editor] Request Presets', // From API
   PresetsLoaded = '[Preset API] Presets Loaded',
   PresetsLoadingError = '[Preset API] Preset Loading Error',
   PresetAdded = '[Preset API] Preset Successfully Added',
   PresetAddingError = '[Preset API] Preset Adding Error',
   PresetUpdated = '[Preset API] Preset Updated Successfully',
   PresetUpdatingError = '[Preset API] Preset Updating Error',
-  LoadPresets = '[Preset] Load Presets',
-  AddPreset = '[Preset] Add Preset',
-  UpsertPreset = '[Preset] Upsert Preset',
-  AddPresets = '[Preset] Add Presets',
-  UpsertPresets = '[Preset] Upsert Presets',
-  UpdatePreset = '[Preset] Update Preset',
-  UpdatePresets = '[Preset] Update Presets',
-  DeletePreset = '[Preset] Delete Preset',
-  DeletePresets = '[Preset] Delete Presets',
-  ClearPresets = '[Preset] Clear Presets'
+  LoadPresets = '[Preset Editor] Load Presets',
+  AddPreset = '[Preset Editor] Add Preset',
+  UpsertPreset = '[Preset Editor] Upsert Preset',//unused
+  AddPresets = '[Preset Editor] Add Presets',//unused
+  UpsertPresets = '[Preset Editor] Upsert Presets',//unused
+  UpdatePreset = '[Preset Editor] Update Preset',
+  UpdatePresets = '[Preset Editor] Update Presets',//unused
+  DeletePreset = '[Preset Editor] Delete Preset',//unused
+  DeletePresets = '[Preset Editor] Delete Presets',//unused
+  ClearPresets = '[Preset Editor] Clear Presets'//unused
 }
 
 export class LoadPresets implements Action {

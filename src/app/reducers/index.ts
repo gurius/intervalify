@@ -9,16 +9,18 @@ import { environment } from '../../environments/environment';
 
 import * as fromLayoutReduser from './app.reducer';
 import * as fromPreset from './preset.reducer';
+import * as fromExercise from './exercise.reducer';
 
 export interface State {
   layout: fromLayoutReduser.State;
   preset: fromPreset.State;
+  exercise: fromExercise.State;
 }
 
 export const reducers: ActionReducerMap<State> = {
   layout: fromLayoutReduser.reducer,
-  preset: fromPreset.reducer
-
+  preset: fromPreset.reducer,
+  exercise: fromExercise.reducer,
 };
 
 

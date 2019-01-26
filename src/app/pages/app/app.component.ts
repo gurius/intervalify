@@ -6,6 +6,7 @@ import { Store, select } from '@ngrx/store';
 import { CloseNav, OpenNav } from './app.actions';
 import * as fromRedusers from '../../reducers';
 import { RequestPresets } from '../preset-editor/preset-editor.actions';
+import { RequestExercises } from 'src/app/actions/exercise.actions';
 
 @Component({
   selector: 'jt-root',
@@ -21,6 +22,7 @@ export class AppComponent {
     this.showNav$ = store.pipe(select(fromRedusers.getShowNav));
     this.showNav$.subscribe(sn => this.visibleNav = sn);
     this.store.dispatch(new RequestPresets());
+    this.store.dispatch(new RequestExercises());
   }
 
   onClick() {

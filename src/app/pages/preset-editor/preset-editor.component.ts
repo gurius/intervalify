@@ -8,6 +8,8 @@ import * as fromReducers from '../../reducers';
 import * as fromSelectors from './preset-editor.selectors';
 import { Preset } from 'src/app/models/preset.model';
 import { AddPreset, UpdatePreset } from './preset-editor.actions';
+import { Exercise } from 'src/app/models/exercise.model';
+import { AddExercise } from 'src/app/actions/exercise.actions';
 
 
 
@@ -20,6 +22,19 @@ export class PresetEditorComponent implements OnInit, OnDestroy {
   preset$: Observable<Preset>
   preset: Preset;
   presetSubscription: Subscription;
+  exercises$: Observable<Exercise[]>;
+  exercises: Exercise[];
+  initialExercise: Exercise = {
+    id: 0,
+    title: '',
+    color: '#1c9bba',
+    countdownsIds: [],
+    seqNo: 0,
+    repetitions: 1,
+    belongsToPresets: []
+  };
+  exercise: Exercise = Object.assign({}, this.initialExercise);
+  exerciseSubscription: Subscription;
   editingTitle: boolean;
   editingRepetitions: boolean;
 
@@ -27,7 +42,10 @@ export class PresetEditorComponent implements OnInit, OnDestroy {
   @ViewChild('repetitionsInput') private repetitionsInput: ElementRef<HTMLInputElement>;
 
   constructor(private store: Store<fromReducers.State>) {
-    this.preset$ = this.store.pipe(select(fromSelectors.selectPreset(1)));
+    this.preset$ = this.store
+      .pipe(
+        select(fromSelectors.selectPreset(1))
+      );
 
     this.presetSubscription = this.preset$
       .subscribe(preset => {
@@ -46,9 +64,20 @@ export class PresetEditorComponent implements OnInit, OnDestroy {
         } else {
           this.preset = preset;
         }
+        this.initialExercise.belongsToPresets = [this.preset.id];
+        this.exercise.belongsToPresets = [this.preset.id];
+      });
 
-      })
+    this.exercises$ = this.store
+      .pipe(
+        select(fromSelectors.allExercisesOfPreset(this.preset.id))
+      );
 
+    this.exerciseSubscription = this.exercises$.subscribe(exercises => {
+      this.exercises = exercises;
+    });
+
+    this.presetSubscription.add(this.exerciseSubscription);
   }
 
   ngOnInit() { }
@@ -64,14 +93,32 @@ export class PresetEditorComponent implements OnInit, OnDestroy {
         changes: { [prop]: val }
       }
     }))
-    let editingField = 'editing'+capitalize(prop);
+    let editingField = 'editing' + capitalize(prop);
     this[editingField] = false;
   }
 
   editProperty(prop) {
-    let editingField = 'editing'+capitalize(prop);
+    let editingField = 'editing' + capitalize(prop);
     this[editingField] = true;
-    setTimeout(() => this[prop+'Input'].nativeElement.focus(), 100)
+    setTimeout(() => this[prop + 'Input'].nativeElement.focus(), 100)
+  }
+
+  addExercise() {
+    this.exercise.id = this.exercises.length;
+    this.store.dispatch(new AddExercise({ exercise: this.exercise }));
+
+    const exercisesIds = this.exercises.map(ex => ex.id);
+
+    this.store.dispatch(new UpdatePreset({
+      preset: {
+        id: this.preset.id,
+        changes: { exercisesIds: exercisesIds }
+      }
+    }));
+
+
+    this.exercise = Object.assign({}, this.initialExercise);
+
   }
 
 }
