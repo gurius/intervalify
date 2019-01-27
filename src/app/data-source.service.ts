@@ -60,14 +60,21 @@ export class DataSourceService {
   }
 
   //exercises
-  getExercises = () => this.getData().exercises;
+  getExercises = () => {
+
+    let data = this.getData().exercises;
+    if (!data){
+      data = [];
+    }
+    return data;
+  };
 
   addExercise = (exercise: Exercise) => {
     let data = this.getData();
 
     let { exercises } = data;
 
-    if (!exercises){
+    if (!exercises) {
       exercises = [];
     }
 
@@ -78,6 +85,28 @@ export class DataSourceService {
     this.setData(data);
   }
 
+  updateExercise = (exercise) => {
+    const data = this.getData();
+    let { exercises } = data;
+
+    if (!exercises) {
+      return { errorOccured: true };
+    }
+
+    const index = findIndex(exercises, { id: exercise.id });
+
+    exercises[index] = Object.assign({}, exercises[index], exercise.changes);
+    data.exercises = exercises;
+    this.setData(data);
+  }
+
+  deleteExercise = (id) => {
+    const data = this.getData();
+
+    data.exercises.splice(id, 1);
+
+    this.setData(data);
+  }
   //countdowns
 
 }

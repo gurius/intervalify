@@ -17,13 +17,15 @@ import { PresetEditorComponent } from './pages/preset-editor/preset-editor.compo
 import { HomeComponent } from './pages/home/home.component';
 import { EffectsModule } from '@ngrx/effects';
 import { PresetEditorEffects } from './pages/preset-editor/preset-editor.effects';
+import { ExerciseEditorComponent } from './pages/exercise-editor/exercise-editor.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     IconButtonComponent,
     PresetEditorComponent,
-    HomeComponent
+    HomeComponent,
+    ExerciseEditorComponent
   ],
   imports: [
     BrowserModule,
@@ -36,6 +38,7 @@ import { PresetEditorEffects } from './pages/preset-editor/preset-editor.effects
     EffectsModule.forRoot([PresetEditorEffects])
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ExerciseEditorComponent]
 })
 export class AppModule { }

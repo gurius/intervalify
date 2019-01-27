@@ -16,7 +16,10 @@ import {
 import {
   RequestExercises,
   ExerciseActionTypes,
-  AddExercise
+  AddExercise,
+  UpdateExercise,
+  DeleteExercise,
+
 } from 'src/app/actions/exercise.actions';
 import { DataSourceService } from 'src/app/data-source.service';
 
@@ -101,10 +104,39 @@ export class PresetEditorEffects {
         this.dataSource.addExercise(action.payload.exercise);
         return of({ type: ExerciseActionTypes.ExerciseAdded })
       }
-    ),
+      ),
 
       catchError(() => of({ type: ExerciseActionTypes.ExerciseAddingError }))
 
+    );
+
+  @Effect()
+  updateExercise$ = this.actions$
+    .pipe(
+
+      ofType<UpdateExercise>(ExerciseActionTypes.UpdateExercise),
+
+      mergeMap(action => {
+        this.dataSource.updateExercise(action.payload.exercise);
+        return of({ type: ExerciseActionTypes.ExerciseUpdated });
+      }),
+
+      catchError(() => of({ tupe: ExerciseActionTypes.ExerciseUpdatingError }))
+
+    );
+
+  @Effect()
+  deleteExercise$ = this.actions$
+    .pipe(
+
+      ofType<DeleteExercise>(ExerciseActionTypes.DeleteExercise),
+
+      mergeMap(action => {
+        this.dataSource.deleteExercise(action.payload.id);
+        return of({ type: ExerciseActionTypes.ExerciseDeleted })
+      }),
+
+      catchError(() => of({ tupe: ExerciseActionTypes.ExerciseDeletionError }))
     )
 
   constructor(

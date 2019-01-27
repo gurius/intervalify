@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material';
 
 import { Observable, Subscription } from 'rxjs';
 import { Store, select } from '@ngrx/store';
@@ -9,7 +10,8 @@ import * as fromSelectors from './preset-editor.selectors';
 import { Preset } from 'src/app/models/preset.model';
 import { AddPreset, UpdatePreset } from './preset-editor.actions';
 import { Exercise } from 'src/app/models/exercise.model';
-import { AddExercise } from 'src/app/actions/exercise.actions';
+import { AddExercise, UpdateExercise, DeleteExercise } from 'src/app/actions/exercise.actions';
+import { ExerciseEditorComponent } from '../exercise-editor/exercise-editor.component';
 
 
 
@@ -37,11 +39,18 @@ export class PresetEditorComponent implements OnInit, OnDestroy {
   exerciseSubscription: Subscription;
   editingTitle: boolean;
   editingRepetitions: boolean;
+  exerciseIdsSubscription: Subscription;
+  exIds: string[] | number[];
 
   @ViewChild('titleInput') private titleInput: ElementRef<HTMLInputElement>;
   @ViewChild('repetitionsInput') private repetitionsInput: ElementRef<HTMLInputElement>;
 
-  constructor(private store: Store<fromReducers.State>) {
+  constructor(
+    private store: Store<fromReducers.State>,
+    private dialog: MatDialog
+  ) { }
+
+  ngOnInit() {
     this.preset$ = this.store
       .pipe(
         select(fromSelectors.selectPreset(1))
@@ -77,10 +86,14 @@ export class PresetEditorComponent implements OnInit, OnDestroy {
       this.exercises = exercises;
     });
 
-    this.presetSubscription.add(this.exerciseSubscription);
-  }
+    this.exerciseIdsSubscription = this.store
+      .pipe(select(fromSelectors.exerciseIds())).subscribe(ids => {
+        this.exIds = ids;
+      });
 
-  ngOnInit() { }
+    this.presetSubscription.add(this.exerciseSubscription);
+    this.presetSubscription.add(this.exerciseIdsSubscription);
+  }
 
   ngOnDestroy() {
     this.presetSubscription.unsubscribe();
@@ -104,9 +117,22 @@ export class PresetEditorComponent implements OnInit, OnDestroy {
   }
 
   addExercise() {
-    this.exercise.id = this.exercises.length;
-    this.store.dispatch(new AddExercise({ exercise: this.exercise }));
+    const exercise = Object.assign({}, this.initialExercise);
+    const options = { dialogTitle: 'New Exercise' };
 
+    this.openDialog(exercise, options);
+  }
+
+  private saveExercise(exercise): void {
+
+    exercise.id = Math.max.apply(Math, this.exIds)+1;
+
+    this.store.dispatch(new AddExercise({ exercise: exercise }));
+
+    this.updateExercisesIds();
+  }
+
+  private updateExercisesIds(): void {
     const exercisesIds = this.exercises.map(ex => ex.id);
 
     this.store.dispatch(new UpdatePreset({
@@ -115,10 +141,52 @@ export class PresetEditorComponent implements OnInit, OnDestroy {
         changes: { exercisesIds: exercisesIds }
       }
     }));
-
-
-    this.exercise = Object.assign({}, this.initialExercise);
-
   }
 
+  private updateExercise(exercise): void {
+    this.store.dispatch(new UpdateExercise({
+      exercise: {
+        id: exercise.id,
+        changes: { ...exercise }
+      }
+    }));
+  }
+
+  editExercise(id) {
+    const exercise = Object.assign({}, this.exercises[id]);
+    const options = { dialogTitle: 'Editing' };
+
+    this.openDialog(exercise, options);
+  }
+
+  private openDialog(exercise: Exercise, opts: { dialogTitle }): void {
+    const dref = this.dialog
+      .open(ExerciseEditorComponent, {
+        data: {
+          exercise,
+          opts
+        }
+      });
+
+    const drefSubs = dref.afterClosed().subscribe(exercise => {
+      if (exercise) {
+
+        if (opts.dialogTitle === 'Editing') {
+          this.updateExercise(exercise);
+
+        } else if (opts.dialogTitle === 'New Exercise') {
+          this.saveExercise(exercise);
+        }
+      }
+
+      drefSubs.unsubscribe();
+    });
+  }
+
+
+
+  deleteExercise(id) {
+    this.store.dispatch(new DeleteExercise({ id }));
+    this.updateExercisesIds();
+  }
 }

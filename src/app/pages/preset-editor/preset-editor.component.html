@@ -1,4 +1,4 @@
-<div class="constuctor-element">
+<div class="constructor-element">
   <div class="workout-title">
     <mat-form-field *ngIf="editingTitle || preset.title === ''">
       <input matInput
@@ -24,89 +24,42 @@
   </div>
 </div>
 
-<div  *ngIf="exercise" class="constuctor-element">
-  <mat-accordion displayMode="flat" hideToggle="true" multi="true">
+<div  *ngIf="exercise" class="constructor-element">
+  <mat-accordion  hideToggle="true" multi="true">
     <mat-expansion-panel *ngFor="let exercise of exercises">
       <mat-expansion-panel-header>
         <mat-panel-title>
-          {{exercise.title}}
-          _x          {{exercise.repetitions}}
+          {{exercise.title }}
+          <div *ngIf="exercise.repetitions > 1" class="repetitions">
+            - x {{exercise.repetitions}}
+          </div>
         </mat-panel-title>
         <mat-panel-description>
-          <button (clicl)="onEditExercise($event)" mat-icon-button>
-            <mat-icon>edit</mat-icon>
-          </button>
+
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <!-- <p>w 1 min. 15 sec.</p>
-      <p>r 45 sec.</p> -->
+      <p>w 1 min. 15 sec.</p>
+      <p>r 45 sec.</p>
+      <div class="exrcise-button-panel">
+        <button (click)="editExercise(exercise.id)" mat-icon-button>
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button (click)="deleteExercise(exercise.id)" mat-icon-button>
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
     </mat-expansion-panel>
 
   </mat-accordion>
 </div>
 
-<div class="constuctor-element">
-  <div class="editor">
-    <div class="editor__item">
-      <mat-form-field class="narrow-input">
-        <input matInput type="color" [(ngModel)]="exercise.color">
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput placeholder="exercise" [(ngModel)]="exercise.title">
-      </mat-form-field>
-      <mat-form-field class="narrow-input">
-        <input matInput
-               type="number"
-               placeholder="repetitions"
-               [(ngModel)]="exercise.repetitions"
-               min="0" step="1">
-      </mat-form-field>
-    </div>
+<div class="constructor-element">
+  <button mat-raised-button (click)="addExercise()">add exercise</button>
+</div>
 
-    <div class="editor__item">
-      <button mat-icon-button>
-        <mat-icon>rowing</mat-icon>
-      </button>
-      <mat-form-field class="narrow-input">
-        <input matInput type="number" min="0" placeholder="minutes">
-      </mat-form-field>:
-      <mat-form-field class="narrow-input">
-        <input matInput type="number" min="0" placeholder="seconds">
-      </mat-form-field>
-      <button mat-icon-button>
-        <mat-icon>indeterminate_check_box</mat-icon>
-      </button>
-    </div>
-
-    <div class="editor__item">
-      <button mat-icon-button>
-        <mat-icon>airline_seat_recline_extra</mat-icon>
-      </button>
-      <mat-form-field class="narrow-input">
-        <input matInput type="number" placeholder="minutes">
-      </mat-form-field>:
-      <mat-form-field class="narrow-input">
-        <input matInput type="number" placeholder="seconds">
-      </mat-form-field>
-      <button mat-icon-button>
-        <mat-icon>indeterminate_check_box</mat-icon>
-      </button>
-    </div>
-
-    <div class="editor__item">
-      <button mat-icon-button class="add-countdown">
-        <mat-icon>add_box</mat-icon>
-      </button>
-    </div>
-    <div class="editor__item">
-      <button mat-raised-button (click)="addExercise()">add exercise</button>
-    </div>
-  </div>
-
-  <div class="constuctor-element">
-    <div class="main-bar">
-      <button mat-raised-button>delete preset</button>
-      <button mat-raised-button>save and launch</button>
-    </div>
+<div class="constructor-element">
+  <div class="buttons-bar">
+    <button class="buttons-bar__button" mat-raised-button>delete</button>
+    <button class="buttons-bar__button" mat-raised-button>launch</button>
   </div>
 </div>

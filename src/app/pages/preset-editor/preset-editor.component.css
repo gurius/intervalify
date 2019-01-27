@@ -6,11 +6,12 @@
   width: 80%;
 }
 
-.constuctor-element,
+.constructor-element,
 mat-form-field{
   width: 100%;
   display: flex;
   flex-flow: column;
+  margin: 0.5rem 0 0.5rem 0;
 }
 .narrow-input{
   width: 4rem;
@@ -27,9 +28,17 @@ mat-form-field{
 .add-countdown{
   align-self: flex-start;
 }
-.main-bar{
+.buttons-bar{
   display: flex;
   flex-flow: row;
   justify-content: center;
   align-items: center;
+}
+.buttons-bar__button{
+  margin: 0 0.5rem 0 0.5rem;
+}
+.exrcise-button-panel{
+  display: flex;
+  flex-flow: row;
+  justify-content: flex-end;
 }
