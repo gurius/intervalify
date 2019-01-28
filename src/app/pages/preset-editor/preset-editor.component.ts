@@ -9,14 +9,14 @@ import { capitalize, filter } from 'lodash';
 import * as fromReducers from '../../root-reducer';
 import * as fromSelectors from './preset-editor.selectors';
 import * as exerciseSelectors
-  from '../exercise-editor/exercise-editor.selectors';
+  from 'src/app/components/exercise-editor/exercise-editor.selectors';
 import { Preset } from 'src/app/models/preset.model';
 import { AddPreset, UpdatePreset } from './preset-editor.actions';
 import { Exercise } from 'src/app/models/exercise.model';
 import { AddExercise, UpdateExercise, DeleteExercise }
-  from 'src/app/pages/exercise-editor/exercise-editor.actions';
+  from 'src/app/components/exercise-editor/exercise-editor.actions';
 import { ExerciseEditorComponent }
-  from '../exercise-editor/exercise-editor.component';
+  from 'src/app/components/exercise-editor/exercise-editor.component';
 
 
 

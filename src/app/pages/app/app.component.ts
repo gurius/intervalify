@@ -7,7 +7,7 @@ import { CloseNav, OpenNav } from './app.actions';
 import * as fromRedusers from '../../root-reducer';
 import { RequestPresets } from '../preset-editor/preset-editor.actions';
 import { RequestExercises }
-  from 'src/app/pages/exercise-editor/exercise-editor.actions';
+  from 'src/app/components/exercise-editor/exercise-editor.actions';
 
 @Component({
   selector: 'jt-root',

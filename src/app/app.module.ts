@@ -22,9 +22,9 @@ import { EffectsModule } from '@ngrx/effects';
 import { PresetEditorEffects }
   from './pages/preset-editor/preset-editor.effects';
 import { ExerciseEditorComponent }
-  from './pages/exercise-editor/exercise-editor.component';
+  from './components/exercise-editor/exercise-editor.component';
 import { ExerciseEditorEffects }
-  from './pages/exercise-editor/exercise-editor.effects';
+  from './components/exercise-editor/exercise-editor.effects';
 
 @NgModule({
   declarations: [

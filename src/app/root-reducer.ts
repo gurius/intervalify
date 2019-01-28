@@ -9,7 +9,7 @@ import { environment } from '../environments/environment';
 
 import * as fromLayoutReduser from './pages/app/app.reducer';
 import * as fromPreset from './pages/preset-editor/preset-editor.reducer';
-import * as fromExercise from './pages/exercise-editor/exercise-editor.reducer';
+import * as fromExercise from './components/exercise-editor/exercise-editor.reducer';
 
 export interface State {
   layout: fromLayoutReduser.State;

@@ -8,7 +8,7 @@ import {
   UpdateExercise,
   DeleteExercise,
 
-} from 'src/app/pages/exercise-editor/exercise-editor.actions';
+} from 'src/app/components/exercise-editor/exercise-editor.actions';
 import { mergeMap, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { DataSourceService } from 'src/app/data-source.service';
