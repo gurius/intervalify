@@ -20,7 +20,7 @@ import {
   UpdateExercise,
   DeleteExercise,
 
-} from 'src/app/actions/exercise.actions';
+} from 'src/app/pages/exercise-editor/exercise-editor.actions';
 import { DataSourceService } from 'src/app/data-source.service';
 
 

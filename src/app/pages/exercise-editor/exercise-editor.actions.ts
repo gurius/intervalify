@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 import { Update } from '@ngrx/entity';
-import { Exercise } from '../models/exercise.model';
+import { Exercise } from '../../models/exercise.model';
 
 export enum ExerciseActionTypes {
   RequestExercises = '[Preset Editor] Request Exercises',

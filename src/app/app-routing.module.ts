@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { PresetEditorComponent } from './pages/preset-editor/preset-editor.component';
+import { PresetEditorComponent }
+  from './pages/preset-editor/preset-editor.component';
 import { HomeComponent } from './pages/home/home.component';
 
 const routes: Routes = [

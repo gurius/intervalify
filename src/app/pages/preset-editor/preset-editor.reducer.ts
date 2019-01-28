@@ -1,8 +1,7 @@
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 
-import { Preset } from '../models/preset.model';
-import { PresetActions, PresetActionTypes }
-  from '../pages/preset-editor/preset-editor.actions';
+import { Preset } from '../../models/preset.model';
+import { PresetActions, PresetActionTypes } from './preset-editor.actions';
 
 
 export interface State extends EntityState<Preset> {
@@ -57,7 +56,7 @@ export function reducer(
     }
 
     case PresetActionTypes.PresetsLoaded: {
-      if (action.payload.presets){
+      if (action.payload.presets) {
         return adapter.addAll(action.payload.presets, state);
       }
     }

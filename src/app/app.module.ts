@@ -5,19 +5,24 @@ import { FormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule }
+  from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { MaterialModule } from './material/material.module';
 import { AppComponent } from './pages/app/app.component';
-import { reducers, metaReducers } from './reducers';
+import { reducers, metaReducers } from './root-reducer';
 import { environment } from '../environments/environment';
-import { IconButtonComponent } from './components/icon-button/icon-button.component';
-import { PresetEditorComponent } from './pages/preset-editor/preset-editor.component';
+import { IconButtonComponent }
+  from './components/icon-button/icon-button.component';
+import { PresetEditorComponent }
+  from './pages/preset-editor/preset-editor.component';
 import { HomeComponent } from './pages/home/home.component';
 import { EffectsModule } from '@ngrx/effects';
-import { PresetEditorEffects } from './pages/preset-editor/preset-editor.effects';
-import { ExerciseEditorComponent } from './pages/exercise-editor/exercise-editor.component';
+import { PresetEditorEffects }
+  from './pages/preset-editor/preset-editor.effects';
+import { ExerciseEditorComponent }
+  from './pages/exercise-editor/exercise-editor.component';
 
 @NgModule({
   declarations: [
@@ -30,8 +35,9 @@ import { ExerciseEditorComponent } from './pages/exercise-editor/exercise-editor
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot(reducers, { metaReducers }),
-    !environment.production ? StoreDevtoolsModule.instrument({ maxAge: 10 }) : [],
+    StoreModule.forRoot(reducers, { metaReducers }), !environment.production
+      ? StoreDevtoolsModule.instrument({ maxAge: 10 })
+      : [],
     BrowserAnimationsModule,
     FormsModule,
     MaterialModule,

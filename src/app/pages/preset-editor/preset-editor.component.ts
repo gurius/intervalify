@@ -1,17 +1,22 @@
-import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy }
+  from '@angular/core';
+import { MatDialog } from '@angular/material';
 
 import { Observable, Subscription } from 'rxjs';
 import { Store, select } from '@ngrx/store';
-import { capitalize } from 'lodash';
+import { capitalize, filter } from 'lodash';
 
-import * as fromReducers from '../../reducers';
+import * as fromReducers from '../../root-reducer';
 import * as fromSelectors from './preset-editor.selectors';
+import * as exerciseSelectors
+  from '../exercise-editor/exercise-editor.selectors';
 import { Preset } from 'src/app/models/preset.model';
 import { AddPreset, UpdatePreset } from './preset-editor.actions';
 import { Exercise } from 'src/app/models/exercise.model';
-import { AddExercise, UpdateExercise, DeleteExercise } from 'src/app/actions/exercise.actions';
-import { ExerciseEditorComponent } from '../exercise-editor/exercise-editor.component';
+import { AddExercise, UpdateExercise, DeleteExercise }
+  from 'src/app/pages/exercise-editor/exercise-editor.actions';
+import { ExerciseEditorComponent }
+  from '../exercise-editor/exercise-editor.component';
 
 
 
@@ -24,9 +29,18 @@ export class PresetEditorComponent implements OnInit, OnDestroy {
   preset$: Observable<Preset>
   preset: Preset;
   presetSubscription: Subscription;
+
+  blankPreset: Preset = {
+    id: 1,
+    title: '',
+    exercisesIds: [],
+    repetitions: 1
+  };
+
   exercises$: Observable<Exercise[]>;
   exercises: Exercise[];
-  initialExercise: Exercise = {
+
+  blankExercise: Exercise = {
     id: 0,
     title: '',
     color: '#1c9bba',
@@ -35,7 +49,7 @@ export class PresetEditorComponent implements OnInit, OnDestroy {
     repetitions: 1,
     belongsToPresets: []
   };
-  exercise: Exercise = Object.assign({}, this.initialExercise);
+
   exerciseSubscription: Subscription;
   editingTitle: boolean;
   editingRepetitions: boolean;
@@ -43,7 +57,8 @@ export class PresetEditorComponent implements OnInit, OnDestroy {
   exIds: string[] | number[];
 
   @ViewChild('titleInput') private titleInput: ElementRef<HTMLInputElement>;
-  @ViewChild('repetitionsInput') private repetitionsInput: ElementRef<HTMLInputElement>;
+  @ViewChild('repetitionsInput')
+  private repetitionsInput: ElementRef<HTMLInputElement>;
 
   constructor(
     private store: Store<fromReducers.State>,
@@ -61,25 +76,17 @@ export class PresetEditorComponent implements OnInit, OnDestroy {
 
         if (!preset) {
 
-          this.store.dispatch(new AddPreset({
-            preset: {
-              id: 1,
-              title: '',
-              exercisesIds: [],
-              repetitions: 1
-            }
-          }));
+          this.store.dispatch(new AddPreset({ preset: this.blankPreset }));
 
         } else {
           this.preset = preset;
         }
-        this.initialExercise.belongsToPresets = [this.preset.id];
-        this.exercise.belongsToPresets = [this.preset.id];
+        this.blankExercise.belongsToPresets = [this.preset.id];
       });
 
     this.exercises$ = this.store
       .pipe(
-        select(fromSelectors.allExercisesOfPreset(this.preset.id))
+        select(exerciseSelectors.allExercisesOfPreset(this.preset.id))
       );
 
     this.exerciseSubscription = this.exercises$.subscribe(exercises => {
@@ -87,7 +94,7 @@ export class PresetEditorComponent implements OnInit, OnDestroy {
     });
 
     this.exerciseIdsSubscription = this.store
-      .pipe(select(fromSelectors.exerciseIds())).subscribe(ids => {
+      .pipe(select(exerciseSelectors.exerciseIds())).subscribe(ids => {
         this.exIds = ids;
       });
 
@@ -117,7 +124,7 @@ export class PresetEditorComponent implements OnInit, OnDestroy {
   }
 
   addExercise() {
-    const exercise = Object.assign({}, this.initialExercise);
+    const exercise = Object.assign({}, this.blankExercise);
     const options = { dialogTitle: 'New Exercise' };
 
     this.openDialog(exercise, options);
@@ -125,7 +132,7 @@ export class PresetEditorComponent implements OnInit, OnDestroy {
 
   private saveExercise(exercise): void {
 
-    exercise.id = Math.max.apply(Math, this.exIds)+1;
+    exercise.id = Date.now();
 
     this.store.dispatch(new AddExercise({ exercise: exercise }));
 
@@ -153,10 +160,11 @@ export class PresetEditorComponent implements OnInit, OnDestroy {
   }
 
   editExercise(id) {
-    const exercise = Object.assign({}, this.exercises[id]);
+    const exes = filter(this.exercises, { id })
+    const exercise = Object.assign({}, exes[0]);
     const options = { dialogTitle: 'Editing' };
 
-    this.openDialog(exercise, options);
+    this.openDialog(exercise as Exercise, options);
   }
 
   private openDialog(exercise: Exercise, opts: { dialogTitle }): void {

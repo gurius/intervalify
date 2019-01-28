@@ -103,7 +103,9 @@ export class DataSourceService {
   deleteExercise = (id) => {
     const data = this.getData();
 
-    data.exercises.splice(id, 1);
+    const index = findIndex(data.exercises, { id });
+
+    data.exercises.splice(index, 1);
 
     this.setData(data);
   }

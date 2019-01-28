@@ -1,9 +1,7 @@
 import { createSelector } from '@ngrx/store';
-import { each, includes, filter } from 'lodash';
 
-import * as fromReducers from '../../reducers';
-import * as fromPreset from '../../reducers/preset.reducer';
-import { selectIds } from '../../reducers/exercise.reducer';
+import * as fromReducers from '../../root-reducer';
+import * as fromPreset from './preset-editor.reducer';
 
 export const presetsSelector = (state: fromReducers.State) => state.preset;
 
@@ -15,23 +13,4 @@ export const selectAllPresets = createSelector(
 export const selectPreset = (id: number) => createSelector(
   presetsSelector,
   presetsState => presetsState.entities[id]
-)
-
-export const exerciseSelector = (state: fromReducers.State) => state.exercise;
-
-export const allExercisesOfPreset = (id: number) => createSelector(
-  exerciseSelector,
-  exerciseState => {
-    const filtered = [];
-    for (let key in exerciseState.entities) {
-      const entity = exerciseState.entities[key];
-      entity.belongsToPresets.includes(id) && filtered.push(entity)
-    }
-    return filtered;
-  }
-)
-
-export const exerciseIds = () => createSelector(
-  exerciseSelector,
-  selectIds
 )

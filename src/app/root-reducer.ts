@@ -5,11 +5,11 @@ import {
   createSelector,
   MetaReducer
 } from '@ngrx/store';
-import { environment } from '../../environments/environment';
+import { environment } from '../environments/environment';
 
-import * as fromLayoutReduser from './app.reducer';
-import * as fromPreset from './preset.reducer';
-import * as fromExercise from './exercise.reducer';
+import * as fromLayoutReduser from './pages/app/app.reducer';
+import * as fromPreset from './pages/preset-editor/preset-editor.reducer';
+import * as fromExercise from './pages/exercise-editor/exercise-editor.reducer';
 
 export interface State {
   layout: fromLayoutReduser.State;
@@ -24,10 +24,14 @@ export const reducers: ActionReducerMap<State> = {
 };
 
 
-export const metaReducers: MetaReducer<State>[] = !environment.production ? [] : [];
+export const metaReducers: MetaReducer<State>[]
+  = !environment.production
+    ? []
+    : [];
 
 // layout redusers
 
 const getLayoutState = (state: State) => state.layout;
 
-export const getShowNav = createSelector(getLayoutState, fromLayoutReduser.getShowNav);
+export const getShowNav
+  = createSelector(getLayoutState, fromLayoutReduser.getShowNav);

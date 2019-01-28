@@ -1,6 +1,7 @@
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
-import { Exercise } from '../models/exercise.model';
-import { ExerciseActions, ExerciseActionTypes } from '../actions/exercise.actions';
+
+import { Exercise } from '../../models/exercise.model';
+import { ExerciseActions, ExerciseActionTypes } from './exercise-editor.actions';
 
 export interface State extends EntityState<Exercise> {
   // additional entities state properties
@@ -15,7 +16,7 @@ export const initialState: State = adapter.getInitialState({
 export function reducer(
   state = initialState,
   action: ExerciseActions
-): State {//---------------------------------------------------
+): State {
   switch (action.type) {
     case ExerciseActionTypes.AddExercise: {
       return adapter.addOne(action.payload.exercise, state);
