@@ -23,6 +23,8 @@ import { PresetEditorEffects }
   from './pages/preset-editor/preset-editor.effects';
 import { ExerciseEditorComponent }
   from './pages/exercise-editor/exercise-editor.component';
+import { ExerciseEditorEffects }
+  from './pages/exercise-editor/exercise-editor.effects';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,7 @@ import { ExerciseEditorComponent }
     BrowserAnimationsModule,
     FormsModule,
     MaterialModule,
-    EffectsModule.forRoot([PresetEditorEffects])
+    EffectsModule.forRoot([PresetEditorEffects, ExerciseEditorEffects])
   ],
   providers: [],
   bootstrap: [AppComponent],

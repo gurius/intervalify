@@ -13,14 +13,7 @@ import {
   PresetUpdatingError,
   PresetUpdated
 } from './preset-editor.actions';
-import {
-  RequestExercises,
-  ExerciseActionTypes,
-  AddExercise,
-  UpdateExercise,
-  DeleteExercise,
 
-} from 'src/app/pages/exercise-editor/exercise-editor.actions';
 import { DataSourceService } from 'src/app/data-source.service';
 
 
@@ -78,66 +71,6 @@ export class PresetEditorEffects {
       catchError(() => of({ type: PresetActionTypes.PresetUpdatingError }))
 
     );
-
-  @Effect()
-  loadExercises$ = this.actions$
-    .pipe(
-
-      ofType<RequestExercises>(ExerciseActionTypes.RequestExercises),
-
-      mergeMap(() => of({
-        type: ExerciseActionTypes.LoadExercises,
-        payload: { exercises: this.dataSource.getExercises() }
-      })),
-
-      catchError(() => of({ type: ExerciseActionTypes.ExercisesLoadingError }))
-
-    );
-
-  @Effect()
-  addExercise$ = this.actions$
-    .pipe(
-
-      ofType<AddExercise>(ExerciseActionTypes.AddExercise),
-
-      mergeMap(action => {
-        this.dataSource.addExercise(action.payload.exercise);
-        return of({ type: ExerciseActionTypes.ExerciseAdded })
-      }
-      ),
-
-      catchError(() => of({ type: ExerciseActionTypes.ExerciseAddingError }))
-
-    );
-
-  @Effect()
-  updateExercise$ = this.actions$
-    .pipe(
-
-      ofType<UpdateExercise>(ExerciseActionTypes.UpdateExercise),
-
-      mergeMap(action => {
-        this.dataSource.updateExercise(action.payload.exercise);
-        return of({ type: ExerciseActionTypes.ExerciseUpdated });
-      }),
-
-      catchError(() => of({ tupe: ExerciseActionTypes.ExerciseUpdatingError }))
-
-    );
-
-  @Effect()
-  deleteExercise$ = this.actions$
-    .pipe(
-
-      ofType<DeleteExercise>(ExerciseActionTypes.DeleteExercise),
-
-      mergeMap(action => {
-        this.dataSource.deleteExercise(action.payload.id);
-        return of({ type: ExerciseActionTypes.ExerciseDeleted })
-      }),
-
-      catchError(() => of({ tupe: ExerciseActionTypes.ExerciseDeletionError }))
-    )
 
   constructor(
     private actions$: Actions,
