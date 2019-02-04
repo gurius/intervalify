@@ -17,6 +17,7 @@ import { AddExercise, UpdateExercise, DeleteExercise }
   from 'src/app/components/exercise-editor/exercise-editor.actions';
 import { ExerciseEditorComponent }
   from 'src/app/components/exercise-editor/exercise-editor.component';
+import { UpsertCountdowns } from 'src/app/components/countdown/countdown.actions';
 
 
 
@@ -54,7 +55,6 @@ export class PresetEditorComponent implements OnInit, OnDestroy {
   editingTitle: boolean;
   editingRepetitions: boolean;
   exerciseIdsSubscription: Subscription;
-  exIds: string[] | number[];
 
   @ViewChild('titleInput') private titleInput: ElementRef<HTMLInputElement>;
   @ViewChild('repetitionsInput')
@@ -93,13 +93,7 @@ export class PresetEditorComponent implements OnInit, OnDestroy {
       this.exercises = exercises;
     });
 
-    this.exerciseIdsSubscription = this.store
-      .pipe(select(exerciseSelectors.exerciseIds())).subscribe(ids => {
-        this.exIds = ids;
-      });
-
     this.presetSubscription.add(this.exerciseSubscription);
-    this.presetSubscription.add(this.exerciseIdsSubscription);
   }
 
   ngOnDestroy() {
@@ -120,25 +114,26 @@ export class PresetEditorComponent implements OnInit, OnDestroy {
   editProperty(prop) {
     let editingField = 'editing' + capitalize(prop);
     this[editingField] = true;
+    // titleInput || repetitionsInput
     setTimeout(() => this[prop + 'Input'].nativeElement.focus(), 100)
   }
 
-  addExercise() {
+  newExercise() {
     const exercise = Object.assign({}, this.blankExercise);
-    const options = { dialogTitle: 'New Exercise' };
+    exercise.id = Date.now();
+    const options = { title: 'New Exercise', isNew: true };
 
     this.openDialog(exercise, options);
   }
 
   private saveExercise(exercise): void {
 
-    exercise.id = Date.now();
-
     this.store.dispatch(new AddExercise({ exercise: exercise }));
 
     this.updateExercisesIds();
   }
 
+  // probably should be delegated to Effects
   private updateExercisesIds(): void {
     const exercisesIds = this.exercises.map(ex => ex.id);
 
@@ -162,12 +157,12 @@ export class PresetEditorComponent implements OnInit, OnDestroy {
   editExercise(id) {
     const exes = filter(this.exercises, { id })
     const exercise = Object.assign({}, exes[0]);
-    const options = { dialogTitle: 'Editing' };
+    const options = { title: 'Editing', isNew: false };
 
     this.openDialog(exercise as Exercise, options);
   }
 
-  private openDialog(exercise: Exercise, opts: { dialogTitle }): void {
+  private openDialog(exercise: Exercise, opts: { title, isNew }): void {
     const dref = this.dialog
       .open(ExerciseEditorComponent, {
         data: {
@@ -176,15 +171,19 @@ export class PresetEditorComponent implements OnInit, OnDestroy {
         }
       });
 
-    const drefSubs = dref.afterClosed().subscribe(exercise => {
-      if (exercise) {
+    const drefSubs = dref.afterClosed().subscribe(data => {
 
-        if (opts.dialogTitle === 'Editing') {
+      const { exercise, countdowns } = data;
+
+      if (data) {
+        // if there was data to save
+        if (!opts.isNew) {
           this.updateExercise(exercise);
-
-        } else if (opts.dialogTitle === 'New Exercise') {
+        } else if (opts.isNew) {
           this.saveExercise(exercise);
         }
+
+        this.store.dispatch(new UpsertCountdowns({ countdowns: countdowns }));
       }
 
       drefSubs.unsubscribe();

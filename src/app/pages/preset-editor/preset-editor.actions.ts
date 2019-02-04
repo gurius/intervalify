@@ -6,12 +6,12 @@ import { Preset } from 'src/app/models/preset.model';
 
 export enum PresetActionTypes {
   RequestPresets = '[Preset Editor] Request Presets', // From API
-  PresetsLoaded = '[Preset API] Presets Loaded',
-  PresetsLoadingError = '[Preset API] Preset Loading Error',
-  PresetAdded = '[Preset API] Preset Successfully Added',
-  PresetAddingError = '[Preset API] Preset Adding Error',
-  PresetUpdated = '[Preset API] Preset Updated Successfully',
-  PresetUpdatingError = '[Preset API] Preset Updating Error',
+  PresetsLoaded = '[Data API] Presets Loaded',
+  PresetsLoadingError = '[Data API] Preset Loading Error',
+  PresetAdded = '[Data API] Preset Successfully Added',
+  PresetAddingError = '[Data API] Preset Adding Error',
+  PresetUpdated = '[Data API] Preset Updated Successfully',
+  PresetUpdatingError = '[Data API] Preset Updating Error',
   LoadPresets = '[Preset Editor] Load Presets',
   AddPreset = '[Preset Editor] Add Preset',
   UpsertPreset = '[Preset Editor] Upsert Preset',//unused

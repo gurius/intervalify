@@ -4,9 +4,9 @@ import { Exercise } from '../../models/exercise.model';
 
 export enum ExerciseActionTypes {
   RequestExercises = '[Preset Editor] Request Exercises',
-  LoadExercises = '[Preset Editor] Load Exercises',  //->
-  ExercisesLoaded = '[Preset API] Exercises Loaded',
-  ExercisesLoadingError = '[Preset API] Exercise Loading Error',
+  LoadExercises = '[Data API] Load Exercises',  //->
+  ExercisesLoaded = '[Data API] Exercises Loaded',
+  ExercisesLoadingError = '[Data API] Exercise Loading Error',
   AddExercise = '[Preset Editor] Add Exercise',      //->
   ExerciseAdded = '[Preser API] Exercise Added',
   ExerciseAddingError = '[Preser API] Exercise Adding Error',
@@ -15,11 +15,11 @@ export enum ExerciseActionTypes {
   UpsertExercises = '[Preset Editor] Upsert Exercises',
   UpdateExercise = '[Preset Editor] Update Exercise',  //->
   ExerciseUpdated = '[Preser API] Exercise Updated',
-  ExerciseUpdatingError = '[Preset API] Exercise Updating Error',
+  ExerciseUpdatingError = '[Data API] Exercise Updating Error',
   UpdateExercises = '[Preset Editor] Update Exercises',
   DeleteExercise = '[Preset Editor] Delete Exercise',  //->
-  ExerciseDeleted = '[Preset API] Exercise Deleted',
-  ExerciseDeletionError = '[Preset API] Exercise Deletion Error',
+  ExerciseDeleted = '[Data API] Exercise Deleted',
+  ExerciseDeletionError = '[Data API] Exercise Deletion Error',
   DeleteExercises = '[Preset Editor] Delete Exercises', //->
   ClearExercises = '[Preset Editor] Clear Exercises'
 }

@@ -1,8 +1,10 @@
 export interface Countdown {
-  id: string;
+  id: number;
   type: CountdownType;
-  value: number;
+  minutes: number;
+  seconds: number;
   seqNo: number;
+  belongsToExercises: number[];
 }
 
 export type CountdownType = 'rest' | 'work';

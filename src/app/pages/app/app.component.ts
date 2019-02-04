@@ -8,6 +8,8 @@ import * as fromRedusers from '../../root-reducer';
 import { RequestPresets } from '../preset-editor/preset-editor.actions';
 import { RequestExercises }
   from 'src/app/components/exercise-editor/exercise-editor.actions';
+import { RequestCountdowns }
+  from 'src/app/components/countdown/countdown.actions';
 
 @Component({
   selector: 'jt-root',
@@ -24,6 +26,7 @@ export class AppComponent {
     this.showNav$.subscribe(sn => this.visibleNav = sn);
     this.store.dispatch(new RequestPresets());
     this.store.dispatch(new RequestExercises());
+    this.store.dispatch(new RequestCountdowns());
   }
 
   onClick() {

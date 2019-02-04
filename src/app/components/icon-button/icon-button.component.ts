@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'jt-icon-button',
@@ -7,15 +7,8 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class IconButtonComponent implements OnInit {
 
-  @Output() click = new EventEmitter<any>();
-
   constructor() { }
 
-  ngOnInit() {
-  }
-
-  onClick() {
-    this.click.emit();
-  }
+  ngOnInit() { }
 
 }

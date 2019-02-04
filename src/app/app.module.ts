@@ -25,6 +25,8 @@ import { ExerciseEditorComponent }
   from './components/exercise-editor/exercise-editor.component';
 import { ExerciseEditorEffects }
   from './components/exercise-editor/exercise-editor.effects';
+import { CountdownComponent } from './components/countdown/countdown.component';
+import { CountdownEffects } from './components/countdown/countdown.effects';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,8 @@ import { ExerciseEditorEffects }
     IconButtonComponent,
     PresetEditorComponent,
     HomeComponent,
-    ExerciseEditorComponent
+    ExerciseEditorComponent,
+    CountdownComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +46,11 @@ import { ExerciseEditorEffects }
     BrowserAnimationsModule,
     FormsModule,
     MaterialModule,
-    EffectsModule.forRoot([PresetEditorEffects, ExerciseEditorEffects])
+    EffectsModule.forRoot([
+      PresetEditorEffects,
+      ExerciseEditorEffects,
+      CountdownEffects
+    ])
   ],
   providers: [],
   bootstrap: [AppComponent],

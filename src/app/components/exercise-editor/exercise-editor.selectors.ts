@@ -1,7 +1,6 @@
 import { createSelector } from '@ngrx/store';
 
 import * as fromReducers from '../../root-reducer';
-import { selectIds } from './exercise-editor.reducer';
 
 export const exerciseSelector = (state: fromReducers.State) => state.exercise;
 
@@ -15,9 +14,4 @@ export const allExercisesOfPreset = (id: number) => createSelector(
     }
     return filtered;
   }
-)
-
-export const exerciseIds = () => createSelector(
-  exerciseSelector,
-  selectIds
 )

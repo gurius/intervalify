@@ -4,6 +4,8 @@ import { Preset } from './models/preset.model';
 import { findIndex } from 'lodash';
 
 import { Exercise } from './models/exercise.model';
+import { Countdown } from './models/countdown.model';
+import { TonusData } from './models/tonus-data.model';
 
 
 @Injectable({
@@ -13,16 +15,16 @@ export class DataSourceService {
 
   constructor() { }
 
-  getData() {
+  getData(): TonusData {
     return JSON.parse(localStorage.getItem('tonus-data'));
   }
 
-  setData(data) {
+  setData(data: TonusData) {
     localStorage.setItem('tonus-data', JSON.stringify(data));
   }
 
   // presets
-  getPresets = () => this.getData().presets;
+  getPresets = (): Preset[] => this.getData().presets;
 
 
   addPreset = (preset: Preset) => {
@@ -63,7 +65,7 @@ export class DataSourceService {
   getExercises = () => {
 
     let data = this.getData().exercises;
-    if (!data){
+    if (!data) {
       data = [];
     }
     return data;
@@ -109,6 +111,39 @@ export class DataSourceService {
 
     this.setData(data);
   }
-  //countdowns
 
+  //countdowns
+  getCountdowns = () => {
+    let data = this.getData().countdowns;
+    if (!data) {
+      data = [];
+    }
+
+    return data;
+  }
+
+  upsertCountdowns = (changedCountdowns: Countdown[]) => {
+
+    const data = this.getData();
+    let { countdowns } = data;
+
+    if (!countdowns) {
+      countdowns = [];
+    }
+
+    changedCountdowns.forEach(newCountdownEl => {
+
+      const index = findIndex(countdowns, { id: newCountdownEl.id });
+      if (index !== -1) {
+        countdowns[index] = Object.assign({}, countdowns[index], newCountdownEl);
+      } else {
+        countdowns.push(newCountdownEl);
+      }
+
+    })
+
+    data.countdowns = countdowns;
+    this.setData(data);
+
+  }
 }

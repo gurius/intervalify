@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>{{dialogOptions.dialogTitle}}</h2>
+<h2 mat-dialog-title>{{dialogOptions.title}}</h2>
 <mat-dialog-content>
   <div class="editor">
     <div class="editor__item">
@@ -18,37 +18,16 @@
     </div>
 
     <div class="editor__item">
-      <button mat-icon-button>
-        <mat-icon>rowing</mat-icon>
-      </button>
-      <mat-form-field class="narrow-input">
-        <input matInput type="number" min="0" placeholder="minutes">
-      </mat-form-field>:
-      <mat-form-field class="narrow-input">
-        <input matInput type="number" min="0" placeholder="seconds">
-      </mat-form-field>
-      <button mat-icon-button>
-        <mat-icon>indeterminate_check_box</mat-icon>
-      </button>
+      <div class="countdowns">
+        <jt-countdown *ngFor="let countdown of countdowns"
+                      [countdowns]="countdowns"
+                      [countdown]="countdown">
+        </jt-countdown>
+      </div>
     </div>
 
     <div class="editor__item">
-      <button mat-icon-button>
-        <mat-icon>airline_seat_recline_extra</mat-icon>
-      </button>
-      <mat-form-field class="narrow-input">
-        <input matInput type="number" placeholder="minutes">
-      </mat-form-field>:
-      <mat-form-field class="narrow-input">
-        <input matInput type="number" placeholder="seconds">
-      </mat-form-field>
-      <button mat-icon-button>
-        <mat-icon>indeterminate_check_box</mat-icon>
-      </button>
-    </div>
-
-    <div class="editor__item">
-      <button mat-icon-button class="add-countdown">
+      <button mat-icon-button class="add-countdown" (click)="addCoundown()">
         <mat-icon>add_box</mat-icon>
       </button>
     </div>
@@ -60,6 +39,6 @@
     <button mat-raised-button [mat-dialog-close]="false">Cancel</button>
   </div>
   <div class="editor__item">
-    <button mat-raised-button [mat-dialog-close]="exercise">Save</button>
+    <button mat-raised-button [mat-dialog-close]="{exercise: exercise, countdowns: countdowns}">Save</button>
   </div>
 </mat-dialog-actions>
