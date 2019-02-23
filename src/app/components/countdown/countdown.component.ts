@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import { Countdown } from 'src/app/models/countdown.model';
-import { findIndex } from 'lodash';
 
 @Component({
   selector: 'jt-countdown',
@@ -11,19 +10,11 @@ import { findIndex } from 'lodash';
 export class CountdownComponent implements OnInit {
 
   @Input() countdown: Countdown;
-  @Input() countdowns: Countdown[];
 
   minutes: number;
   seconds: number;
 
-  constructor() { }
-
   ngOnInit() { }
-
-  deleteCoundown(id) {
-    const index = findIndex(this.countdowns, { id });
-    this.countdowns.splice(index, 1);
-  }
 
   timeCorrector(event) {
     let val = event.target.value;
@@ -33,4 +24,6 @@ export class CountdownComponent implements OnInit {
       event.target.value = 59;
     }
   }
+
+  constructor() { }
 }

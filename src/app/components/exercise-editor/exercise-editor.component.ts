@@ -8,6 +8,7 @@ import * as rootReducer from '../../root-reducer';
 import { Exercise } from 'src/app/models/exercise.model';
 import { Countdown } from 'src/app/models/countdown.model';
 import * as countdonwSelectors from '../countdown/countdown.selectors';
+import { findIndex } from 'lodash';
 
 @Component({
   selector: 'jt-exercise-editor',
@@ -18,6 +19,7 @@ export class ExerciseEditorComponent implements OnInit, OnDestroy {
   exercise: Exercise;
   dialogOptions: { title, isNew };
   countdowns: Countdown[] = [];
+  deletedCountdowns: number[] = [];
 
   blank: Countdown = {
     id: 0,
@@ -37,13 +39,16 @@ export class ExerciseEditorComponent implements OnInit, OnDestroy {
 
       this.countdownsSubscription = this.store.pipe(
         select(countdonwSelectors.allExerciseCountdowns(this.exercise.id))
-      ).subscribe(countdowns => this.countdowns = countdowns);
+      ).subscribe(
+        countdowns => this.countdowns = countdowns
+          .map(cd => Object.assign({}, cd))
+      );
 
     }
   }
 
   ngOnDestroy(): void {
-    if (this.countdownsSubscription){
+    if (this.countdownsSubscription) {
       this.countdownsSubscription.unsubscribe();
     }
   }
@@ -55,12 +60,20 @@ export class ExerciseEditorComponent implements OnInit, OnDestroy {
     this.countdowns.push(Object.assign({}, this.blank, { id, belongsToExercises }));
   }
 
+  deleteCoundown(id) {
+    const index = findIndex(this.countdowns, { id: id });
+    if (index !== -1) {
+
+      this.deletedCountdowns.push(this.countdowns.splice(index, 1)[0].id);
+    }
+  }
+
   constructor(
     private dialogReference: MatDialogRef<ExerciseEditorComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { exercise, opts },
     private store: Store<rootReducer.State>
   ) {
-    this.exercise = this.data.exercise;
+    this.exercise = Object.assign({}, this.data.exercise);
     this.dialogOptions = this.data.opts;
   }
 }

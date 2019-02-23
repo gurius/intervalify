@@ -5,16 +5,16 @@ import { Countdown } from '../../models/countdown.model';
 export enum CountdownActionTypes {
   RequestCountdowns = '[Exercise Editor] Request Countdowns', // ->
   LoadCountdowns = '[Data API] Load Countdowns', // ->
-  CountdownsLoaded = '[Data API] Countdowns Loaded',
-  CountdownsError = '[Data API] Countdowns Error',
+  CountdownsUpdated = '[Data API] Countdowns Updated', // ->
+  CountdownsError = '[Data API] Countdowns Error', // ->
   AddCountdown = '[Countdown] Add Countdown',
   UpsertCountdown = '[Countdown] Upsert Countdown',
   AddCountdowns = '[Countdown] Add Countdowns',
-  UpsertCountdowns = '[Countdown] Upsert Countdowns', // ->
-  UpdateCountdown = '[Countdown] Update Countdown',
+  UpsertCountdowns = '[Preset Editor] Upsert Countdowns', // ->
+  CountdownDeleted = '[Data API] Countdown Deleted', // ->
   UpdateCountdowns = '[Countdown] Update Countdowns',
   DeleteCountdown = '[Countdown] Delete Countdown',
-  DeleteCountdowns = '[Countdown] Delete Countdowns',
+  DeleteCountdowns = '[Countdown Component] Delete Countdowns', // ->
   ClearCountdowns = '[Countdown] Clear Countdowns'
 }
 
@@ -28,8 +28,8 @@ export class LoadCountdowns implements Action {
   constructor(public payload: { countdowns: Countdown[] }) { }
 }
 
-export class CountdownsLoaded implements Action {
-  readonly type = CountdownActionTypes.CountdownsLoaded;
+export class CountdownsUpdated implements Action {
+  readonly type = CountdownActionTypes.CountdownsUpdated;
 }
 
 export class CountdownsLoadingError implements Action {
@@ -67,8 +67,8 @@ export class UpsertCountdowns implements Action {
   constructor(public payload: { countdowns: Countdown[] }) { }
 }
 
-export class UpdateCountdown implements Action {
-  readonly type = CountdownActionTypes.UpdateCountdown;
+export class CountdownDeleted implements Action {
+  readonly type = CountdownActionTypes.CountdownDeleted;
 
   constructor(public payload: { countdown: Update<Countdown> }) { }
 }
@@ -88,7 +88,7 @@ export class DeleteCountdown implements Action {
 export class DeleteCountdowns implements Action {
   readonly type = CountdownActionTypes.DeleteCountdowns;
 
-  constructor(public payload: { ids: string[] }) { }
+  constructor(public payload: { ids: number[] }) { }
 }
 
 export class ClearCountdowns implements Action {
@@ -99,11 +99,11 @@ export type CountdownActions =
   LoadCountdowns
   | RequestCountdowns
   | AddCountdown
-  | CountdownsLoaded
+  | CountdownsUpdated
   | UpsertCountdown
   | AddCountdowns
   | UpsertCountdowns
-  | UpdateCountdown
+  | CountdownDeleted
   | UpdateCountdowns
   | DeleteCountdown
   | DeleteCountdowns

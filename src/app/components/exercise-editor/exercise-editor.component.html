@@ -19,9 +19,10 @@
 
     <div class="editor__item">
       <div class="countdowns">
-        <jt-countdown *ngFor="let countdown of countdowns"
-                      [countdowns]="countdowns"
-                      [countdown]="countdown">
+        <jt-countdown *ngFor="let cn of countdowns" [countdown]="cn">
+          <button mat-icon-button (click)="deleteCoundown(cn.id)">
+            <mat-icon>indeterminate_check_box</mat-icon>
+          </button>
         </jt-countdown>
       </div>
     </div>
@@ -39,6 +40,14 @@
     <button mat-raised-button [mat-dialog-close]="false">Cancel</button>
   </div>
   <div class="editor__item">
-    <button mat-raised-button [mat-dialog-close]="{exercise: exercise, countdowns: countdowns}">Save</button>
+    <button
+      mat-raised-button
+      [mat-dialog-close]="{
+        exercise: exercise,
+        countdowns: countdowns,
+        deletedCountdowns: deletedCountdowns
+      }">
+      Save
+    </button>
   </div>
 </mat-dialog-actions>

@@ -2,23 +2,28 @@ import { Component, OnInit, ViewChild, ElementRef, OnDestroy }
   from '@angular/core';
 import { MatDialog } from '@angular/material';
 
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
-import { capitalize, filter } from 'lodash';
+import { capitalize } from 'lodash';
 
 import * as fromReducers from '../../root-reducer';
 import * as fromSelectors from './preset-editor.selectors';
 import * as exerciseSelectors
   from 'src/app/components/exercise-editor/exercise-editor.selectors';
 import { Preset } from 'src/app/models/preset.model';
-import { AddPreset, UpdatePreset } from './preset-editor.actions';
+import { UpdatePreset } from './preset-editor.actions';
 import { Exercise } from 'src/app/models/exercise.model';
-import { AddExercise, UpdateExercise, DeleteExercise }
-  from 'src/app/components/exercise-editor/exercise-editor.actions';
 import { ExerciseEditorComponent }
   from 'src/app/components/exercise-editor/exercise-editor.component';
-import { UpsertCountdowns } from 'src/app/components/countdown/countdown.actions';
-
+import {
+  UpsertCountdowns,
+  DeleteCountdowns
+} from 'src/app/components/countdown/countdown.actions';
+import * as countdonwSelectors
+  from '../../components/countdown/countdown.selectors';
+import { PresetService } from '../../helpers/preset.service';
+import { ExerciseService } from 'src/app/helpers/exercise.service';
+import { first } from 'rxjs/operators';
 
 
 @Component({
@@ -27,34 +32,10 @@ import { UpsertCountdowns } from 'src/app/components/countdown/countdown.actions
   styleUrls: ['./preset-editor.component.css']
 })
 export class PresetEditorComponent implements OnInit, OnDestroy {
-  preset$: Observable<Preset>
   preset: Preset;
-  presetSubscription: Subscription;
-
-  blankPreset: Preset = {
-    id: 1,
-    title: '',
-    exercisesIds: [],
-    repetitions: 1
-  };
-
   exercises$: Observable<Exercise[]>;
-  exercises: Exercise[];
-
-  blankExercise: Exercise = {
-    id: 0,
-    title: '',
-    color: '#1c9bba',
-    countdownsIds: [],
-    seqNo: 0,
-    repetitions: 1,
-    belongsToPresets: []
-  };
-
-  exerciseSubscription: Subscription;
   editingTitle: boolean;
   editingRepetitions: boolean;
-  exerciseIdsSubscription: Subscription;
 
   @ViewChild('titleInput') private titleInput: ElementRef<HTMLInputElement>;
   @ViewChild('repetitionsInput')
@@ -62,26 +43,25 @@ export class PresetEditorComponent implements OnInit, OnDestroy {
 
   constructor(
     private store: Store<fromReducers.State>,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private pHelper: PresetService,
+    private eHelper: ExerciseService
   ) { }
 
   ngOnInit() {
-    this.preset$ = this.store
+    this.store
       .pipe(
-        select(fromSelectors.selectPreset(1))
-      );
-
-    this.presetSubscription = this.preset$
+        // temporary get the first preset by default
+        select(fromSelectors.selectPreset()),
+        first()
+      )
       .subscribe(preset => {
-
         if (!preset) {
-
-          this.store.dispatch(new AddPreset({ preset: this.blankPreset }));
-
+          //Create and save to storage blank preset
+          this.pHelper.addPreset()
         } else {
           this.preset = preset;
         }
-        this.blankExercise.belongsToPresets = [this.preset.id];
       });
 
     this.exercises$ = this.store
@@ -89,15 +69,9 @@ export class PresetEditorComponent implements OnInit, OnDestroy {
         select(exerciseSelectors.allExercisesOfPreset(this.preset.id))
       );
 
-    this.exerciseSubscription = this.exercises$.subscribe(exercises => {
-      this.exercises = exercises;
-    });
-
-    this.presetSubscription.add(this.exerciseSubscription);
   }
 
   ngOnDestroy() {
-    this.presetSubscription.unsubscribe();
   }
 
   onBlur(prop, val) {
@@ -119,44 +93,14 @@ export class PresetEditorComponent implements OnInit, OnDestroy {
   }
 
   newExercise() {
-    const exercise = Object.assign({}, this.blankExercise);
-    exercise.id = Date.now();
+    const exercise = this.eHelper.getBlank(this.preset.id);
     const options = { title: 'New Exercise', isNew: true };
 
     this.openDialog(exercise, options);
   }
 
-  private saveExercise(exercise): void {
-
-    this.store.dispatch(new AddExercise({ exercise: exercise }));
-
-    this.updateExercisesIds();
-  }
-
-  // probably should be delegated to Effects
-  private updateExercisesIds(): void {
-    const exercisesIds = this.exercises.map(ex => ex.id);
-
-    this.store.dispatch(new UpdatePreset({
-      preset: {
-        id: this.preset.id,
-        changes: { exercisesIds: exercisesIds }
-      }
-    }));
-  }
-
-  private updateExercise(exercise): void {
-    this.store.dispatch(new UpdateExercise({
-      exercise: {
-        id: exercise.id,
-        changes: { ...exercise }
-      }
-    }));
-  }
-
-  editExercise(id) {
-    const exes = filter(this.exercises, { id })
-    const exercise = Object.assign({}, exes[0]);
+  editExercise(ex) {
+    const exercise = Object.assign({}, ex);
     const options = { title: 'Editing', isNew: false };
 
     this.openDialog(exercise as Exercise, options);
@@ -172,28 +116,45 @@ export class PresetEditorComponent implements OnInit, OnDestroy {
       });
 
     const drefSubs = dref.afterClosed().subscribe(data => {
+      if (!data) return;
 
-      const { exercise, countdowns } = data;
+      const { exercise, countdowns, deletedCountdowns } = data;
 
-      if (data) {
-        // if there was data to save
-        if (!opts.isNew) {
-          this.updateExercise(exercise);
-        } else if (opts.isNew) {
-          this.saveExercise(exercise);
-        }
+      // if there was data to save
 
-        this.store.dispatch(new UpsertCountdowns({ countdowns: countdowns }));
+      if (deletedCountdowns.length) {
+
+        deletedCountdowns.forEach(dcId => {
+          const index = exercise.countdownsIds.findIndex(cId => cId === dcId);
+          if (index !== -1) {
+            exercise.countdownsIds.splice(index, 1);
+          }
+        })
+
+        this.store.dispatch(new DeleteCountdowns({ ids: deletedCountdowns }));
       }
+
+
+      if (!opts.isNew) {
+        this.eHelper.updateExercise(exercise);
+      } else if (opts.isNew) {
+        this.eHelper.addExercise(exercise, this.preset.id);
+      }
+
+      this.store.dispatch(new UpsertCountdowns({ countdowns: countdowns }));
+
 
       drefSubs.unsubscribe();
     });
   }
 
-
-
   deleteExercise(id) {
-    this.store.dispatch(new DeleteExercise({ id }));
-    this.updateExercisesIds();
+    this.eHelper.removeExercise(id, this.preset.id);
+  }
+
+  getCountdownsBy(exerciseId) {
+    return this.store.pipe(
+      select(countdonwSelectors.allExerciseCountdowns(exerciseId))
+    );
   }
 }

@@ -26,7 +26,7 @@
 
 <div class="constructor-element">
   <mat-accordion  hideToggle="true" multi="true">
-    <mat-expansion-panel *ngFor="let exercise of exercises">
+    <mat-expansion-panel *ngFor="let exercise of exercises$ | async">
       <mat-expansion-panel-header>
         <mat-panel-title>
           {{exercise.title }}
@@ -38,10 +38,14 @@
 
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <p>w 1 min. 15 sec.</p>
-      <p>r 45 sec.</p>
+      <p *ngFor="let cd of getCountdownsBy(exercise.id) | async">
+        {{cd.type}}:
+        {{cd.minutes ? ' '+cd.minutes+' min.' : ''}}
+        {{cd.seconds ? ' '+cd.seconds+' sec.' : ''}}
+      </p>
+
       <div class="exrcise-button-panel">
-        <button (click)="editExercise(exercise.id)" mat-icon-button>
+        <button (click)="editExercise(exercise)" mat-icon-button>
           <mat-icon>edit</mat-icon>
         </button>
         <button (click)="deleteExercise(exercise.id)" mat-icon-button>

@@ -23,6 +23,4 @@
          (input)="timeCorrector($event)"
          [(ngModel)]="countdown.seconds">
 </mat-form-field>
-<button mat-icon-button (click)="deleteCoundown(countdown.id)">
-  <mat-icon>indeterminate_check_box</mat-icon>
-</button>
+<ng-content></ng-content>

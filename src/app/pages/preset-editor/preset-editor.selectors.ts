@@ -10,7 +10,12 @@ export const selectAllPresets = createSelector(
   fromPreset.selectAll
 );
 
-export const selectPreset = (id: number) => createSelector(
+export const selectPreset = (id?: number | string) => createSelector(
   presetsSelector,
-  presetsState => presetsState.entities[id]
+  presetsState => {
+    if (!id) {
+      id = presetsState.ids[0];
+    }
+    return presetsState.entities[id]
+  }
 )

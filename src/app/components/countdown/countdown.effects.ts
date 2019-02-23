@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { RequestCountdowns, CountdownActionTypes, UpsertCountdowns } from './countdown.actions';
+import {
+  RequestCountdowns,
+  CountdownActionTypes,
+  UpsertCountdowns,
+  DeleteCountdowns
+} from './countdown.actions';
 import { mergeMap, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { DataSourceService } from 'src/app/data-source.service';
@@ -35,13 +40,31 @@ export class CountdownEffects {
 
       mergeMap(action => {
         this.dataSource.upsertCountdowns(action.payload.countdowns);
-        return of({ type: CountdownActionTypes.CountdownsLoaded });
+        return of({ type: CountdownActionTypes.CountdownsUpdated });
       }),
 
       catchError((err) => of({
         type: CountdownActionTypes.CountdownsError,
         payload: { error: { err, description: 'Adding Error' } }
       }))
+    )
+
+  @Effect()
+  deleteCountdown$ = this.actions$
+    .pipe(
+
+      ofType<DeleteCountdowns>(CountdownActionTypes.DeleteCountdowns),
+
+      mergeMap(action => {
+        this.dataSource.deleteCountdowns(action.payload.ids);
+        return of({ type: CountdownActionTypes.CountdownDeleted });
+      }),
+
+      catchError((err) => of({
+        type: CountdownActionTypes.CountdownsError,
+        payload: { error: { err, description: 'Deletion Error' } }
+      }))
+
     )
 
   constructor(

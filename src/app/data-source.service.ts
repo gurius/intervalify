@@ -56,9 +56,11 @@ export class DataSourceService {
 
     const index = findIndex(presets, { id: preset.id });
 
-    presets[index] = Object.assign({}, presets[index], preset.changes);
-    data.presets = presets;
-    this.setData(data);
+    if (index !== -1) {
+      presets[index] = Object.assign({}, presets[index], preset.changes);
+      data.presets = presets;
+      this.setData(data);
+    }
   }
 
   //exercises
@@ -97,9 +99,11 @@ export class DataSourceService {
 
     const index = findIndex(exercises, { id: exercise.id });
 
-    exercises[index] = Object.assign({}, exercises[index], exercise.changes);
-    data.exercises = exercises;
-    this.setData(data);
+    if (index !== -1) {
+      exercises[index] = Object.assign({}, exercises[index], exercise.changes);
+      data.exercises = exercises;
+      this.setData(data);
+    }
   }
 
   deleteExercise = (id) => {
@@ -107,9 +111,10 @@ export class DataSourceService {
 
     const index = findIndex(data.exercises, { id });
 
-    data.exercises.splice(index, 1);
-
-    this.setData(data);
+    if (index !== -1) {
+      data.exercises.splice(index, 1);
+      this.setData(data);
+    }
   }
 
   //countdowns
@@ -145,5 +150,35 @@ export class DataSourceService {
     data.countdowns = countdowns;
     this.setData(data);
 
+  }
+
+  deleteCountdowns = (ids: number[]) => {
+    const data = this.getData();
+
+    ids.forEach(id => deleteById(data, 'countdowns', id));
+
+    this.setData(data);
+  }
+}
+
+function deleteById(db: TonusData, table: string, id: number | string) {
+  let source;
+
+  switch (table) {
+    case 'presets':
+      source = db.presets;
+      break;
+    case 'exercises':
+      source = db.exercises;
+      break;
+    case 'countdowns':
+      source = db.countdowns;
+      break;
+  }
+
+  const index = source.findIndex(el => el.id === id);
+
+  if (index !== -1) {
+    source.splice(index, 1);
   }
 }

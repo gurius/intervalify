@@ -33,9 +33,6 @@ export function reducer(
       return adapter.upsertMany(action.payload.countdowns, state);
     }
 
-    case CountdownActionTypes.UpdateCountdown: {
-      return adapter.updateOne(action.payload.countdown, state);
-    }
 
     case CountdownActionTypes.UpdateCountdowns: {
       return adapter.updateMany(action.payload.countdowns, state);
