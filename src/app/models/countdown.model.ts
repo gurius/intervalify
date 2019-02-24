@@ -7,4 +7,10 @@ export interface Countdown {
   belongsToExercises: number[];
 }
 
-export type CountdownType = 'rest' | 'work';
+
+export enum CountdownTypes {
+  Rest = 'rest',
+  Work = 'work'
+}
+
+export type CountdownType = CountdownTypes.Rest | CountdownTypes.Work;

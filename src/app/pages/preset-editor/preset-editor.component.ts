@@ -2,28 +2,22 @@ import { Component, OnInit, ViewChild, ElementRef, OnDestroy }
   from '@angular/core';
 import { MatDialog } from '@angular/material';
 
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Store, select } from '@ngrx/store';
-import { capitalize } from 'lodash';
 
 import * as fromReducers from '../../root-reducer';
 import * as fromSelectors from './preset-editor.selectors';
 import * as exerciseSelectors
   from 'src/app/components/exercise-editor/exercise-editor.selectors';
 import { Preset } from 'src/app/models/preset.model';
-import { UpdatePreset } from './preset-editor.actions';
 import { Exercise } from 'src/app/models/exercise.model';
 import { ExerciseEditorComponent }
   from 'src/app/components/exercise-editor/exercise-editor.component';
-import {
-  UpsertCountdowns,
-  DeleteCountdowns
-} from 'src/app/components/countdown/countdown.actions';
 import * as countdonwSelectors
   from '../../components/countdown/countdown.selectors';
 import { PresetService } from '../../helpers/preset.service';
 import { ExerciseService } from 'src/app/helpers/exercise.service';
-import { first } from 'rxjs/operators';
+import { CountdownService } from 'src/app/helpers/countdown.service';
 
 
 @Component({
@@ -36,24 +30,24 @@ export class PresetEditorComponent implements OnInit, OnDestroy {
   exercises$: Observable<Exercise[]>;
   editingTitle: boolean;
   editingRepetitions: boolean;
+  presetSubscription: Subscription;
 
-  @ViewChild('titleInput') private titleInput: ElementRef<HTMLInputElement>;
-  @ViewChild('repetitionsInput')
-  private repetitionsInput: ElementRef<HTMLInputElement>;
+  @ViewChild('titleInput') titleInput: ElementRef<HTMLInputElement>;
+  @ViewChild('repetitionsInput') repetitionsInput: ElementRef<HTMLInputElement>;
 
   constructor(
     private store: Store<fromReducers.State>,
     private dialog: MatDialog,
     private pHelper: PresetService,
-    private eHelper: ExerciseService
+    private eHelper: ExerciseService,
+    private cHelper: CountdownService
   ) { }
 
   ngOnInit() {
-    this.store
+    this.presetSubscription = this.store
       .pipe(
         // temporary get the first preset by default
-        select(fromSelectors.selectPreset()),
-        first()
+        select(fromSelectors.selectPreset())
       )
       .subscribe(preset => {
         if (!preset) {
@@ -72,24 +66,23 @@ export class PresetEditorComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.presetSubscription.unsubscribe();
   }
 
   onBlur(prop, val) {
-    this.store.dispatch(new UpdatePreset({
-      preset: {
-        id: this.preset.id,
-        changes: { [prop]: val }
-      }
-    }))
-    let editingField = 'editing' + capitalize(prop);
-    this[editingField] = false;
+    this.editProperty(prop, false);
+    this.pHelper.updatePreset(this.preset.id, { [prop]: val });
   }
 
-  editProperty(prop) {
-    let editingField = 'editing' + capitalize(prop);
-    this[editingField] = true;
-    // titleInput || repetitionsInput
-    setTimeout(() => this[prop + 'Input'].nativeElement.focus(), 100)
+  editProperty(prop, edit = true) {
+    switch (prop) {
+      case 'title':
+        this.editingTitle = edit;
+        break;
+      case 'repetitions':
+        this.editingRepetitions = edit;
+        break;
+    }
   }
 
   newExercise() {
@@ -120,20 +113,9 @@ export class PresetEditorComponent implements OnInit, OnDestroy {
 
       const { exercise, countdowns, deletedCountdowns } = data;
 
-      // if there was data to save
-
       if (deletedCountdowns.length) {
-
-        deletedCountdowns.forEach(dcId => {
-          const index = exercise.countdownsIds.findIndex(cId => cId === dcId);
-          if (index !== -1) {
-            exercise.countdownsIds.splice(index, 1);
-          }
-        })
-
-        this.store.dispatch(new DeleteCountdowns({ ids: deletedCountdowns }));
+        this.cHelper.removeCountdowns(exercise.id, deletedCountdowns);
       }
-
 
       if (!opts.isNew) {
         this.eHelper.updateExercise(exercise);
@@ -141,8 +123,7 @@ export class PresetEditorComponent implements OnInit, OnDestroy {
         this.eHelper.addExercise(exercise, this.preset.id);
       }
 
-      this.store.dispatch(new UpsertCountdowns({ countdowns: countdowns }));
-
+      this.cHelper.upsertCountdowns(exercise.id, countdowns);
 
       drefSubs.unsubscribe();
     });

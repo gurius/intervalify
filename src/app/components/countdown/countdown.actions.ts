@@ -10,11 +10,11 @@ export enum CountdownActionTypes {
   AddCountdown = '[Countdown] Add Countdown',
   UpsertCountdown = '[Countdown] Upsert Countdown',
   AddCountdowns = '[Countdown] Add Countdowns',
-  UpsertCountdowns = '[Preset Editor] Upsert Countdowns', // ->
+  UpsertCountdowns = '[Countdown Helper] Upsert Countdowns', // ->
   CountdownDeleted = '[Data API] Countdown Deleted', // ->
   UpdateCountdowns = '[Countdown] Update Countdowns',
   DeleteCountdown = '[Countdown] Delete Countdown',
-  DeleteCountdowns = '[Countdown Component] Delete Countdowns', // ->
+  DeleteCountdowns = '[Countdown Helper] Delete Countdowns', // ->
   ClearCountdowns = '[Countdown] Clear Countdowns'
 }
 

@@ -27,6 +27,7 @@ import { ExerciseEditorEffects }
   from './components/exercise-editor/exercise-editor.effects';
 import { CountdownComponent } from './components/countdown/countdown.component';
 import { CountdownEffects } from './components/countdown/countdown.effects';
+import { AutofocusInputDirective } from './directives/autofocus-input.directive';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { CountdownEffects } from './components/countdown/countdown.effects';
     PresetEditorComponent,
     HomeComponent,
     ExerciseEditorComponent,
-    CountdownComponent
+    CountdownComponent,
+    AutofocusInputDirective
   ],
   imports: [
     BrowserModule,

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { Preset } from '../models/preset.model';
-import { AddPreset } from '../pages/preset-editor/preset-editor.actions';
+import { AddPreset, UpdatePreset } from '../pages/preset-editor/preset-editor.actions';
 import * as fromReducers from '../root-reducer';
 
 @Injectable({
@@ -11,7 +11,7 @@ import * as fromReducers from '../root-reducer';
 })
 export class PresetService {
 
-  getBlank(): Preset  {
+  getBlank(): Preset {
     return {
       id: Date.now(),
       title: '',
@@ -22,6 +22,10 @@ export class PresetService {
 
   addPreset(): void {
     this.store.dispatch(new AddPreset({ preset: this.getBlank() }));
+  }
+
+  updatePreset(id, changes) {
+    this.store.dispatch(new UpdatePreset({ preset: { id, changes } }));
   }
 
   constructor(

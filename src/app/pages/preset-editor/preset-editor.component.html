@@ -6,19 +6,21 @@
       value="{{preset.title}}"
       (blur)="onBlur('title', titleInput.value)"
       placeholder="presets title"
-      #titleInput>
+      #titleInput
+      jtAutofocusInput>
     </mat-form-field>
     <p [hidden]="editingTitle" (click)="editProperty('title')">{{preset.title}}</p>
   </div>
   <div class="workout-repetitions">
-    <mat-form-field *ngIf="editingRepetitions">
+    <mat-form-field *ngIf="editingRepetitions || preset.repetitions === ''">
       <input matInput
              type="number"
              min="1"
              placeholder="repetitions"
              (blur)="onBlur('repetitions', repetitionsInput.value)"
              value="{{preset.repetitions}}"
-             #repetitionsInput>
+             #repetitionsInput
+             jtAutofocusInput>
     </mat-form-field>
     <p [hidden]="editingRepetitions" (click)="editProperty('repetitions')">{{preset.repetitions}}</p>
   </div>
