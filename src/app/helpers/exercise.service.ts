@@ -26,12 +26,12 @@ export class ExerciseService {
 
   public addExercise(exercise, presetId): void {
     this.store.dispatch(new AddExercise({ exercise }));
-    this.rdm.onExerciseAddOrRemove(presetId);
+    this.rdm.onExerciseAdd(presetId);
   }
 
   public removeExercise(id, presetId): void {
     this.store.dispatch(new DeleteExercise({ id }));
-    this.rdm.onExerciseAddOrRemove(presetId);
+    this.rdm.onExerciseRemove(presetId, id);
   }
 
   public updateExercise(exercise): void {

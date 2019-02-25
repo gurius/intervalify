@@ -10,6 +10,8 @@ import { UpdateExercise }
   from '../components/exercise-editor/exercise-editor.actions';
 import * as countdonwSelectors
   from 'src/app/components/countdown/countdown.selectors';
+import { Countdown } from '../models/countdown.model';
+import { DeleteCountdowns } from '../components/countdown/countdown.actions';
 
 @Injectable({
   providedIn: 'root'
@@ -17,24 +19,13 @@ import * as countdonwSelectors
 export class RelatedDataManagerService {
 
   // update Preset.exercisesIds
-  onExerciseAddOrRemove(presetId) {
-    this.store
-      .pipe(
-        select(exerciseSelectors.allExercisesOfPreset(presetId)),
-        first()
-      )
+  onExerciseAdd(presetId) {
+    this.updateExercisesIds(presetId);
+  }
 
-      .subscribe(exercises => {
-        const exercisesIds = exercises.map(ex => ex.id);
-
-        this.store.dispatch(new UpdatePreset({
-          preset: {
-            id: presetId,
-            changes: { exercisesIds: exercisesIds }
-          }
-        }));
-
-      });
+  onExerciseRemove(presetId, exerciseId) {
+    this.updateExercisesIds(presetId);
+    this.deleteExercisesCountdowns(exerciseId)
   }
 
   onCountdownUpsertOrRemove(exerciseId) {
@@ -55,6 +46,35 @@ export class RelatedDataManagerService {
         }));
 
       });
+  }
+
+  private updateExercisesIds(presetId) {
+    this.store
+      .pipe(
+        select(exerciseSelectors.allExercisesOfPreset(presetId)),
+        first()
+      )
+
+      .subscribe(exercises => {
+        const exercisesIds = exercises.map(ex => ex.id);
+
+        this.store.dispatch(new UpdatePreset({
+          preset: {
+            id: presetId,
+            changes: { exercisesIds: exercisesIds }
+          }
+        }));
+
+      });
+  }
+
+  private deleteExercisesCountdowns(exerciseId) {
+    let countdownsIds;
+    this.store.pipe(
+      select(countdonwSelectors.allExerciseCountdowns(exerciseId)),
+      first()
+    ).subscribe(ids => countdownsIds = ids.map(countdown => countdown.id));
+    this.store.dispatch(new DeleteCountdowns({ ids: countdownsIds }));
   }
 
   constructor(
