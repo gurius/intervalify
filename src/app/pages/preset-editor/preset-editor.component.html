@@ -66,6 +66,11 @@
 <div class="constructor-element">
   <div class="buttons-bar">
     <button class="buttons-bar__button" mat-raised-button>delete</button>
-    <button class="buttons-bar__button" mat-raised-button>launch</button>
+    <button
+      class="buttons-bar__button"
+      mat-raised-button
+      routerLink="/stepper" [queryParams]="{pId: preset.id}">
+      launch
+    </button>
   </div>
 </div>

@@ -3,5 +3,24 @@
 html, body {
   height: 100%;
   background: grey;
+  font-size: 10px;
 }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/*
+  font-family: 'Faster One', cursive;
+  font-family: 'Allerta Stencil', sans-serif;
+ */
+header{
+  text-align: center;
+}
+h1{
+  font-family: 'Faster One', cursive;
+  font-size: 4rem;
+}
+section{
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+}

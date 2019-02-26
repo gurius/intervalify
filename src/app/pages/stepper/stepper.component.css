@@ -1,0 +1,14 @@
+
+.countdown{
+  font-family: 'Allerta Stencil', sans-serif;
+  font-size: 40px;
+  min-width: 120px;
+  text-align: center;
+}
+.progress{
+  display: flex;
+  flex-flow: column;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 150px;
+}

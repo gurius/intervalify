@@ -23,3 +23,18 @@ export const allExerciseCountdowns = (id) => createSelector(
     return filtered;
   }
 );
+
+export const allCountdownsOfExercises = (ids: number[]) => createSelector(
+  countdownsSelector,
+  countdownState => {
+    const filtered = [];
+
+    for (let key in countdownState.entities) {
+      const entity = countdownState.entities[key];
+      ids.includes(entity.id) && filtered.push(entity)
+    }
+
+    return filtered;
+  }
+
+)

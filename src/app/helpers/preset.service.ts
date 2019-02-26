@@ -24,7 +24,7 @@ export class PresetService {
     this.store.dispatch(new AddPreset({ preset: this.getBlank() }));
   }
 
-  updatePreset(id, changes) {
+  updatePreset(id, changes): void {
     this.store.dispatch(new UpdatePreset({ preset: { id, changes } }));
   }
 
