@@ -41,12 +41,13 @@ export class StepperService {
             const steps = [];
             countdowns.forEach(cns => {
               const exId = +Object.keys(cns)[0];
-              const exercise = exercises.find(ex => ex.id === exId);
+              const exercise = Object.assign({}, exercises.find(ex => ex.id === exId));
               while (exercise.repetitions > 0) {
                 exercise.repetitions--;
                 cns[exId].forEach(cn => {
-                  cn.title = exercise.title;
-                  steps.push(cn)
+                  const countdown = Object.assign({}, cn);
+                  countdown.title = exercise.title;
+                  steps.push(countdown)
                 });
               }
             })

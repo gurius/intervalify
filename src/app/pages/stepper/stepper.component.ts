@@ -20,7 +20,8 @@ export class StepperComponent implements OnInit {
   preset: Preset;
   steps: Step[] = [];
   currentStep: any;
-  intervalId: number;
+  intervalMainId: NodeJS.Timer;
+  intervalProgressId: NodeJS.Timer;
   numInOrder: number = 0;
   nextStep: Step;
   progress: number;
@@ -63,37 +64,57 @@ export class StepperComponent implements OnInit {
     this.nextStep = Object.assign({}, this.steps[nextNumInOrder]);
     this.currentStep.countdownSec =
       this.currentStep.minutes * 60 + this.currentStep.seconds;
-    this.progressUnit = 100 / this.currentStep.countdownSec
-    this.progress = 0;
+
+    this.progressUnit = (100 / this.currentStep.countdownSec)/10;
+
+    switch(this.currentStep.type){
+      case 'work':
+        this.progress = 0;
+        break;
+      case 'rest':
+        this.progress = 100;
+        break;
+    }
     this.numInOrder++;
   }
 
   start() {
     this.running = true;
-    this.intervalId = setInterval(() => {
+    this.intervalMainId = setInterval(() => {
 
       if (this.currentStep.seconds > 0) {
         this.currentStep.seconds--;
-        this.progress += this.progressUnit;
       } else if (this.currentStep.minutes > 0) {
         this.currentStep.minutes--;
         this.currentStep.seconds = 59;
-        this.progress += this.progressUnit;
       } else {
         this.doStep();
       }
 
-    }, 500);
+    }, 1000);
+    // for smooth progress running
+    this.intervalProgressId = setInterval(() => {
+      switch(this.currentStep.type){
+        case 'work':
+          this.progress += this.progressUnit;
+          break;
+        case 'rest':
+          this.progress -= this.progressUnit;
+          break;
+      }
+    }, 100)
   }
   stop() {
     this.running = false;
-    clearInterval(this.intervalId);
+    clearInterval(this.intervalMainId);
+    clearInterval(this.intervalProgressId);
     this.numInOrder = 0;
     this.doStep();
   }
   pause() {
     this.running = false;
-    clearInterval(this.intervalId);
+    clearInterval(this.intervalMainId);
+    clearInterval(this.intervalProgressId);
   }
 
 
