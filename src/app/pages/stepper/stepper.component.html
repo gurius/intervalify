@@ -1,5 +1,5 @@
 <header>
-  <h1>{{preset.title}}</h1>
+  <h1 [ngStyle]="{'color': stepper.currentStep.color}">{{preset.title}}</h1>
 </header>
 <section class="step">
   <div class="step__current">

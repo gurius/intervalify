@@ -26,7 +26,15 @@ export class StepperService {
 
   setSteps(steps: Step[], repetitions: number) {
     while (repetitions > 0) {
-      this.steps.push(...steps)
+      if (this.steps.length){
+        for (let i = 0; i < steps.length; i++){
+          let step = steps[i];
+          step.presetRepetitions && this.steps.push(step);
+        }
+      } else {
+
+        this.steps.push(...steps);
+      }
       repetitions--;
     }
   }

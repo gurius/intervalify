@@ -25,6 +25,8 @@ export class StepsService {
       minutes: 0,
       seconds: 0,
       seqNo: 1,
+      presetRepetitions: true,
+      color: '#1c9bba',
       belongsToExercises: []
     })
   }
@@ -60,6 +62,8 @@ export class StepsService {
                 cns[exId].forEach(cn => {
                   const countdown = Object.assign({}, cn);
                   countdown.title = exercise.title;
+                  countdown.presetRepetitions = exercise.presetRepetitions
+                  countdown.color = exercise.color;
                   steps.push(countdown)
                 });
               }

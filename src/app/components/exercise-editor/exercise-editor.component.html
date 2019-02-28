@@ -2,9 +2,6 @@
 <mat-dialog-content>
   <div class="editor">
     <div class="editor__item">
-      <mat-form-field class="narrow-input">
-        <input matInput type="color" [(ngModel)]="exercise.color">
-      </mat-form-field>
       <mat-form-field>
         <input matInput placeholder="exercise" [(ngModel)]="exercise.title">
       </mat-form-field>
@@ -14,6 +11,12 @@
         placeholder="repetitions"
         [(ngModel)]="exercise.repetitions"
         min="0" step="1">
+      </mat-form-field>
+    </div>
+    <div class="editor__item">
+      <mat-checkbox [(ngModel)]="exercise.presetRepetitions">preset repetitions</mat-checkbox>
+      <mat-form-field class="narrow-input">
+        <input matInput type="color" [(ngModel)]="exercise.color">
       </mat-form-field>
     </div>
 

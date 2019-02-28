@@ -5,5 +5,6 @@ export interface Exercise {
   countdownsIds: Array<number>;
   seqNo: number;
   repetitions: number;
+  presetRepetitions: boolean;
   belongsToPresets: number[];
 }
