@@ -10,11 +10,24 @@ import * as exerciseSelectors
 import * as countdonwSelectors
   from '../components/countdown/countdown.selectors';
 import { of } from 'rxjs';
+import { CountdownTypes } from '../models/countdown.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class StepperService {
+export class StepsService {
+
+  getBlankStep(): Step {
+    return Object.assign({}, {
+      id: Date.now(),
+      title: '',
+      type: CountdownTypes.Work,
+      minutes: 0,
+      seconds: 0,
+      seqNo: 1,
+      belongsToExercises: []
+    })
+  }
 
   steps: Step[] = [];
 

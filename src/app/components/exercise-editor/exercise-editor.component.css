@@ -1,3 +1,6 @@
+:host{
+  font-size: 1.6rem;
+}
 .countdowns{
   display: flex;
   flex-direction: column;

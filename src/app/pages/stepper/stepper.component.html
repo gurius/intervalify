@@ -3,31 +3,31 @@
 </header>
 <section class="step">
   <div class="step__current">
-    {{currentStep.type === 'work' ? currentStep.title : currentStep.type}}
+    {{stepper.currentStep.type === 'work' ? stepper.currentStep.title : stepper.currentStep.type}}
   </div>
-  <mat-icon *ngIf="numInOrder < steps.length && numInOrder !== 0">arrow_right_alt</mat-icon>
+  <mat-icon *ngIf="stepper.stepNumber < stepper.steps.length && stepper.stepNumber !== 0">arrow_right_alt</mat-icon>
   <div class="step__next">
-    {{nextStep.type === 'work' ? nextStep.title : nextStep.type}}
+    {{stepper.nextStep.type === 'work' ? stepper.nextStep.title : stepper.nextStep.type}}
   </div>
 </section>
 <section class="countdown-wrapper">
   <div class="countdown">
-    {{currentStep.minutes < 1 ? 00 : currentStep.minutes < 10 ? 0 : '' }}{{currentStep.minutes}}:{{currentStep.seconds < 1 ? 00 : currentStep.seconds < 10 ? 0 : '' }}{{currentStep.seconds}}
+    {{stepper.currentStep.minutes < 1 ? 00 : stepper.currentStep.minutes < 10 ? 0 : '' }}{{stepper.currentStep.minutes}}:{{stepper.currentStep.seconds < 1 ? 00 : stepper.currentStep.seconds < 10 ? 0 : '' }}{{stepper.currentStep.seconds}}
   </div>
 </section>
 <section>
   <div class="progress">
-    <mat-progress-spinner mode="determinate" [value]="progress"></mat-progress-spinner>
+    <mat-progress-spinner mode="determinate" [value]="stepper.progress"></mat-progress-spinner>
     <div class="current-number">
-      {{numInOrder}} of {{steps.length}}
+      {{stepper.stepNumber}} of {{stepper.steps.length}}
     </div>
   </div>
 </section>
 <section>
-  <button *ngIf="!running" (click)="start()" mat-icon-button>
+  <button *ngIf="!stepper.running" (click)="play()" mat-icon-button>
     <mat-icon>play_arrow</mat-icon>
   </button>
-  <button *ngIf="running" (click)="pause()" mat-icon-button>
+  <button *ngIf="stepper.running" (click)="pause()" mat-icon-button>
     <mat-icon>pause</mat-icon>
   </button>
   <button (click)="stop()" mat-icon-button>
