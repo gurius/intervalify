@@ -69,16 +69,26 @@ export class StepperService {
     return Object.assign({}, this.steps[this.stepNumber]);
   }
 
-  getTotalSeconds(){
+  getTotalSeconds() {
     return this.currentStep.minutes * this.secInMinute + this.currentStep.seconds;
+  }
+
+  playBefore(sec: number) {
+    this.currentTotalSeconds--;
+    if (this.currentTotalSeconds <= sec && this.currentTotalSeconds > 0) {
+      this.soundPlayer.play(Sound.Bip);
+    }
+    if (this.currentTotalSeconds === 0) {
+      this.soundPlayer.play(Sound.ExEnd);
+    }
   }
 
   doStep() {
     if (this.stepNumber === this.steps.length) {
       this.stop();
+      this.soundPlayer.play(Sound.Finish);
       return;
     }
-    this.soundPlayer.play(Sound.Kwak)
     this.currentStep = this.getCurrentStep();
     this.nextStep = this.getNextStep();
     this.currentTotalSeconds = this.getTotalSeconds();
@@ -95,9 +105,11 @@ export class StepperService {
 
       if (this.currentStep.seconds > 0) {
         this.currentStep.seconds--;
+        this.playBefore(3);
       } else if (this.currentStep.minutes > 0) {
         this.currentStep.minutes--;
         this.currentStep.seconds = 59;
+        this.playBefore(3);
       } else {
         this.doStep();
       }

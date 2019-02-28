@@ -1,5 +1,12 @@
 export enum Sound {
-  Kwak = 'kwak'
+  Kwak = 'kwak',
+  End = 'end',
+  Bip = 'bip',
+  ExEnd = 'ex_end',
+  Finish = 'finish'
 }
 
-export type SoundType = Sound.Kwak;
+export type SoundType
+  = Sound.Bip
+  | Sound.ExEnd
+  | Sound.Finish;

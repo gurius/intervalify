@@ -26,10 +26,13 @@ export class StepperComponent implements OnInit, OnDestroy {
         const steps = this.sHelper.getSteps(presetId);
         this.preset = this.pHelper.getPreset(presetId);
         this.stepper.setSteps(steps, this.preset.repetitions);
+        this.stepper.doStep();
       })
   }
 
   ngOnDestroy(): void {
+    this.stepper.stop();
+    this.stepper.stepNumber--;
     this.stepper.steps = [];
   }
 

@@ -8,7 +8,7 @@ export class AudioService {
   sound: HTMLAudioElement;
 
   play(title: SoundType){
-    this.sound.src = `/assets/sounds/${title}.wav`;
+    this.sound.src = `/assets/sounds/${title}.mp3`;
     this.sound.load();
     this.sound.play();
   }
