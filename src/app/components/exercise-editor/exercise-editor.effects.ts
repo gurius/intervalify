@@ -7,6 +7,7 @@ import {
   AddExercise,
   UpdateExercise,
   DeleteExercise,
+  DeleteExercises,
 
 } from 'src/app/components/exercise-editor/exercise-editor.actions';
 import { mergeMap, catchError } from 'rxjs/operators';
@@ -71,6 +72,20 @@ export class ExerciseEditorEffects {
       mergeMap(action => {
         this.dataSource.deleteExercise(action.payload.id);
         return of({ type: ExerciseActionTypes.ExerciseDeleted })
+      }),
+
+      catchError(() => of({ tupe: ExerciseActionTypes.ExerciseDeletionError }))
+    )
+
+  @Effect()
+  deleteExercises$ = this.actions$
+    .pipe(
+
+      ofType<DeleteExercises>(ExerciseActionTypes.DeleteExercises),
+
+      mergeMap(action => {
+        this.dataSource.deleteExercises(action.payload.ids);
+        return of({ type: ExerciseActionTypes.ExercisesDeleted })
       }),
 
       catchError(() => of({ tupe: ExerciseActionTypes.ExerciseDeletionError }))

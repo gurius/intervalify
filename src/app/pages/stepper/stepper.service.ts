@@ -92,6 +92,7 @@ export class StepperService {
   }
 
   doStep() {
+    if (this.steps.length === 0) return;
     if (this.stepNumber === this.steps.length) {
       this.stop();
       this.soundPlayer.play(Sound.Finish);

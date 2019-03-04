@@ -63,6 +63,14 @@ export class DataSourceService {
     }
   }
 
+  deletePreset = (pId: number) => {
+    const data = this.getData();
+
+    deleteById(data, 'presets', pId);
+
+    this.setData(data);
+  }
+
   //exercises
   getExercises = () => {
 
@@ -115,6 +123,14 @@ export class DataSourceService {
       data.exercises.splice(index, 1);
       this.setData(data);
     }
+  }
+
+  deleteExercises = (ids: number[]) => {
+    const data = this.getData();
+
+    ids.forEach(id => deleteById(data, 'exercises', id));
+
+    this.setData(data);
   }
 
   //countdowns

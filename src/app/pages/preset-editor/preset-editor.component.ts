@@ -18,6 +18,7 @@ import * as countdonwSelectors
 import { PresetService } from '../../helpers/preset.service';
 import { ExerciseService } from 'src/app/helpers/exercise.service';
 import { CountdownService } from 'src/app/helpers/countdown.service';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
 
 @Component({
@@ -40,22 +41,24 @@ export class PresetEditorComponent implements OnInit, OnDestroy {
     private dialog: MatDialog,
     private pHelper: PresetService,
     private eHelper: ExerciseService,
-    private cHelper: CountdownService
+    private cHelper: CountdownService,
+    private ar: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit() {
-    this.presetSubscription = this.store
-      .pipe(
-        // temporary get the first preset by default
-        select(fromSelectors.selectPreset())
-      )
-      .subscribe(preset => {
-        if (!preset) {
-          //Create and save to storage blank preset
-          this.pHelper.addPreset()
-        } else {
-          this.preset = preset;
-        }
+    this.ar.queryParamMap
+      .subscribe((paramMap: ParamMap) => {
+        const presetId = paramMap.get('pId');
+
+        this.presetSubscription = this.store
+          .pipe(
+            select(fromSelectors.selectPreset(presetId))
+          )
+          .subscribe(preset => {
+            this.preset = preset;
+          });
+
       });
 
     this.exercises$ = this.store
@@ -67,6 +70,11 @@ export class PresetEditorComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.presetSubscription.unsubscribe();
+  }
+
+  deletePreset(preset) {
+    this.pHelper.deletePreset(preset);
+    this.router.navigate(['/home']);
   }
 
   onBlur(prop, val) {

@@ -3,11 +3,13 @@ import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 
 import { Preset } from '../models/preset.model';
-import { AddPreset, UpdatePreset }
+import { AddPreset, UpdatePreset, DeletePreset }
   from '../pages/preset-editor/preset-editor.actions';
 import * as fromReducers from '../root-reducer';
 import * as fromSelectors from '../pages/preset-editor/preset-editor.selectors';
 import { first } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { RelatedDataManagerService } from './related-data-manager.service';
 
 @Injectable({
   providedIn: 'root'
@@ -23,8 +25,8 @@ export class PresetService {
     })
   }
 
-  addPreset(): void {
-    this.store.dispatch(new AddPreset({ preset: this.getBlank() }));
+  addPreset(preset: Preset): void {
+    this.store.dispatch(new AddPreset({ preset }));
   }
 
   updatePreset(id, changes): void {
@@ -41,10 +43,23 @@ export class PresetService {
       )
       .subscribe(preset => p = preset);
 
-    return Object.assign({}, p);;
+    return Object.assign({}, p);
+  }
+
+  deletePreset(preset) {
+    this.store.dispatch(new DeletePreset({ id: preset.id }));
+    this.rdm.onPresetRemove(preset);
+  }
+
+  getAllPresets(): Observable<Preset[]> {
+    return this.store
+      .pipe(
+        select(fromSelectors.selectAllPresets())
+      )
   }
 
   constructor(
-    private store: Store<fromReducers.State>
+    private store: Store<fromReducers.State>,
+    private rdm: RelatedDataManagerService
   ) { }
 }

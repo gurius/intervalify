@@ -11,7 +11,9 @@ export enum PresetActionTypes {
   PresetAdded = '[Data API] Preset Successfully Added',
   PresetAddingError = '[Data API] Preset Adding Error',
   PresetUpdated = '[Data API] Preset Updated Successfully',
+  PresetDeleted = '[Data API] Preset Delated Successfully',
   PresetUpdatingError = '[Data API] Preset Updating Error',
+  PresetDeletionError = '[Data API] Preset Deletion Error',
   LoadPresets = '[Preset Editor] Load Presets',
   AddPreset = '[Preset Editor] Add Preset',
   UpsertPreset = '[Preset Editor] Upsert Preset',//unused
@@ -49,6 +51,9 @@ export class PresetAddingError implements Action {
 }
 export class PresetUpdatingError implements Action {
   readonly type = PresetActionTypes.PresetUpdatingError;
+}
+export class PresetDeletionError implements Action {
+  readonly type = PresetActionTypes.PresetDeletionError;
 }
 
 export class AddPreset implements Action {
@@ -89,6 +94,10 @@ export class PresetUpdated implements Action {
   readonly type = PresetActionTypes.PresetUpdated;
 }
 
+export class PresetDeleted implements Action {
+  readonly type = PresetActionTypes.PresetDeleted;
+}
+
 export class UpdatePresets implements Action {
   readonly type = PresetActionTypes.UpdatePresets;
 
@@ -98,7 +107,7 @@ export class UpdatePresets implements Action {
 export class DeletePreset implements Action {
   readonly type = PresetActionTypes.DeletePreset;
 
-  constructor(public payload: { id: string }) { }
+  constructor(public payload: { id: number }) { }
 }
 
 export class DeletePresets implements Action {
@@ -118,12 +127,16 @@ export type PresetActions =
   | PresetAdded
   | PresetsLoadingError
   | PresetUpdatingError
+  | PresetDeletionError
   | AddPreset
+  | PresetAddingError
   | UpsertPreset
   | AddPresets
   | UpsertPresets
   | UpdatePreset
+  | PresetUpdated
   | UpdatePresets
   | DeletePreset
+  | PresetDeleted
   | DeletePresets
   | ClearPresets;

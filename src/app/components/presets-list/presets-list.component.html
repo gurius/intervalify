@@ -1,0 +1,21 @@
+<h2>Presets list</h2>
+<button mat-button (click)="addPreset()" >
+  <mat-icon>add</mat-icon>
+</button>
+<ul class="preset-list">
+  <li class="preset-list__item" *ngFor="let preset of presets">
+    <h3>{{preset.title}}</h3>
+    <div class="button-panel">
+      <button mat-icon-button>
+        <mat-icon routerLink="/stepper" [queryParams]="{pId: preset.id}">play_arrow</mat-icon>
+      </button>
+      <button mat-icon-button>
+        <mat-icon routerLink="/constructor" [queryParams]="{pId: preset.id}">edit</mat-icon>
+      </button>
+      <button (click)="deletePreset(preset)" mat-icon-button>
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+
+  </li>
+</ul>

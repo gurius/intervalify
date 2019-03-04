@@ -5,7 +5,7 @@ import * as fromPreset from './preset-editor.reducer';
 
 export const presetsSelector = (state: fromReducers.State) => state.preset;
 
-export const selectAllPresets = createSelector(
+export const selectAllPresets = () => createSelector(
   presetsSelector,
   fromPreset.selectAll
 );

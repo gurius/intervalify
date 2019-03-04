@@ -6,7 +6,7 @@ import { UpdatePreset } from '../pages/preset-editor/preset-editor.actions';
 import * as exerciseSelectors
   from 'src/app/components/exercise-editor/exercise-editor.selectors';
 import { first } from 'rxjs/operators';
-import { UpdateExercise }
+import { UpdateExercise, DeleteExercises }
   from '../components/exercise-editor/exercise-editor.actions';
 import * as countdonwSelectors
   from 'src/app/components/countdown/countdown.selectors';
@@ -48,6 +48,11 @@ export class RelatedDataManagerService {
       });
   }
 
+  onPresetRemove(preset) {
+    this.deletePresetsExercises(preset.exercisesIds);
+    preset.exercisesIds.forEach(eId => this.deleteExercisesCountdowns(eId));
+  }
+
   private updateExercisesIds(presetId) {
     this.store
       .pipe(
@@ -75,6 +80,10 @@ export class RelatedDataManagerService {
       first()
     ).subscribe(ids => countdownsIds = ids.map(countdown => countdown.id));
     this.store.dispatch(new DeleteCountdowns({ ids: countdownsIds }));
+  }
+
+  private deletePresetsExercises(ids) {
+    this.store.dispatch(new DeleteExercises({ ids }));
   }
 
   constructor(

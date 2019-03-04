@@ -24,3 +24,7 @@ section{
   justify-content: center;
   font-size: 2rem;
 }
+ul,li{
+  padding: 0;
+  margin: 0;
+}

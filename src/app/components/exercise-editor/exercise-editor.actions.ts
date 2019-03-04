@@ -19,6 +19,7 @@ export enum ExerciseActionTypes {
   UpdateExercises = '[Preset Editor] Update Exercises',
   DeleteExercise = '[Preset Editor] Delete Exercise',  //->
   ExerciseDeleted = '[Data API] Exercise Deleted',
+  ExercisesDeleted = '[Data API] Exercises Deleted',
   ExerciseDeletionError = '[Data API] Exercise Deletion Error',
   DeleteExercises = '[Preset Editor] Delete Exercises', //->
   ClearExercises = '[Preset Editor] Clear Exercises'
@@ -75,7 +76,7 @@ export class DeleteExercise implements Action {
 export class DeleteExercises implements Action {
   readonly type = ExerciseActionTypes.DeleteExercises;
 
-  constructor(public payload: { ids: string[] }) { }
+  constructor(public payload: { ids: number[] }) { }
 }
 
 export class ClearExercises implements Action {
@@ -116,6 +117,10 @@ export class ExerciseDeleted implements Action {
   readonly type = ExerciseActionTypes.ExerciseDeleted;
 }
 
+export class ExercisesDeleted implements Action {
+  readonly type = ExerciseActionTypes.ExercisesDeleted;
+}
+
 export class ExerciseDeletionError implements Action {
   readonly type = ExerciseActionTypes.ExerciseDeletionError;
 }
@@ -138,5 +143,6 @@ export type ExerciseActions =
   | UpdateExercise
   | UpdateExercises
   | DeleteExercise
+  | ExercisesDeleted
   | DeleteExercises
   | ClearExercises;

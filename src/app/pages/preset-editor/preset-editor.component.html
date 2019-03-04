@@ -65,7 +65,12 @@
 
 <div class="constructor-element">
   <div class="buttons-bar">
-    <button class="buttons-bar__button" mat-raised-button>delete</button>
+    <button
+      (click)="deletePreset(preset)"
+      class="buttons-bar__button"
+      mat-raised-button>
+      delete
+    </button>
     <button
       class="buttons-bar__button"
       mat-raised-button

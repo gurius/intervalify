@@ -11,7 +11,10 @@ import {
   UpdatePreset,
   PresetAdded,
   PresetUpdatingError,
-  PresetUpdated
+  PresetUpdated,
+  DeletePreset,
+  PresetDeletionError,
+  PresetDeleted
 } from './preset-editor.actions';
 
 import { DataSourceService } from 'src/app/data-source.service';
@@ -70,6 +73,19 @@ export class PresetEditorEffects {
 
       catchError(() => of({ type: PresetActionTypes.PresetUpdatingError }))
 
+    );
+
+  @Effect()
+  deletePreset$ = this.actions$
+    .pipe(
+
+      ofType<DeletePreset>(PresetActionTypes.DeletePreset),
+      map(action => {
+        this.dataSource.deletePreset(action.payload.id);
+        return new PresetDeleted();
+      }),
+
+      catchError(() => of(new PresetDeletionError()))
     );
 
   constructor(

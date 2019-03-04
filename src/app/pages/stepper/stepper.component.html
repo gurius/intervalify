@@ -24,13 +24,13 @@
   </div>
 </section>
 <section>
-  <button *ngIf="!stepper.running" (click)="play()" mat-icon-button>
+  <button *ngIf="!stepper.running" [disabled]="!stepper.steps.length" (click)="play()" mat-icon-button>
     <mat-icon>play_arrow</mat-icon>
   </button>
   <button *ngIf="stepper.running" (click)="pause()" mat-icon-button>
     <mat-icon>pause</mat-icon>
   </button>
-  <button (click)="stop()" mat-icon-button>
+  <button [disabled]="!stepper.steps.length" (click)="stop()" mat-icon-button>
     <mat-icon>stop</mat-icon>
   </button>
 </section>

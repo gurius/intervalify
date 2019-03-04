@@ -50,7 +50,7 @@ export class CountdownEffects {
     )
 
   @Effect()
-  deleteCountdown$ = this.actions$
+  deleteCountdowns$ = this.actions$
     .pipe(
 
       ofType<DeleteCountdowns>(CountdownActionTypes.DeleteCountdowns),

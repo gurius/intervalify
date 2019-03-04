@@ -12,3 +12,7 @@
   align-items: center;
   height: 150px;
 }
+.step__current{
+  font-weight: bold;
+  text-shadow: 0 0  1.5rem rgb(200, 200, 200);
+}

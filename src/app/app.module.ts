@@ -29,6 +29,7 @@ import { CountdownComponent } from './components/countdown/countdown.component';
 import { CountdownEffects } from './components/countdown/countdown.effects';
 import { AutofocusInputDirective } from './directives/autofocus-input.directive';
 import { StepperComponent } from './pages/stepper/stepper.component';
+import { PresetsListComponent } from './components/presets-list/presets-list.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { StepperComponent } from './pages/stepper/stepper.component';
     ExerciseEditorComponent,
     CountdownComponent,
     AutofocusInputDirective,
-    StepperComponent
+    StepperComponent,
+    PresetsListComponent
   ],
   imports: [
     BrowserModule,

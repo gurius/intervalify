@@ -1,0 +1,18 @@
+:host{
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: space-between;
+}
+.preset-list{
+  padding: 0.5rem;
+}
+.preset-list__item{
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  box-shadow: 0px 3px 2rem 0.01rem #c8c8c8;
+}
