@@ -16,13 +16,13 @@ export class StepperService {
   progress: number;
   running: boolean = false;
   currentStep: any = this.sHelper.getBlankStep();
-  intervalMainId;
   intervalProgressId;
   stepNumber: number = 0;
   nextStep: Step = this.sHelper.getBlankStep();
   sounds: any = {};
   currentTotalSeconds: any;
   unitOfProgress: number;
+  counter: number = 0;
 
   setSteps(steps: Step[], repetitions: number) {
     while (repetitions > 0) {
@@ -110,35 +110,36 @@ export class StepperService {
 
   play() {
     this.running = true;
-    this.intervalMainId = setInterval(() => {
-
+    this.intervalProgressId = setInterval(() => {
+      this.progressTick();
       if (this.currentStep.seconds > 0) {
-        this.currentStep.seconds--;
-        this.playBefore(3);
+        this.counter += 1;
+        if (this.counter >= 10){
+          this.currentStep.seconds--;
+          this.playBefore(3);
+          this.counter = 0;
+        }
       } else if (this.currentStep.minutes > 0) {
-        this.currentStep.minutes--;
-        this.currentStep.seconds = 59;
-        this.playBefore(3);
+        this.counter += 1;
+        if (this.counter >= 10){
+          this.currentStep.minutes--;
+          this.currentStep.seconds = 59;
+          this.playBefore(3);
+          this.counter = 0;
+        }
       } else {
         this.doStep();
       }
-
-    }, 1000);
-    // for smooth progress running
-    this.intervalProgressId = setInterval(() => {
-      this.progressTick();
     }, 100)
   }
   stop() {
     this.running = false;
-    clearInterval(this.intervalMainId);
     clearInterval(this.intervalProgressId);
     this.stepNumber = 0;
     this.doStep();
   }
   pause() {
     this.running = false;
-    clearInterval(this.intervalMainId);
     clearInterval(this.intervalProgressId);
   }
 
