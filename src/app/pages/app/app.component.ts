@@ -10,6 +10,7 @@ import { RequestExercises }
   from 'src/app/components/exercise-editor/exercise-editor.actions';
 import { RequestCountdowns }
   from 'src/app/components/countdown/countdown.actions';
+import { StepperService } from '../stepper/stepper.service';
 
 @Component({
   selector: 'jt-root',
@@ -21,7 +22,10 @@ export class AppComponent {
   showNav$: Observable<boolean>
   visibleNav: boolean;
 
-  constructor(private store: Store<fromRedusers.State>) {
+  constructor(
+    private store: Store<fromRedusers.State>,
+    private stepper: StepperService
+  ) {
     this.showNav$ = store.pipe(select(fromRedusers.getShowNav));
     this.showNav$.subscribe(sn => this.visibleNav = sn);
     this.store.dispatch(new RequestPresets());

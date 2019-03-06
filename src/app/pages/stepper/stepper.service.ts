@@ -13,7 +13,7 @@ export class StepperService {
   readonly minProgress: number = 0;
   readonly secInMinute: number = 60;
   steps: Step[] = [];
-  progress: number;
+  progress: number = 0;
   running: boolean = false;
   currentStep: any = this.sHelper.getBlankStep();
   intervalProgressId;
@@ -23,11 +23,15 @@ export class StepperService {
   currentTotalSeconds: any;
   unitOfProgress: number;
   counter: number = 0;
+  presetTotalTime: { minutes: number, seconds: number, totalSec: number }
+    = { minutes: 0, seconds: 0, totalSec: 0 };
+  unitOfTotalProggress: number;
+  totalProgress: number = 0;
 
   setSteps(steps: Step[], repetitions: number) {
     while (repetitions > 0) {
-      if (this.steps.length){
-        for (let i = 0; i < steps.length; i++){
+      if (this.steps.length) {
+        for (let i = 0; i < steps.length; i++) {
           let step = steps[i];
           step.presetRepetitions && this.steps.push(step);
         }
@@ -37,6 +41,12 @@ export class StepperService {
       }
       repetitions--;
     }
+    const minutes = this.steps.reduce((acc, step) => acc + step.minutes, 0);
+    const rawSeconds = this.steps.reduce((acc, step) => acc + step.seconds, 0);
+    this.presetTotalTime.minutes = minutes + Math.trunc(rawSeconds / 60);
+    this.presetTotalTime.seconds = Math.round(rawSeconds / 60 % 1 * 10 * 6);
+    this.presetTotalTime.totalSec = minutes * 60 + rawSeconds;
+
   }
 
 
@@ -52,6 +62,7 @@ export class StepperService {
   }
 
   progressTick() {
+    this.totalProgress += this.unitOfTotalProggress;
     switch (this.currentStep.type) {
       case CountdownTypes.Work:
         this.progress += this.unitOfProgress;
@@ -103,6 +114,7 @@ export class StepperService {
     this.currentTotalSeconds = this.getTotalSeconds();
 
     this.unitOfProgress = (this.maxProgress / this.currentTotalSeconds) / 10;
+    this.unitOfTotalProggress = (this.maxProgress / this.presetTotalTime.totalSec) / 10;
     this.controlProgressDirection()
 
     this.stepNumber++;
@@ -114,14 +126,14 @@ export class StepperService {
       this.progressTick();
       if (this.currentStep.seconds > 0) {
         this.counter += 1;
-        if (this.counter >= 10){
+        if (this.counter >= 10) {
           this.currentStep.seconds--;
           this.playBefore(3);
           this.counter = 0;
         }
       } else if (this.currentStep.minutes > 0) {
         this.counter += 1;
-        if (this.counter >= 10){
+        if (this.counter >= 10) {
           this.currentStep.minutes--;
           this.currentStep.seconds = 59;
           this.playBefore(3);

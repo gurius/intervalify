@@ -1,9 +1,32 @@
-
+:host{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  justify-content: flex-start;
+}
+.section{
+  font-size: 3rem;
+}
+.section--col{
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 4rem;
+}
+/* .section--progress{
+  flex: 1 0;
+} */
 .countdown{
   font-family: 'Allerta Stencil', sans-serif;
-  font-size: 40px;
+  font-size: 10rem;
   min-width: 120px;
-  text-align: center;
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  width: 30rem;
 }
 .progress{
   display: flex;
@@ -12,7 +35,24 @@
   align-items: center;
   height: 150px;
 }
-.step__current{
+.step-current{
   font-weight: bold;
   text-shadow: 0 0  1.5rem rgb(200, 200, 200);
+}
+.section--bottom-info{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  font-size: 2rem;
+  color: white;
+  width: 100%;
+}
+button{
+  height: 6rem;
+  width: 6rem;
+}
+mat-icon{
+  transform: scale(2);
 }

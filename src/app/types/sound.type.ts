@@ -1,6 +1,4 @@
 export enum Sound {
-  Kwak = 'kwak',
-  End = 'end',
   Bip = 'bip',
   ExEnd = 'ex_end',
   Finish = 'finish'

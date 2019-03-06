@@ -1,4 +1,9 @@
 <header>
+  <mat-progress-bar
+    *ngIf="stepperRoute.isActive"
+    mode="determinate"
+    [value]="stepper.totalProgress">
+  </mat-progress-bar>
   <jt-icon-button (click)="onClick()">
     |||
   </jt-icon-button>
@@ -10,6 +15,7 @@
   <div   routerLink="/constructor" class="">
     constructor
   </div>
+  <div  routerLink="/stepper" routerLinkActive #stepperRoute="routerLinkActive"></div>
 </nav>
 <div class="routerOutlet">
   <router-outlet></router-outlet>
