@@ -12,11 +12,12 @@
 </section>
 <section class="section">
   <div class="countdown ">
-    <span class="countdown__item">{{stepper.currentStep.minutes < 1 ? 00 : stepper.currentStep.minutes < 10 ? 0 : '' }}</span>
+    <!-- <span class="countdown__item">{{stepper.currentStep.minutes < 1 ? 00 : stepper.currentStep.minutes < 10 ? 0 : '' }}</span>
     <span class="countdown__item">{{stepper.currentStep.minutes}}</span>
     <span class="countdown__item">:</span>
     <span class="countdown__item">{{stepper.currentStep.seconds < 1 ? 00 : stepper.currentStep.seconds < 10 ? 0 : '' }}</span>
-    <span class="countdown__item">{{stepper.currentStep.seconds}}</span>
+    <span class="countdown__item">{{stepper.currentStep.seconds}}</span> -->
+    {{stepper.countdown}}
   </div>
 </section>
 <section class="section section--progress">
@@ -47,12 +48,12 @@
 </section>
 <section class="section section--bottom-info">
   <div class="elapsed">
-    Elapsed: 01:34
+    Elapsed: {{stepper.presetTotalTime.elapsed}}
   </div>
   <div class="current-number">
     {{stepper.stepNumber}} of {{stepper.steps.length}}
   </div>
   <div class="remaining">
-    Remaining: 15:26
+    Remaining: {{stepper.presetTotalTime.remaining}}
   </div>
 </section>

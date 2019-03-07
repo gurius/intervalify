@@ -23,10 +23,11 @@ export class StepperService {
   currentTotalSeconds: any;
   unitOfProgress: number;
   counter: number = 0;
-  presetTotalTime: { minutes: number, seconds: number, totalSec: number }
-    = { minutes: 0, seconds: 0, totalSec: 0 };
+  presetTotalTime: { elapsed: string, remaining: string, totalSec: number, secondsRemaining: number, secondsElapsed: number }
+    = { elapsed: '00:00', remaining: '00:00', totalSec: 0, secondsRemaining: 0, secondsElapsed: 0 };
   unitOfTotalProggress: number;
   totalProgress: number = 0;
+  countdown: string;
 
   setSteps(steps: Step[], repetitions: number) {
     while (repetitions > 0) {
@@ -43,10 +44,12 @@ export class StepperService {
     }
     const minutes = this.steps.reduce((acc, step) => acc + step.minutes, 0);
     const rawSeconds = this.steps.reduce((acc, step) => acc + step.seconds, 0);
-    this.presetTotalTime.minutes = minutes + Math.trunc(rawSeconds / 60);
-    this.presetTotalTime.seconds = Math.round(rawSeconds / 60 % 1 * 10 * 6);
+    // this.presetTotalTime.minutes = minutes + Math.trunc(rawSeconds / 60);
+    // this.presetTotalTime.seconds = Math.round(rawSeconds / 60 % 1 * 10 * 6);
     this.presetTotalTime.totalSec = minutes * 60 + rawSeconds;
-
+    this.presetTotalTime.secondsRemaining = this.presetTotalTime.totalSec;
+    this.presetTotalTime.remaining = this.secondsTommssStr(this.presetTotalTime.totalSec);
+    this.unitOfTotalProggress = (this.maxProgress / this.presetTotalTime.totalSec) / 10;
   }
 
 
@@ -61,7 +64,7 @@ export class StepperService {
     }
   }
 
-  progressTick() {
+  progressTic() {
     this.totalProgress += this.unitOfTotalProggress;
     switch (this.currentStep.type) {
       case CountdownTypes.Work:
@@ -114,30 +117,35 @@ export class StepperService {
     this.currentTotalSeconds = this.getTotalSeconds();
 
     this.unitOfProgress = (this.maxProgress / this.currentTotalSeconds) / 10;
-    this.unitOfTotalProggress = (this.maxProgress / this.presetTotalTime.totalSec) / 10;
     this.controlProgressDirection()
-
+    this.secondTic();
     this.stepNumber++;
   }
 
   play() {
     this.running = true;
     this.intervalProgressId = setInterval(() => {
-      this.progressTick();
+      this.progressTic();
       if (this.currentStep.seconds > 0) {
         this.counter += 1;
         if (this.counter >= 10) {
           this.currentStep.seconds--;
+          this.presetTotalTime.secondsRemaining--;
+          this.presetTotalTime.secondsElapsed++;
           this.playBefore(3);
           this.counter = 0;
+          this.secondTic();
         }
       } else if (this.currentStep.minutes > 0) {
         this.counter += 1;
         if (this.counter >= 10) {
           this.currentStep.minutes--;
+          this.presetTotalTime.secondsRemaining--;
+          this.presetTotalTime.secondsElapsed++;
           this.currentStep.seconds = 59;
           this.playBefore(3);
           this.counter = 0;
+          this.secondTic();
         }
       } else {
         this.doStep();
@@ -148,11 +156,36 @@ export class StepperService {
     this.running = false;
     clearInterval(this.intervalProgressId);
     this.stepNumber = 0;
+    this.totalProgress = 0;
+    this.presetTotalTime.secondsElapsed = 0;
+    this.presetTotalTime.secondsRemaining = this.presetTotalTime.totalSec;
     this.doStep();
   }
   pause() {
     this.running = false;
     clearInterval(this.intervalProgressId);
+  }
+
+  prependZero(val: number): string {
+    return val.toString().padStart(2, '0');
+  }
+
+  tommssStr(m: number, s: number): string {
+    const mm = this.prependZero(m);
+    const ss = this.prependZero(s);
+    return `${mm}:${ss}`;
+  }
+
+  secondsTommssStr(seconds: number): string {
+    const arr: string[] = (new Date(seconds * 1000)).toUTCString().match(/(\d{2}:\d{2}:\d{2})/)[0].split(':');
+    return `${arr[1]}:${arr[2]}`;
+  }
+
+  secondTic(){
+    const { minutes: m, seconds: s } = this.currentStep;
+    this.countdown = this.tommssStr(m, s);
+    this.presetTotalTime.elapsed = this.secondsTommssStr(this.presetTotalTime.secondsElapsed);
+    this.presetTotalTime.remaining = this.secondsTommssStr(this.presetTotalTime.secondsRemaining);
   }
 
   constructor(
