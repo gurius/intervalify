@@ -22,7 +22,7 @@ export class StepperService {
   sounds: any = {};
   currentTotalSeconds: any;
   unitOfProgress: number;
-  counter: number = 0;
+  oneSecondCounter: number = 0;
   presetTotalTime: { elapsed: string, remaining: string, totalSec: number, secondsRemaining: number, secondsElapsed: number }
     = { elapsed: '00:00', remaining: '00:00', totalSec: 0, secondsRemaining: 0, secondsElapsed: 0 };
   unitOfTotalProggress: number;
@@ -127,24 +127,24 @@ export class StepperService {
     this.intervalProgressId = setInterval(() => {
       this.progressTic();
       if (this.currentStep.seconds > 0) {
-        this.counter += 1;
-        if (this.counter >= 10) {
+        this.oneSecondCounter += 1;
+        if (this.oneSecondCounter >= 10) {
           this.currentStep.seconds--;
           this.presetTotalTime.secondsRemaining--;
           this.presetTotalTime.secondsElapsed++;
           this.playBefore(3);
-          this.counter = 0;
+          this.oneSecondCounter = 0;
           this.secondTic();
         }
       } else if (this.currentStep.minutes > 0) {
-        this.counter += 1;
-        if (this.counter >= 10) {
+        this.oneSecondCounter += 1;
+        if (this.oneSecondCounter >= 10) {
           this.currentStep.minutes--;
           this.presetTotalTime.secondsRemaining--;
           this.presetTotalTime.secondsElapsed++;
           this.currentStep.seconds = 59;
           this.playBefore(3);
-          this.counter = 0;
+          this.oneSecondCounter = 0;
           this.secondTic();
         }
       } else {

@@ -46,7 +46,8 @@ import { PresetsListComponent } from './components/presets-list/presets-list.com
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot(reducers, { metaReducers }), !environment.production
+    StoreModule.forRoot(reducers, { metaReducers }),
+    !environment.production
       ? StoreDevtoolsModule.instrument({ maxAge: 10 })
       : [],
     BrowserAnimationsModule,

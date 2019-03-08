@@ -4,10 +4,14 @@
   display: flex;
   flex-flow: column wrap;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
 }
 .section{
   font-size: 3rem;
+  flex: 1 1;
+}
+.preset-title{
+  flex: 0 1;
 }
 .section--col{
   display: flex;
@@ -15,6 +19,7 @@
   align-items: center;
   justify-content: center;
   line-height: 4rem;
+  min-height: 10.5rem;
 }
 /* .section--progress{
   flex: 1 0;
