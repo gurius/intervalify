@@ -4,6 +4,8 @@ import { CountdownTypes } from 'src/app/models/countdown.model';
 import { StepsService } from 'src/app/helpers/steps.service';
 import { AudioService } from 'src/app/helpers/audio.service';
 import { Sound } from 'src/app/types/sound.type';
+import { Subject } from 'rxjs';
+import { StepperState } from './stepper-state';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +30,7 @@ export class StepperService {
   unitOfTotalProggress: number;
   totalProgress: number = 0;
   countdown: string;
+  state: Subject<StepperState> = new Subject();
 
   setSteps(steps: Step[], repetitions: number) {
     while (repetitions > 0) {
@@ -52,6 +55,9 @@ export class StepperService {
     this.unitOfTotalProggress = (this.maxProgress / this.presetTotalTime.totalSec) / 10;
   }
 
+  getState() {
+    return this.state;
+  }
 
   controlProgressDirection() {
     switch (this.currentStep.type) {
@@ -95,12 +101,12 @@ export class StepperService {
     return this.currentStep.minutes * this.secInMinute + this.currentStep.seconds;
   }
 
-  playBefore(sec: number) {
-    this.currentTotalSeconds--;
-    if (this.currentTotalSeconds <= sec && this.currentTotalSeconds > 0) {
+  playBefore(sec: number, countdown: number) {
+
+    if (countdown <= sec && countdown > 0) {
       this.soundPlayer.play(Sound.Bip);
     }
-    if (this.currentTotalSeconds === 0) {
+    if (countdown === 0) {
       this.soundPlayer.play(Sound.ExEnd);
     }
   }
@@ -110,6 +116,7 @@ export class StepperService {
     if (this.stepNumber === this.steps.length) {
       this.stop();
       this.soundPlayer.play(Sound.Finish);
+      this.state.next({ accomplished: true });
       return;
     }
     this.currentStep = this.getCurrentStep();
@@ -131,8 +138,9 @@ export class StepperService {
         if (this.oneSecondCounter >= 10) {
           this.currentStep.seconds--;
           this.presetTotalTime.secondsRemaining--;
+          this.currentTotalSeconds--;
           this.presetTotalTime.secondsElapsed++;
-          this.playBefore(3);
+          this.playBefore(3, this.currentTotalSeconds);
           this.oneSecondCounter = 0;
           this.secondTic();
         }
@@ -141,9 +149,10 @@ export class StepperService {
         if (this.oneSecondCounter >= 10) {
           this.currentStep.minutes--;
           this.presetTotalTime.secondsRemaining--;
+          this.currentTotalSeconds--;
           this.presetTotalTime.secondsElapsed++;
           this.currentStep.seconds = 59;
-          this.playBefore(3);
+          this.playBefore(3, this.currentTotalSeconds);
           this.oneSecondCounter = 0;
           this.secondTic();
         }
@@ -155,12 +164,15 @@ export class StepperService {
   stop() {
     this.running = false;
     clearInterval(this.intervalProgressId);
+  }
+
+  reset() {
     this.stepNumber = 0;
     this.totalProgress = 0;
     this.presetTotalTime.secondsElapsed = 0;
     this.presetTotalTime.secondsRemaining = this.presetTotalTime.totalSec;
-    this.doStep();
   }
+
   pause() {
     this.running = false;
     clearInterval(this.intervalProgressId);
@@ -181,7 +193,7 @@ export class StepperService {
     return `${arr[1]}:${arr[2]}`;
   }
 
-  secondTic(){
+  secondTic() {
     const { minutes: m, seconds: s } = this.currentStep;
     this.countdown = this.tommssStr(m, s);
     this.presetTotalTime.elapsed = this.secondsTommssStr(this.presetTotalTime.secondsElapsed);

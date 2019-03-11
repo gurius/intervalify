@@ -4,6 +4,7 @@ html, body {
   height: 100%;
   background: grey;
   font-size: 10px;
+  overflow: hidden;
 }
 body { margin: 0; font-family: 'Exo 2', sans-serif; }
 /*

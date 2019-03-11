@@ -1,58 +1,83 @@
 <header class="preset-title">
   <h1 [ngStyle]="{'color': stepper.currentStep.color}">{{preset.title}}</h1>
 </header>
-<section [@fadeToggle] *ngIf="stepper.totalProgress > 0" class="section section--col">
-  <div class="step-current">
-    {{stepper.currentStep.type === 'work' ? stepper.currentStep.title : stepper.currentStep.type}}
-  </div>
-  <mat-icon  *ngIf="stepper.stepNumber < stepper.steps.length && stepper.stepNumber !== 0">arrow_downward</mat-icon>
-  <div class="step-next ">
-    {{stepper.nextStep.type === 'work' ? stepper.nextStep.title : stepper.nextStep.type}}
-  </div>
-</section>
-<section [@fadeToggle] *ngIf="stepper.totalProgress > 0" class="section">
-  <div class="countdown ">
-    {{stepper.countdown}}
-  </div>
-</section>
-<section [@fadeToggle] *ngIf="stepper.totalProgress > 0" class="section section--progress">
-  <div class="progress ">
-    <mat-progress-spinner mode="determinate" color="accent" [value]="stepper.progress"></mat-progress-spinner>
-  </div>
-</section>
-<section class="section">
-  <div class="pause-play-wrapper" [@scaledToNormal]="stepper.totalProgress > 0 ? 'running' : 'preStart'">
+<div [@fadeToggle]="stepper.stepNumber" *ngIf="!initial" class="main-body">
+  <section  *ngIf="!initial" class="section section--col">
+    <div [@pulsation]="stepper.countdown" class="step-current">
+      {{stepper.currentStep.type === 'work' ? stepper.currentStep.title : stepper.currentStep.type}}
+    </div>
+    <mat-icon class="arrow"  *ngIf="stepper.stepNumber < stepper.steps.length && stepper.stepNumber !== 0">arrow_downward</mat-icon>
+    <div class="step-next ">
+      {{stepper.nextStep.type === 'work' ? stepper.nextStep.title : stepper.nextStep.type}}
+    </div>
+  </section>
+  <section  *ngIf="!initial" class="section">
+    <div class="countdown ">
+      {{stepper.countdown}}
+    </div>
+  </section>
+  <section  *ngIf="!initial" class="section section--progress">
+    <div class="progress ">
+      <mat-progress-spinner mode="determinate" color="accent" [value]="stepper.progress"></mat-progress-spinner>
+    </div>
+  </section>
+  <section  *ngIf="!initial" class="section section--play-stop">
     <button
-    *ngIf="!stepper.running"
-    [disabled]="!stepper.steps.length"
-    (click)="play()"
-    mat-icon-button>
-    <mat-icon>play_arrow</mat-icon>
-  </button>
+      *ngIf="!stepper.running"
+      [disabled]="!stepper.steps.length"
+      (click)="play()"
+      mat-icon-button>
+      <mat-icon>play_arrow</mat-icon>
+    </button>
     <button
-
-    *ngIf="stepper.running"
-    (click)="pause()"
-    mat-icon-button>
-    <mat-icon>pause</mat-icon>
-  </button>
+      *ngIf="stepper.running"
+      (click)="pause()"
+      mat-icon-button>
+      <mat-icon>pause</mat-icon>
+    </button>
+    <button
+      [disabled]="!stepper.steps.length"
+      (click)="stop()"
+      mat-icon-button>
+      <mat-icon>stop</mat-icon>
+    </button>
+  </section>
+  <section  *ngIf="!initial" class="section section--bottom-info">
+    <div class="elapsed">
+      {{stepper.presetTotalTime.elapsed}}
+    </div>
+    <div class="current-number">
+      {{stepper.stepNumber}} of {{stepper.steps.length}}
+    </div>
+    <div class="remaining">
+      {{stepper.presetTotalTime.remaining}}
+    </div>
+  </section>
+</div>
+<section *ngIf="initial" class="section section--prestart">
+  <div [@prestart]="stage">
+    <button
+      *ngIf="!launched"
+      (click)="start()"
+      [disabled]="launched"
+      mat-icon-button>
+      <mat-icon>play_arrow</mat-icon>
+    </button>
+    <div
+      [hidden]="stage === 'button'"
+      class="prestart-countdown">
+      {{stage}}
+    </div>
+  </div>
+</section>
+<div [@finish]="stage" *ngIf="stage === 'accomplished'" class="finish">
+  <div class="done">
+    {{'accomplished' | uppercase}}
   </div>
   <button
-    [@fadeToggle] *ngIf="stepper.totalProgress > 0"
-    [disabled]="!stepper.steps.length"
+    class="replay"
     (click)="stop()"
     mat-icon-button>
-    <mat-icon>stop</mat-icon>
+    <mat-icon>replay</mat-icon>
   </button>
-</section>
-<section [@fadeToggle] *ngIf="stepper.totalProgress > 0" class="section section--bottom-info">
-  <div class="elapsed">
-    {{stepper.presetTotalTime.elapsed}}
-  </div>
-  <div class="current-number">
-    {{stepper.stepNumber}} of {{stepper.steps.length}}
-  </div>
-  <div class="remaining">
-    {{stepper.presetTotalTime.remaining}}
-  </div>
-</section>
+</div>

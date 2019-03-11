@@ -9,7 +9,6 @@ export class AudioService {
 
   play(title: SoundType){
     this.sound.src = `/assets/sounds/${title}.mp3`;
-    this.sound.load();
     this.sound.play();
   }
 

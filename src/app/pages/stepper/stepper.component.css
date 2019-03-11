@@ -1,12 +1,13 @@
-:host{
+:host, .main-body{
   height: 100%;
   width: 100%;
   display: flex;
   flex-flow: column wrap;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
-.section{
+.section, .main-body{
   font-size: 3rem;
   flex: 1 1;
 }
@@ -21,9 +22,6 @@
   line-height: 4rem;
   min-height: 10.5rem;
 }
-/* .section--progress{
-  flex: 1 0;
-} */
 .countdown{
   font-family: 'Allerta Stencil', sans-serif;
   font-size: 10rem;
@@ -50,8 +48,7 @@
   align-items: center;
   position: absolute;
   bottom: 0;
-  font-size: 2rem;
-  color: white;
+  font-size: 4rem;
   width: 100%;
 }
 button{
@@ -60,4 +57,40 @@ button{
 }
 mat-icon{
   transform: scale(2);
+}
+.finish{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  overflow: hidden;
+  background-color: rgba(62, 62, 62, 0.95);
+}
+.done{
+  font-family: 'Faster One', cursive;
+  font-size: 5rem;
+  font-weight: bold;
+  color: #d60600;
+  border: 1rem solid #d60600;
+  border-radius: 3rem;
+  width: fit-content;
+  transform: rotate(-0.05turn);
+  padding: 0 1rem;
+}
+
+button.replay  {
+  height: 12rem;
+  width: 12rem;
+}
+
+.section--play-stop{
+  width: 10rem;
+  justify-content: space-evenly;
+}
+
+.replay mat-icon{
+  transform: scale(4);
 }
