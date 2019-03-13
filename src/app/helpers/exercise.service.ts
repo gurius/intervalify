@@ -20,6 +20,8 @@ export class ExerciseService {
       countdownsIds: [],
       seqNo: 0,
       repetitions: 1,
+      atStartOnly: false,
+      atEndOnly: false,
       presetRepetitions: true,
       belongsToPresets: [presetId]
     })

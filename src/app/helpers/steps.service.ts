@@ -64,6 +64,8 @@ export class StepsService {
                   countdown.title = exercise.title;
                   countdown.presetRepetitions = exercise.presetRepetitions
                   countdown.color = exercise.color;
+                  countdown.atStartOnly = exercise.atStartOnly;
+                  countdown.atEndOnly = exercise.atEndOnly;
                   steps.push(countdown)
                 });
               }

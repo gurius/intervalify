@@ -15,7 +15,7 @@ import { first } from 'rxjs/operators';
   templateUrl: './exercise-editor.component.html',
   styleUrls: ['./exercise-editor.component.css']
 })
-export class ExerciseEditorComponent implements OnInit {
+export class ExerciseEditorComponent implements OnInit, OnDestroy {
   exercise: Exercise;
   dialogOptions: { title, isNew };
   countdowns: Countdown[] = [];
@@ -37,6 +37,14 @@ export class ExerciseEditorComponent implements OnInit {
 
     }
   }
+
+  ngOnDestroy(): void {
+    this.exercise.presetRepetitions
+    = this.exercise.atEndOnly || this.exercise.atStartOnly
+    ? false
+    : true;
+  }
+
 
   addCoundown() {
     const blank = this.cHelper.getBlank(this.exercise.id);

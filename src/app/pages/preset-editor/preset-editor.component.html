@@ -1,4 +1,4 @@
-<div class="constructor-element constructor-element--main-info">
+  <div class="constructor-element constructor-element--main-info">
   <div class="workout-title">
     <mat-form-field *ngIf="editingTitle || preset.title === ''">
       <input matInput
@@ -9,7 +9,7 @@
       #titleInput
       jtAutofocusInput>
     </mat-form-field>
-    <p class="smart-label" [hidden]="editingTitle" (click)="editProperty('title')">{{preset.title}}</p>
+    <p class="smart-label" matRipple [hidden]="editingTitle" (click)="editProperty('title')">{{preset.title}}</p>
   </div>
   <div class="workout-repetitions">
     <mat-form-field *ngIf="editingRepetitions || preset.repetitions === ''">
@@ -22,59 +22,51 @@
              #repetitionsInput
              jtAutofocusInput>
     </mat-form-field>
-    <jt-preset-repeats-icon [hidden]="editingRepetitions" [val]="preset.repetitions" (click)="editProperty('repetitions')"></jt-preset-repeats-icon>
+    <jt-preset-repeats-icon matRipple [hidden]="editingRepetitions" [val]="preset.repetitions" (click)="editProperty('repetitions')"></jt-preset-repeats-icon>
     <!-- <p class="smart-label" [hidden]="editingRepetitions" (click)="editProperty('repetitions')">{{preset.repetitions}}</p> -->
   </div>
 </div>
 
 <div class="constructor-element">
-  <mat-accordion  hideToggle="true" multi="true">
-    <mat-expansion-panel *ngFor="let exercise of exercises$ | async">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          <jt-repeat-with-preset-icon [repeat]="exercise.presetRepetitions"></jt-repeat-with-preset-icon>
-          {{exercise.title }}
-          <div *ngIf="exercise.repetitions > 1" class="repetitions">
-            <jt-repeats-icon [val]="exercise.repetitions"></jt-repeats-icon>
-          </div>
-        </mat-panel-title>
-        <mat-panel-description>
-
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-      <p *ngFor="let cd of getCountdownsBy(exercise.id) | async">
-        {{cd.type}}:
-        {{cd.minutes ? ' '+cd.minutes+' min.' : ''}}
-        {{cd.seconds ? ' '+cd.seconds+' sec.' : ''}}
-      </p>
-
-      <div class="exrcise-button-panel">
-        <button (click)="editExercise(exercise)" mat-icon-button>
-          <mat-icon>edit</mat-icon>
-        </button>
-        <button (click)="deleteExercise(exercise.id)" mat-icon-button>
-          <mat-icon>delete</mat-icon>
-        </button>
+  <mat-chip-list
+    class="mat-chip-list-stacked"
+    cdkDropList
+    [cdkDropListData]="exercises"
+    (cdkDropListDropped)="drop($event)">
+    <mat-chip
+      cdkDrag
+      (click)="editExercise(exercise)"
+      *ngFor="let exercise of exercises"
+      removable="true"
+      (removed)="deleteExercise(exercise.id)"
+      [color]="exercise.color">
+      <jt-repeat-with-preset-icon [repeat]="exercise.presetRepetitions"></jt-repeat-with-preset-icon>
+      {{exercise.title}}
+      {{exercise.seqNo}}
+      <div *ngIf="exercise.repetitions > 1" class="repetitions">
+        <jt-repeats-icon [val]="exercise.repetitions"></jt-repeats-icon>
       </div>
-    </mat-expansion-panel>
-
-  </mat-accordion>
+      <mat-icon matChipRemove>delete</mat-icon>
+    </mat-chip>
+  </mat-chip-list>
 </div>
 
 <div class="constructor-element">
-  <button mat-raised-button (click)="newExercise()">add exercise</button>
+  <div class="centred-bar">
+    <button mat-raised-button (click)="newExercise()"><mat-icon>add</mat-icon></button>
+  </div>
 </div>
 
 <div class="constructor-element">
-  <div class="buttons-bar">
+  <div class="centred-bar">
     <button
       (click)="deletePreset(preset)"
-      class="buttons-bar__button"
+      class="editor-button"
       mat-raised-button>
       delete
     </button>
     <button
-      class="buttons-bar__button"
+      class="editor-button"
       mat-raised-button
       routerLink="/stepper" [queryParams]="{pId: preset.id}">
       launch

@@ -14,7 +14,14 @@
       </mat-form-field>
     </div>
     <div class="editor__item">
-      <mat-checkbox [(ngModel)]="exercise.presetRepetitions">preset repetitions</mat-checkbox>
+      <mat-checkbox
+        [(ngModel)]="exercise.atStartOnly">
+        At start only
+      </mat-checkbox>
+      <mat-checkbox
+        [(ngModel)]="exercise.atEndOnly">
+        At end only
+      </mat-checkbox>
       <mat-form-field class="narrow-input">
         <input matInput type="color" [(ngModel)]="exercise.color">
       </mat-form-field>

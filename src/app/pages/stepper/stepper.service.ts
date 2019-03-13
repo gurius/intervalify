@@ -33,22 +33,25 @@ export class StepperService {
   state: Subject<StepperState> = new Subject();
 
   setSteps(steps: Step[], repetitions: number) {
-    while (repetitions > 0) {
-      if (this.steps.length) {
-        for (let i = 0; i < steps.length; i++) {
-          let step = steps[i];
-          step.presetRepetitions && this.steps.push(step);
-        }
-      } else {
+    let start = [];
+    let repeatable = [];
+    let end = [];
 
-        this.steps.push(...steps);
-      }
+    for (let i = 0; i < steps.length; i++) {
+      let step = steps[i];
+      step.atStartOnly && start.push(step)
+      step.presetRepetitions && repeatable.push(step);
+      step.atEndOnly && end.push(step)
+    }
+    this.steps.push(...start);
+    while (repetitions > 0) {
+      this.steps.push(...repeatable);
       repetitions--;
     }
+    this.steps.push(...end);
+
     const minutes = this.steps.reduce((acc, step) => acc + step.minutes, 0);
     const rawSeconds = this.steps.reduce((acc, step) => acc + step.seconds, 0);
-    // this.presetTotalTime.minutes = minutes + Math.trunc(rawSeconds / 60);
-    // this.presetTotalTime.seconds = Math.round(rawSeconds / 60 % 1 * 10 * 6);
     this.presetTotalTime.totalSec = minutes * 60 + rawSeconds;
     this.presetTotalTime.secondsRemaining = this.presetTotalTime.totalSec;
     this.presetTotalTime.remaining = this.secondsTommssStr(this.presetTotalTime.totalSec);

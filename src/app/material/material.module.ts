@@ -11,6 +11,7 @@ import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatListModule } from '@angular/material/list';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatRippleModule } from '@angular/material/core';
+import { MatChipsModule } from '@angular/material/chips';
 
 @NgModule({
   imports: [
@@ -25,7 +26,8 @@ import { MatRippleModule } from '@angular/material/core';
     MatBottomSheetModule,
     MatListModule,
     DragDropModule,
-    MatRippleModule
+    MatRippleModule,
+    MatChipsModule
   ],
   exports: [
     MatInputModule,
@@ -39,7 +41,8 @@ import { MatRippleModule } from '@angular/material/core';
     MatBottomSheetModule,
     MatListModule,
     DragDropModule,
-    MatRippleModule
+    MatRippleModule,
+    MatChipsModule
   ]
 })
 export class MaterialModule { }

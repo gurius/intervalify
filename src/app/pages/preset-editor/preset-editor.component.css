@@ -41,13 +41,13 @@ mat-form-field{
 .add-countdown{
   align-self: flex-start;
 }
-.buttons-bar{
+.centred-bar{
   display: flex;
   flex-flow: row;
   justify-content: center;
   align-items: center;
 }
-.buttons-bar__button{
+.editor-button{
   margin: 0 0.5rem 0 0.5rem;
 }
 .exrcise-button-panel{

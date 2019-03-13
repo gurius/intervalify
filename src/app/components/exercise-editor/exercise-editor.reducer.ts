@@ -7,11 +7,17 @@ export interface State extends EntityState<Exercise> {
   // additional entities state properties
 }
 
-export const adapter: EntityAdapter<Exercise> = createEntityAdapter<Exercise>();
+export const adapter: EntityAdapter<Exercise> = createEntityAdapter<Exercise>({
+  sortComparer: sortBySeqNo
+});
 
 export const initialState: State = adapter.getInitialState({
   // additional entity state properties
 });
+
+export function sortBySeqNo(e1: Exercise, e2: Exercise): number {
+  return e1.seqNo - e2.seqNo;
+}
 
 export function reducer(
   state = initialState,

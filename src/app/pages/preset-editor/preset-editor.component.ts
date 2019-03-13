@@ -19,6 +19,7 @@ import { PresetService } from '../../helpers/preset.service';
 import { ExerciseService } from 'src/app/helpers/exercise.service';
 import { CountdownService } from 'src/app/helpers/countdown.service';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 
 @Component({
@@ -35,6 +36,8 @@ export class PresetEditorComponent implements OnInit, OnDestroy {
 
   @ViewChild('titleInput') titleInput: ElementRef<HTMLInputElement>;
   @ViewChild('repetitionsInput') repetitionsInput: ElementRef<HTMLInputElement>;
+  exercises: Exercise[];
+  exercisesSubscription: Subscription;
 
   constructor(
     private store: Store<fromReducers.State>,
@@ -61,15 +64,26 @@ export class PresetEditorComponent implements OnInit, OnDestroy {
 
       });
 
-    this.exercises$ = this.store
+    this.exercisesSubscription = this.store
       .pipe(
         select(exerciseSelectors.allExercisesOfPreset(this.preset.id))
-      );
+      ).subscribe(exercises => {
+        this.exercises = exercises;
+      });
 
+      this.presetSubscription.add(this.exercisesSubscription)
   }
 
   ngOnDestroy() {
     this.presetSubscription.unsubscribe();
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.exercises, event.previousIndex, event.currentIndex);
+    this.exercises.forEach((ex, i) => {
+      ex.seqNo = i;
+      this.eHelper.updateExercise(ex);
+    })
   }
 
   deletePreset(preset) {
