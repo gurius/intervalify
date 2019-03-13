@@ -7,6 +7,12 @@
   font-size: 1.6rem;
 }
 
+.workout-repetitions{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .constructor-element,
 mat-form-field{
   width: 100%;
@@ -14,6 +20,12 @@ mat-form-field{
   flex-flow: column;
   margin: 0.5rem 0 0.5rem 0;
 }
+
+.constructor-element--main-info{
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+
 .narrow-input{
   width: 4rem;
 }
@@ -42,4 +54,11 @@ mat-form-field{
   display: flex;
   flex-flow: row;
   justify-content: flex-end;
+}
+.smart-label{
+  margin: 2.85rem 0;
+  cursor: pointer;
+}
+mat-panel-title{
+  align-items: center;
 }

@@ -2,11 +2,10 @@
   <mat-progress-bar
     *ngIf="stepperRoute.isActive"
     mode="determinate"
+    color="accent"
     [value]="stepper.totalProgress">
   </mat-progress-bar>
-  <jt-icon-button (click)="onClick()">
-    |||
-  </jt-icon-button>
+  <jt-icon-button (click)="openMenu()"> </jt-icon-button>
 </header>
 <nav [hidden]='!visibleNav'>
   <div  routerLink="/home" class="">

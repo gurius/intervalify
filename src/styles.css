@@ -1,4 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+:root{
+  --rest: #61ff7e;
+  --yell: #ffcd06;
+}
 
 html, body {
   height: 100%;
@@ -28,4 +32,9 @@ section{
 ul,li{
   padding: 0;
   margin: 0;
+}
+@media screen and (max-width: 400px) {
+  html{
+    font-size: 6px;
+  }
 }

@@ -11,6 +11,8 @@ import { RequestExercises }
 import { RequestCountdowns }
   from 'src/app/components/countdown/countdown.actions';
 import { StepperService } from '../stepper/stepper.service';
+import { MatBottomSheet } from '@angular/material';
+import { BottomSheetMenuComponent } from 'src/app/components/bottom-sheet-menu/bottom-sheet-menu.component';
 
 @Component({
   selector: 'jt-root',
@@ -24,13 +26,18 @@ export class AppComponent {
 
   constructor(
     private store: Store<fromRedusers.State>,
-    private stepper: StepperService
+    private stepper: StepperService,
+    private menu: MatBottomSheet
   ) {
     this.showNav$ = store.pipe(select(fromRedusers.getShowNav));
     this.showNav$.subscribe(sn => this.visibleNav = sn);
     this.store.dispatch(new RequestPresets());
     this.store.dispatch(new RequestExercises());
     this.store.dispatch(new RequestCountdowns());
+  }
+
+  openMenu(): void {
+    this.menu.open(BottomSheetMenuComponent);
   }
 
   onClick() {

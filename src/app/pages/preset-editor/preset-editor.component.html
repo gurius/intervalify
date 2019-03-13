@@ -1,4 +1,4 @@
-<div class="constructor-element">
+<div class="constructor-element constructor-element--main-info">
   <div class="workout-title">
     <mat-form-field *ngIf="editingTitle || preset.title === ''">
       <input matInput
@@ -9,7 +9,7 @@
       #titleInput
       jtAutofocusInput>
     </mat-form-field>
-    <p [hidden]="editingTitle" (click)="editProperty('title')">{{preset.title}}</p>
+    <p class="smart-label" [hidden]="editingTitle" (click)="editProperty('title')">{{preset.title}}</p>
   </div>
   <div class="workout-repetitions">
     <mat-form-field *ngIf="editingRepetitions || preset.repetitions === ''">
@@ -22,7 +22,8 @@
              #repetitionsInput
              jtAutofocusInput>
     </mat-form-field>
-    <p [hidden]="editingRepetitions" (click)="editProperty('repetitions')">{{preset.repetitions}}</p>
+    <jt-preset-repeats-icon [hidden]="editingRepetitions" [val]="preset.repetitions" (click)="editProperty('repetitions')"></jt-preset-repeats-icon>
+    <!-- <p class="smart-label" [hidden]="editingRepetitions" (click)="editProperty('repetitions')">{{preset.repetitions}}</p> -->
   </div>
 </div>
 
@@ -31,9 +32,10 @@
     <mat-expansion-panel *ngFor="let exercise of exercises$ | async">
       <mat-expansion-panel-header>
         <mat-panel-title>
+          <jt-repeat-with-preset-icon [repeat]="exercise.presetRepetitions"></jt-repeat-with-preset-icon>
           {{exercise.title }}
           <div *ngIf="exercise.repetitions > 1" class="repetitions">
-            - x {{exercise.repetitions}}
+            <jt-repeats-icon [val]="exercise.repetitions"></jt-repeats-icon>
           </div>
         </mat-panel-title>
         <mat-panel-description>

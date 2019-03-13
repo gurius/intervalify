@@ -30,6 +30,10 @@ import { CountdownEffects } from './components/countdown/countdown.effects';
 import { AutofocusInputDirective } from './directives/autofocus-input.directive';
 import { StepperComponent } from './pages/stepper/stepper.component';
 import { PresetsListComponent } from './components/presets-list/presets-list.component';
+import { BottomSheetMenuComponent } from './components/bottom-sheet-menu/bottom-sheet-menu.component';
+import { RepeatsIconComponent } from './components/repeats-icon/repeats-icon.component';
+import { RepeatWithPresetIconComponent } from './components/repeat-with-preset-icon/repeat-with-preset-icon.component';
+import { PresetRepeatsIconComponent } from './components/preset-repeats-icon/preset-repeats-icon.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +45,11 @@ import { PresetsListComponent } from './components/presets-list/presets-list.com
     CountdownComponent,
     AutofocusInputDirective,
     StepperComponent,
-    PresetsListComponent
+    PresetsListComponent,
+    BottomSheetMenuComponent,
+    RepeatsIconComponent,
+    RepeatWithPresetIconComponent,
+    PresetRepeatsIconComponent
   ],
   imports: [
     BrowserModule,
@@ -61,6 +69,6 @@ import { PresetsListComponent } from './components/presets-list/presets-list.com
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [ExerciseEditorComponent]
+  entryComponents: [ExerciseEditorComponent, BottomSheetMenuComponent]
 })
 export class AppModule { }

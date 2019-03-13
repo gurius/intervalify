@@ -7,6 +7,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
+import { MatListModule } from '@angular/material/list';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   imports: [
@@ -17,7 +20,10 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatDialogModule,
     MatProgressSpinnerModule,
     MatCheckboxModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatBottomSheetModule,
+    MatListModule,
+    DragDropModule
   ],
   exports: [
     MatInputModule,
@@ -27,7 +33,10 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatDialogModule,
     MatProgressSpinnerModule,
     MatCheckboxModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatBottomSheetModule,
+    MatListModule,
+    DragDropModule
   ]
 })
 export class MaterialModule { }

@@ -110,6 +110,7 @@ export class StepperComponent implements OnInit, OnDestroy {
   prestartCountdown: IterableIterator<string | number>;
   stage: string | number;
   launched: boolean = false;
+  startIntervalId: any;
 
 
   ngOnInit() {
@@ -119,6 +120,7 @@ export class StepperComponent implements OnInit, OnDestroy {
         const steps = this.sHelper.getSteps(presetId);
         this.preset = this.pHelper.getPreset(presetId);
         this.stepper.setSteps(steps, this.preset.repetitions);
+        this.stepper.reset();
         this.stepper.doStep();
         this.stepper.getState().subscribe(s => {
           s.accomplished && (this.stage = 'accomplished');
@@ -129,8 +131,9 @@ export class StepperComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.stepper.stop();
-    this.stepper.stepNumber--;
+    this.stepper.stepNumber = 0;
     this.stepper.steps = [];
+    clearInterval(this.startIntervalId);
   }
 
   play() {
@@ -148,7 +151,7 @@ export class StepperComponent implements OnInit, OnDestroy {
 
   start() {
     this.launched = true;
-    const startIntervalId = setInterval(() => {
+    this.startIntervalId = setInterval(() => {
       const stage = this.prestartCountdown.next();
       this.stage = stage.value;
       if (typeof this.stage === 'number') {
@@ -158,7 +161,7 @@ export class StepperComponent implements OnInit, OnDestroy {
       }
 
       if (stage.done) {
-        clearInterval(startIntervalId);
+        clearInterval(this.startIntervalId);
         this.initial = false;
         this.stepper.play();
       }

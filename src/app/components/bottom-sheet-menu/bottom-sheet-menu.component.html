@@ -1,0 +1,16 @@
+<mat-nav-list>
+  <a mat-list-item (click)="openLink($event)">
+    <span routerLink="/constructor" activeRoute mat-line>Add Preset</span>
+    <span mat-line>Create new preset</span>
+  </a>
+
+  <a  mat-list-item (click)="openLink($event)">
+    <span routerLink="/home" activeRoute mat-line>Home</span>
+    <span mat-line>Go to home page</span>
+  </a>
+
+  <a  mat-list-item (click)="openLink($event)">
+    <span routerLink="/stepper" activeRoute mat-line>Activate default preset</span>
+    <span mat-line>Go to page with default preset preloaded</span>
+  </a>
+</mat-nav-list>

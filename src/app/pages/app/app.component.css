@@ -10,7 +10,7 @@ header{
   width: 100%;
 }
 mat-progress-bar{
-  height: 0.5rem;
+  height: 1rem;
 }
 .routerOutlet{
   display: flex;
@@ -23,8 +23,8 @@ mat-progress-bar{
 }
 jt-icon-button{
   position: absolute;
-  top: 1rem;
-  left: 1rem;
+  top: 3rem;
+  left: 2rem;
 }
 nav{
   position: absolute;
