@@ -6,15 +6,19 @@
   <li class="preset-list__item" *ngFor="let preset of presets">
     <h3>{{preset.title}}</h3>
     <div class="button-panel">
-      <li mat-icon-button>
-        <mat-icon routerLink="/stepper" [queryParams]="{pId: preset.id}">play_arrow</mat-icon>
-      </li>
-      <li mat-icon-button>
-        <mat-icon routerLink="/constructor" [queryParams]="{pId: preset.id}">edit</mat-icon>
-      </li>
-      <button (click)="deletePreset(preset)" mat-icon-button>
-        <mat-icon>delete</mat-icon>
-      </button>
+      <ul class="hor-list">
+        <li routerLink="/stepper" [queryParams]="{pId: preset.id}">
+          <button mat-icon-button><mat-icon >play_arrow</mat-icon></button>
+        </li>
+        <li routerLink="/constructor" [queryParams]="{pId: preset.id}" >
+          <button mat-icon-button><mat-icon >edit</mat-icon></button>
+        </li>
+        <li>
+          <button (click)="deletePreset(preset)" mat-icon-button>
+            <mat-icon>delete</mat-icon>
+          </button>
+        </li>
+      </ul>
     </div>
 
   </li>

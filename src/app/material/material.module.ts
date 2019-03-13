@@ -10,6 +10,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatListModule } from '@angular/material/list';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatRippleModule } from '@angular/material/core';
 
 @NgModule({
   imports: [
@@ -23,7 +24,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     MatProgressBarModule,
     MatBottomSheetModule,
     MatListModule,
-    DragDropModule
+    DragDropModule,
+    MatRippleModule
   ],
   exports: [
     MatInputModule,
@@ -36,7 +38,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     MatProgressBarModule,
     MatBottomSheetModule,
     MatListModule,
-    DragDropModule
+    DragDropModule,
+    MatRippleModule
   ]
 })
 export class MaterialModule { }
