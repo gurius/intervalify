@@ -62,3 +62,15 @@ mat-form-field{
 mat-panel-title{
   align-items: center;
 }
+.chip{
+  justify-content: space-between;
+}
+.icon-wrapper{
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  min-width: 12rem;
+}
+.centred-bar button{
+  width: 100%;
+}

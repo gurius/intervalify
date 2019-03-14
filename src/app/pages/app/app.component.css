@@ -23,11 +23,6 @@ mat-progress-bar{
 }
 jt-icon-button{
   position: absolute;
-  top: 3rem;
+  bottom: 3rem;
   left: 2rem;
-}
-nav{
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
 }

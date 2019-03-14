@@ -35,17 +35,19 @@
     (cdkDropListDropped)="drop($event)">
     <mat-chip
       cdkDrag
+      class="chip"
       (click)="editExercise(exercise)"
       *ngFor="let exercise of exercises"
       removable="true"
       (removed)="deleteExercise(exercise.id)"
       [color]="exercise.color">
-      <jt-repeat-with-preset-icon [repeat]="exercise.presetRepetitions"></jt-repeat-with-preset-icon>
-      {{exercise.title}}
-      {{exercise.seqNo}}
-      <div *ngIf="exercise.repetitions > 1" class="repetitions">
-        <jt-repeats-icon [val]="exercise.repetitions"></jt-repeats-icon>
+      <div class="icon-wrapper">
+        <jt-svg-ico *ngIf="exercise.atStartOnly" icoName="green-flag"></jt-svg-ico>
+        <jt-svg-ico *ngIf="exercise.atEndOnly" icoName="crossed-flags"></jt-svg-ico>
+        <jt-repeat-with-preset-icon *ngIf="exercise.presetRepetitions" [repeat]="exercise.presetRepetitions"></jt-repeat-with-preset-icon>
+        <jt-repeats-icon *ngIf="exercise.repetitions > 1" [val]="exercise.repetitions"></jt-repeats-icon>
       </div>
+      {{exercise.title}}
       <mat-icon matChipRemove>delete</mat-icon>
     </mat-chip>
   </mat-chip-list>
@@ -53,7 +55,7 @@
 
 <div class="constructor-element">
   <div class="centred-bar">
-    <button mat-raised-button (click)="newExercise()"><mat-icon>add</mat-icon></button>
+    <button mat-button (click)="newExercise()"><mat-icon>add</mat-icon></button>
   </div>
 </div>
 
@@ -63,13 +65,13 @@
       (click)="deletePreset(preset)"
       class="editor-button"
       mat-raised-button>
-      delete
+      <mat-icon>delete</mat-icon>
     </button>
     <button
       class="editor-button"
       mat-raised-button
       routerLink="/stepper" [queryParams]="{pId: preset.id}">
-      launch
+      <mat-icon>play_arrow</mat-icon>
     </button>
   </div>
 </div>

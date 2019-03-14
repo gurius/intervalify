@@ -7,15 +7,7 @@
   </mat-progress-bar>
   <jt-icon-button (click)="openMenu()"> </jt-icon-button>
 </header>
-<nav [hidden]='!visibleNav'>
-  <div  routerLink="/home" class="">
-    home
-  </div>
-  <div   routerLink="/constructor" class="">
-    constructor
-  </div>
-  <div  routerLink="/stepper" routerLinkActive #stepperRoute="routerLinkActive"></div>
-</nav>
+<div  routerLink="/stepper" routerLinkActive #stepperRoute="routerLinkActive"></div>
 <div class="routerOutlet">
   <router-outlet></router-outlet>
 </div>

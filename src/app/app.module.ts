@@ -34,6 +34,7 @@ import { BottomSheetMenuComponent } from './components/bottom-sheet-menu/bottom-
 import { RepeatsIconComponent } from './components/repeats-icon/repeats-icon.component';
 import { RepeatWithPresetIconComponent } from './components/repeat-with-preset-icon/repeat-with-preset-icon.component';
 import { PresetRepeatsIconComponent } from './components/preset-repeats-icon/preset-repeats-icon.component';
+import { SvgIcoComponent } from './components/svg-ico/svg-ico.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { PresetRepeatsIconComponent } from './components/preset-repeats-icon/pre
     BottomSheetMenuComponent,
     RepeatsIconComponent,
     RepeatWithPresetIconComponent,
-    PresetRepeatsIconComponent
+    PresetRepeatsIconComponent,
+    SvgIcoComponent
   ],
   imports: [
     BrowserModule,
