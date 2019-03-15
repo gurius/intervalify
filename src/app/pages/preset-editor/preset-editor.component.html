@@ -1,4 +1,4 @@
-  <div class="constructor-element constructor-element--main-info">
+<div class="constructor-element constructor-element--main-info">
   <div class="workout-title">
     <mat-form-field *ngIf="editingTitle || preset.title === ''">
       <input matInput
@@ -28,29 +28,28 @@
 </div>
 
 <div class="constructor-element">
-  <mat-chip-list
-    class="mat-chip-list-stacked"
+  <ul
     cdkDropList
     [cdkDropListData]="exercises"
-    (cdkDropListDropped)="drop($event)">
-    <mat-chip
+    (cdkDropListDropped)="drop($event)"
+    class="preset-exercises-list">
+    <li
+      matRipple
       cdkDrag
-      class="chip"
       (click)="editExercise(exercise)"
       *ngFor="let exercise of exercises"
-      removable="true"
-      (removed)="deleteExercise(exercise.id)"
-      [color]="exercise.color">
+      [style.color]="exercise.color"
+      class="preset-exercises-list__item">
       <div class="icon-wrapper">
         <jt-svg-ico *ngIf="exercise.atStartOnly" icoName="green-flag"></jt-svg-ico>
         <jt-svg-ico *ngIf="exercise.atEndOnly" icoName="crossed-flags"></jt-svg-ico>
         <jt-repeat-with-preset-icon *ngIf="exercise.presetRepetitions" [repeat]="exercise.presetRepetitions"></jt-repeat-with-preset-icon>
         <jt-repeats-icon *ngIf="exercise.repetitions > 1" [val]="exercise.repetitions"></jt-repeats-icon>
       </div>
-      {{exercise.title}}
-      <mat-icon matChipRemove>delete</mat-icon>
-    </mat-chip>
-  </mat-chip-list>
+      <span class="title">{{exercise.title}}</span>
+      <mat-icon (click)="deleteExercise(exercise.id)">delete</mat-icon>
+    </li>
+  </ul>
 </div>
 
 <div class="constructor-element">
@@ -59,7 +58,7 @@
   </div>
 </div>
 
-<div class="constructor-element">
+<div class="constructor-element constructor-element--buttons-bar">
   <div class="centred-bar">
     <button
       (click)="deletePreset(preset)"

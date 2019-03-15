@@ -1,9 +1,12 @@
 :host{
-  height: 3.4rem;
-  width: 3.4rem;
+  height: 3.6rem;
+  width: 3.6rem;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 0.5rem;
+  border-radius: 37%;
+  background-color: grey;
 }
 
 svg{

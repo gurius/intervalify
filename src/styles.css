@@ -33,6 +33,12 @@ ul,li{
   padding: 0;
   margin: 0;
 }
+ul{
+  list-style: none;
+}
+li{
+  cursor: pointer;
+}
 @media screen and (max-width: 400px) {
   html{
     font-size: 6px;

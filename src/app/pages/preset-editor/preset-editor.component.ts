@@ -20,6 +20,8 @@ import { ExerciseService } from 'src/app/helpers/exercise.service';
 import { CountdownService } from 'src/app/helpers/countdown.service';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { sortBySeqNo }
+  from '../../components/exercise-editor/exercise-editor.reducer';
 
 
 @Component({
@@ -68,7 +70,7 @@ export class PresetEditorComponent implements OnInit, OnDestroy {
       .pipe(
         select(exerciseSelectors.allExercisesOfPreset(this.preset.id))
       ).subscribe(exercises => {
-        this.exercises = exercises;
+        this.exercises = exercises.sort(sortBySeqNo);
       });
 
       this.presetSubscription.add(this.exercisesSubscription)
@@ -110,7 +112,7 @@ export class PresetEditorComponent implements OnInit, OnDestroy {
   newExercise() {
     const exercise = this.eHelper.getBlank(this.preset.id);
     const options = { title: 'New Exercise', isNew: true };
-
+    exercise.seqNo = this.exercises.length;
     this.openDialog(exercise, options);
   }
 
@@ -153,6 +155,7 @@ export class PresetEditorComponent implements OnInit, OnDestroy {
 
   deleteExercise(id) {
     this.eHelper.removeExercise(id, this.preset.id);
+    this.exercises.forEach((ex, i) => ex.seqNo = i)
   }
 
   getCountdownsBy(exerciseId) {

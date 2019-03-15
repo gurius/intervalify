@@ -27,7 +27,7 @@ mat-form-field{
 }
 
 .narrow-input{
-  width: 4rem;
+  width: 2rem;
 }
 .wide-input{
   width: 10rem;
@@ -50,20 +50,9 @@ mat-form-field{
 .editor-button{
   margin: 0 0.5rem 0 0.5rem;
 }
-.exrcise-button-panel{
-  display: flex;
-  flex-flow: row;
-  justify-content: flex-end;
-}
 .smart-label{
   margin: 2.85rem 0;
   cursor: pointer;
-}
-mat-panel-title{
-  align-items: center;
-}
-.chip{
-  justify-content: space-between;
 }
 .icon-wrapper{
   display: flex;
@@ -73,4 +62,23 @@ mat-panel-title{
 }
 .centred-bar button{
   width: 100%;
+  border-radius: 3rem;
+  box-shadow: 0 0 0.5rem;
+}
+.preset-exercises-list__item{
+  margin: 0.5rem 0;
+  padding-right: 0.5rem;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 2rem;
+  border: solid 0.1rem;
+  box-shadow: 0 0 0.5rem;
+}
+.title{
+  text-shadow : 0 0 1rem white;
+}
+.constructor-element--buttons-bar{
+  margin-top: 3rem;
 }
