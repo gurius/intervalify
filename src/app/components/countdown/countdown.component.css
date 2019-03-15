@@ -1,0 +1,13 @@
+:host{
+  display: flex;
+  flex-flow: row;
+}
+.countdown-block{
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: center;
+}
+.countdown-input{
+  width: 5rem;
+}

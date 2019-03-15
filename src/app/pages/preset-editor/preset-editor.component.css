@@ -25,13 +25,6 @@ mat-form-field{
   flex-flow: row wrap;
   justify-content: space-between;
 }
-
-.narrow-input{
-  width: 2rem;
-}
-.wide-input{
-  width: 10rem;
-}
 .editor__item{
   display: flex;
   flex-flow: row;

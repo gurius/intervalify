@@ -3,25 +3,34 @@
   <div class="editor">
     <div class="editor__item">
       <mat-form-field>
-        <input matInput placeholder="exercise" [(ngModel)]="exercise.title">
+        <input matInput placeholder="exercise title" [(ngModel)]="exercise.title">
       </mat-form-field>
+    </div>
+    <div class="editor__item">
       <mat-form-field class="narrow-input">
+        <jt-repeats-icon class="input-icon" matPrefix [val]="exercise.repetitions"></jt-repeats-icon>
         <input matInput
         type="number"
         placeholder="repetitions"
         [(ngModel)]="exercise.repetitions"
-        min="0" step="1">
+        min="1" step="1">
       </mat-form-field>
     </div>
     <div class="editor__item">
+      <jt-svg-ico class="editor-icon" icoName="green-flag"></jt-svg-ico>
       <mat-checkbox
         [(ngModel)]="exercise.atStartOnly">
-        At start only
+        If set will play at start (no preset repetitions)
       </mat-checkbox>
+    </div>
+    <div class="editor__item">
+      <jt-svg-ico class="editor-icon" icoName="crossed-flags"></jt-svg-ico>
       <mat-checkbox
         [(ngModel)]="exercise.atEndOnly">
-        At end only
+        If set will play at end (no preset repetitions)
       </mat-checkbox>
+    </div>
+    <div class="editor__item">
       <mat-form-field class="narrow-input">
         <input matInput type="color" [(ngModel)]="exercise.color">
       </mat-form-field>
@@ -37,7 +46,7 @@
       </div>
     </div>
 
-    <div class="editor__item">
+    <div class="editor__item editor__item--centred">
       <button mat-icon-button class="add-countdown" (click)="addCoundown()">
         <mat-icon>add_box</mat-icon>
       </button>

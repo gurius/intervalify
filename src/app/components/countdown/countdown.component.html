@@ -1,26 +1,32 @@
-<button mat-icon-button [ngSwitch]="countdown.type">
-  <mat-icon *ngSwitchCase="'work'" (click)="countdown.type = 'rest'">
-    rowing
-  </mat-icon>
-  <mat-icon *ngSwitchCase="'rest'" (click)="countdown.type = 'work'">
-    airline_seat_recline_extra
-  </mat-icon>
-</button>
-<mat-form-field class="narrow-input">
-  <input matInput
-         type="number"
-         min="0"
-         placeholder="minutes"
-         (input)="timeCorrector($event)"
-         [(ngModel)]="countdown.minutes">
-</mat-form-field>:
+<div class="countdown-block">
+  <button mat-icon-button [ngSwitch]="countdown.type">
+    <mat-icon *ngSwitchCase="'work'" (click)="countdown.type = 'rest'">
+      rowing
+    </mat-icon>
+    <mat-icon *ngSwitchCase="'rest'" (click)="countdown.type = 'work'">
+      airline_seat_recline_extra
+    </mat-icon>
+  </button>
+</div>
+<div class="countdown-block">
+  <mat-form-field class="countdown-input">
+    <input matInput
+    type="number"
+    min="0"
+    placeholder="minutes"
+    (input)="timeCorrector($event)"
+    [(ngModel)]="countdown.minutes">
+  </mat-form-field>:
 
-<mat-form-field class="narrow-input">
-  <input matInput
-         type="number"
-         min="0"
-         placeholder="seconds"
-         (input)="timeCorrector($event)"
-         [(ngModel)]="countdown.seconds">
-</mat-form-field>
-<ng-content></ng-content>
+  <mat-form-field class="countdown-input">
+    <input matInput
+    type="number"
+    min="0"
+    placeholder="seconds"
+    (input)="timeCorrector($event)"
+    [(ngModel)]="countdown.seconds">
+  </mat-form-field>
+</div>
+<div class="countdown-block">
+  <ng-content></ng-content>
+</div>
