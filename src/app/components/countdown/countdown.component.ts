@@ -17,12 +17,15 @@ export class CountdownComponent implements OnInit {
   ngOnInit() { }
 
   timeCorrector(event) {
-    let val = event.target.value;
+    let val = +event.target.value;
     if (val < 0) {
       event.target.value = 0;
     } else if (val > 59) {
       event.target.value = 59;
+    } else {
+      event.target.value = +val;
     }
+
   }
 
   constructor() { }

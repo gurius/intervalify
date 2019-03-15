@@ -8,12 +8,19 @@
     </div>
     <div class="editor__item">
       <mat-form-field class="narrow-input">
-        <jt-repeats-icon class="input-icon" matPrefix [val]="exercise.repetitions"></jt-repeats-icon>
-        <input matInput
-        type="number"
-        placeholder="repetitions"
-        [(ngModel)]="exercise.repetitions"
-        min="1" step="1">
+        <jt-repeats-icon
+          [title]="exercise.repetitions"
+          class="input-icon"
+          matPrefix
+          [val]="exercise.repetitions">
+        </jt-repeats-icon>
+        <input
+          matInput
+          (input)="inputCorrector($event)"
+          type="number"
+          placeholder="repetitions"
+          [(ngModel)]="exercise.repetitions"
+          min="1" step="1">
       </mat-form-field>
     </div>
     <div class="editor__item">

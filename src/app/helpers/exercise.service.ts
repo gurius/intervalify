@@ -15,8 +15,8 @@ export class ExerciseService {
   getBlank(presetId): Exercise {
     return Object.assign({}, {
       id: Date.now(),
-      title: '',
-      color: '#1c9bba',
+      title: 'untitled',
+      color: '#ffcd06',
       countdownsIds: [],
       seqNo: 0,
       repetitions: 1,

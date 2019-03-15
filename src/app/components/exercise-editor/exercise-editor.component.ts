@@ -40,9 +40,9 @@ export class ExerciseEditorComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.exercise.presetRepetitions
-    = this.exercise.atEndOnly || this.exercise.atStartOnly
-    ? false
-    : true;
+      = this.exercise.atEndOnly || this.exercise.atStartOnly
+        ? false
+        : true;
   }
 
 
@@ -58,6 +58,13 @@ export class ExerciseEditorComponent implements OnInit, OnDestroy {
       const cId = this.countdowns.splice(index, 1)[0].id;
       this.deletedCountdowns.push(cId);
     }
+  }
+
+  inputCorrector(event): void {
+    let val = +event.target.value
+    !val && (val = 1);
+    event.target.value = val;
+    this.exercise.repetitions = val;
   }
 
   constructor(

@@ -22,7 +22,13 @@
              #repetitionsInput
              jtAutofocusInput>
     </mat-form-field>
-    <jt-preset-repeats-icon matRipple [hidden]="editingRepetitions" [val]="preset.repetitions" (click)="editProperty('repetitions')"></jt-preset-repeats-icon>
+    <jt-preset-repeats-icon
+      matRipple
+      [hidden]="editingRepetitions"
+      [val]="preset.repetitions"
+      (click)="editProperty('repetitions')"
+      [title]="preset.repetitions">
+    </jt-preset-repeats-icon>
     <!-- <p class="smart-label" [hidden]="editingRepetitions" (click)="editProperty('repetitions')">{{preset.repetitions}}</p> -->
   </div>
 </div>
@@ -43,8 +49,15 @@
       <div class="icon-wrapper">
         <jt-svg-ico *ngIf="exercise.atStartOnly" icoName="green-flag"></jt-svg-ico>
         <jt-svg-ico *ngIf="exercise.atEndOnly" icoName="crossed-flags"></jt-svg-ico>
-        <jt-repeat-with-preset-icon *ngIf="exercise.presetRepetitions" [repeat]="exercise.presetRepetitions"></jt-repeat-with-preset-icon>
-        <jt-repeats-icon *ngIf="exercise.repetitions > 1" [val]="exercise.repetitions"></jt-repeats-icon>
+        <jt-repeat-with-preset-icon
+          *ngIf="exercise.presetRepetitions"
+          [repeat]="exercise.presetRepetitions">
+        </jt-repeat-with-preset-icon>
+        <jt-repeats-icon
+          *ngIf="exercise.repetitions > 1"
+          [val]="exercise.repetitions"
+          [title]="'repetitions: ' + exercise.repetitions">
+        </jt-repeats-icon>
       </div>
       <span class="title">{{exercise.title}}</span>
       <mat-icon (click)="deleteExercise(exercise.id)">delete</mat-icon>

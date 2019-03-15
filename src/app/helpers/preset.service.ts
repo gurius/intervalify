@@ -19,7 +19,7 @@ export class PresetService {
   getBlank(): Preset {
     return Object.assign({}, {
       id: Date.now(),
-      title: '',
+      title: 'untitled',
       exercisesIds: [],
       repetitions: 1
     })
