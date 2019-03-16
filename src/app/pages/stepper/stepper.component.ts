@@ -7,7 +7,17 @@ import { StepsService } from 'src/app/helpers/steps.service';
 import { StepperService } from './stepper.service';
 import { PresetService } from 'src/app/helpers/preset.service';
 import { Step } from 'src/app/models/step.model';
-import { style, state, transition, trigger, animate, query, keyframes, group, stagger, sequence } from '@angular/animations';
+import {
+  style,
+  state,
+  transition,
+  trigger,
+  animate,
+  query,
+  keyframes,
+  group,
+  sequence
+} from '@angular/animations';
 import { Sound } from 'src/app/types/sound.type';
 import { AudioService } from 'src/app/helpers/audio.service';
 
@@ -117,8 +127,8 @@ export class StepperComponent implements OnInit, OnDestroy {
     this.router.queryParamMap
       .subscribe((params: ParamMap) => {
         const presetId = +params.get('pId');
-        const steps = this.sHelper.getSteps(presetId);
         this.preset = this.pHelper.getPreset(presetId);
+        const steps = this.sHelper.getSteps(this.preset.id);
         this.stepper.setSteps(steps, this.preset.repetitions);
         this.stepper.reset();
         this.stepper.doStep();
@@ -131,7 +141,7 @@ export class StepperComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.stepper.stop();
-    this.stepper.stepNumber = 0;
+    this.stepper.reset();
     this.stepper.steps = [];
     clearInterval(this.startIntervalId);
   }

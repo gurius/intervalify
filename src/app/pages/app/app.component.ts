@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 
 import { CloseNav, OpenNav } from './app.actions';
@@ -11,7 +11,7 @@ import { RequestExercises }
 import { RequestCountdowns }
   from 'src/app/components/countdown/countdown.actions';
 import { StepperService } from '../stepper/stepper.service';
-import { MatBottomSheet } from '@angular/material';
+import { MatBottomSheet, MatBottomSheetRef } from '@angular/material';
 import { BottomSheetMenuComponent } from 'src/app/components/bottom-sheet-menu/bottom-sheet-menu.component';
 
 @Component({
@@ -23,6 +23,9 @@ export class AppComponent {
   title = 'justimer';
   showNav$: Observable<boolean>
   visibleNav: boolean;
+    menuRef: MatBottomSheetRef<BottomSheetMenuComponent, any>;
+    aoSubs: Subscription;
+    adSubs: Subscription;
 
   constructor(
     private store: Store<fromRedusers.State>,
@@ -37,14 +40,18 @@ export class AppComponent {
   }
 
   openMenu(): void {
-    this.menu.open(BottomSheetMenuComponent);
+    this.menuRef = this.menu.open(BottomSheetMenuComponent);
+
+    this.aoSubs = this.menuRef.afterOpened().subscribe(() => {
+      this.store.dispatch(new OpenNav());
+      this.aoSubs.unsubscribe();
+    });
+
+    this.adSubs = this.menuRef.afterDismissed().subscribe(() => {
+      this.store.dispatch(new CloseNav());
+      this.adSubs.unsubscribe();
+    })
   }
 
-  onClick() {
-    if (this.visibleNav) {
-      this.store.dispatch(new CloseNav());
-    } else {
-      this.store.dispatch(new OpenNav());
-    }
-  }
+
 }

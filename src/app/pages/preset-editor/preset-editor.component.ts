@@ -61,19 +61,20 @@ export class PresetEditorComponent implements OnInit, OnDestroy {
             select(fromSelectors.selectPreset(presetId))
           )
           .subscribe(preset => {
-            this.preset = preset;
+            if (preset) {
+              this.preset = preset;
+              this.exercisesSubscription = this.store
+                .pipe(
+                  select(exerciseSelectors.allExercisesOfPreset(this.preset.id))
+                ).subscribe(exercises => {
+                  this.exercises = exercises.sort(sortBySeqNo);
+                });
+            }
           });
 
+        this.presetSubscription.add(this.exercisesSubscription)
       });
 
-    this.exercisesSubscription = this.store
-      .pipe(
-        select(exerciseSelectors.allExercisesOfPreset(this.preset.id))
-      ).subscribe(exercises => {
-        this.exercises = exercises.sort(sortBySeqNo);
-      });
-
-      this.presetSubscription.add(this.exercisesSubscription)
   }
 
   ngOnDestroy() {
