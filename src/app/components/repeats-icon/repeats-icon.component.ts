@@ -8,6 +8,8 @@ import { Component, OnInit, Input } from '@angular/core';
 export class RepeatsIconComponent implements OnInit {
   @Input()
   val: number;
+  @Input()
+  color: string = '#a1a1a1';
   constructor() { }
 
   ngOnInit() {

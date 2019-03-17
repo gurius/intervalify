@@ -35,6 +35,7 @@ import { RepeatsIconComponent } from './components/repeats-icon/repeats-icon.com
 import { RepeatWithPresetIconComponent } from './components/repeat-with-preset-icon/repeat-with-preset-icon.component';
 import { PresetRepeatsIconComponent } from './components/preset-repeats-icon/preset-repeats-icon.component';
 import { SvgIcoComponent } from './components/svg-ico/svg-ico.component';
+import { SpaceTriggerDirective } from './directives/space-trigger.directive';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { SvgIcoComponent } from './components/svg-ico/svg-ico.component';
     RepeatsIconComponent,
     RepeatWithPresetIconComponent,
     PresetRepeatsIconComponent,
-    SvgIcoComponent
+    SvgIcoComponent,
+    SpaceTriggerDirective
   ],
   imports: [
     BrowserModule,

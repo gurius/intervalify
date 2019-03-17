@@ -121,6 +121,7 @@ export class StepperComponent implements OnInit, OnDestroy {
   stage: string | number;
   launched: boolean = false;
   startIntervalId: any;
+  prestartPhase: boolean;
 
 
   ngOnInit() {
@@ -159,8 +160,20 @@ export class StepperComponent implements OnInit, OnDestroy {
     this.stepper.pause();
   }
 
+  playPause(): void {
+    if (this.prestartPhase) return;
+    if (!this.launched){
+      this.start();
+    } else if (this.stepper.running) {
+      this.pause()
+    } else if (!this.stepper.running) {
+      this.play();
+    }
+  }
+
   start() {
     this.launched = true;
+    this.prestartPhase = true;
     this.startIntervalId = setInterval(() => {
       const stage = this.prestartCountdown.next();
       this.stage = stage.value;
@@ -171,6 +184,7 @@ export class StepperComponent implements OnInit, OnDestroy {
       }
 
       if (stage.done) {
+        this.prestartPhase = false;
         clearInterval(this.startIntervalId);
         this.initial = false;
         this.stepper.play();

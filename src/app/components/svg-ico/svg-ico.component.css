@@ -1,10 +1,11 @@
 :host{
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
   background-repeat: no-repeat;
   background-size: 3.6rem 3.6rem;
   background-position: center;
   height: 3.6rem;
   width: 3.6rem;
-  margin: 0.5rem;
-  border-radius: 37%;
-  background-color: grey;
+  margin: auto;
 }

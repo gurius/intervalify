@@ -70,7 +70,7 @@ mat-form-field{
   box-shadow: 0 0 0.5rem;
 }
 .title{
-  text-shadow : 0 0 1rem white;
+  /* text-shadow : 0 0 1rem white; */
 }
 .constructor-element--buttons-bar{
   margin-top: 3rem;

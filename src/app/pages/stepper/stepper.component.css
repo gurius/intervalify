@@ -66,6 +66,9 @@ mat-icon{
 .section--prestart button {
   color: var(--yell);
 }
+.section--prestart{
+  flex-flow: column;
+}
 .done{
   font-family: 'Faster One', cursive;
   font-size: 5rem;
@@ -115,4 +118,21 @@ button.large  {
 .current-number{
   color: #b0bec5;
   font-size: 4rem;
+}
+.time-stat{
+  font-size: 1.6rem;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 3rem;
+}
+.time-stat mat-icon{
+  transform: scale(1);
+}
+.rest-icon{
+  height: 2.4rem;
+  width: 2.4rem;
+  background-size: 2.4rem 2.4rem;
 }

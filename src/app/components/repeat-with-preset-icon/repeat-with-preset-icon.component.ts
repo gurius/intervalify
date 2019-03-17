@@ -10,6 +10,12 @@ export class RepeatWithPresetIconComponent implements OnInit {
   @Input()
   repeat: boolean;
 
+  @Input()
+  disabled: boolean;
+
+  @Input()
+  color: string = '#a1a1a1';
+
   constructor() { }
 
   ngOnInit() {

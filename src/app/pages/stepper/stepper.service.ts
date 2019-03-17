@@ -31,6 +31,8 @@ export class StepperService {
   totalProgress: number = 0;
   countdown: string;
   state: Subject<StepperState> = new Subject();
+  workTotalTime: number;
+  restTotalTime: number;
 
   setSteps(steps: Step[], repetitions: number) {
     let start = [];
@@ -51,7 +53,44 @@ export class StepperService {
     this.steps.push(...end);
 
     const minutes = this.steps.reduce((acc, step) => acc + step.minutes, 0);
+
+    const workMinutes = this.steps.reduce((acc, step) => {
+      if  (step.type === CountdownTypes.Work){
+        return acc + step.minutes
+      } else {
+        return acc;
+      }
+    }, 0);
+
+    const resetMinutes = this.steps.reduce((acc, step) => {
+      if  (step.type === CountdownTypes.Rest){
+        return acc + step.minutes
+      } else {
+        return acc;
+      }
+    }, 0);
+
     const rawSeconds = this.steps.reduce((acc, step) => acc + step.seconds, 0);
+
+    const workRawSeconds = this.steps.reduce((acc, step) => {
+      if  (step.type === CountdownTypes.Work){
+        return acc + step.seconds
+      } else {
+        return acc;
+      }
+    }, 0);
+
+    const restRawSeconds = this.steps.reduce((acc, step) => {
+      if  (step.type === CountdownTypes.Rest){
+        return acc + step.seconds
+      } else {
+        return acc;
+      }
+    }, 0);
+
+    this.workTotalTime = workMinutes * 60 + workRawSeconds;
+    this.restTotalTime = resetMinutes * 60 + restRawSeconds;
+
     this.presetTotalTime.totalSec = minutes * 60 + rawSeconds;
     this.presetTotalTime.secondsRemaining = this.presetTotalTime.totalSec;
     this.presetTotalTime.remaining = this.secondsTommssStr(this.presetTotalTime.totalSec);

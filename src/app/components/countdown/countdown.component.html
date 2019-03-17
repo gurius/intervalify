@@ -1,11 +1,17 @@
 <div class="countdown-block">
   <button mat-icon-button [ngSwitch]="countdown.type">
     <mat-icon *ngSwitchCase="'work'" (click)="countdown.type = 'rest'">
-      rowing
+      directions_run
     </mat-icon>
-    <mat-icon *ngSwitchCase="'rest'" (click)="countdown.type = 'work'">
+    <jt-svg-ico
+      class="rest-icon"
+      *ngSwitchCase="'rest'"
+      (click)="countdown.type = 'work'"
+      icoName="resting-man-white">
+    </jt-svg-ico>
+    <!-- <mat-icon *ngSwitchCase="'rest'" (click)="countdown.type = 'work'">
       airline_seat_recline_extra
-    </mat-icon>
+    </mat-icon> -->
   </button>
 </div>
 <div class="countdown-block">

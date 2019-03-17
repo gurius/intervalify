@@ -1,4 +1,4 @@
-<header class="preset-title">
+<header [jtSpaceTrigger]="playPause.bind(this)" class="preset-title">
   <h1>{{preset.title}}</h1>
 </header>
 <div [@fadeToggle]="stepper.stepNumber" *ngIf="!initial" class="main-body">
@@ -72,6 +72,15 @@
       class="prestart-countdown">
       {{stage}}
     </div>
+  </div>
+  <div class="time-stat" *ngIf="!launched">
+    <mat-icon>access_time</mat-icon> {{stepper.presetTotalTime.remaining}} =
+    <mat-icon>directions_run</mat-icon> {{stepper.secondsTommssStr(stepper.workTotalTime)}} +
+    <jt-svg-ico
+      class="rest-icon"
+      icoName="resting-man-white">
+    </jt-svg-ico>
+    {{stepper.secondsTommssStr(stepper.restTotalTime)}}
   </div>
 </section>
 <div [@finish]="stage" *ngIf="stage === 'accomplished'" class="finish">

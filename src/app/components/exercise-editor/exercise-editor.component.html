@@ -24,18 +24,26 @@
       </mat-form-field>
     </div>
     <div class="editor__item">
-      <jt-svg-ico class="editor-icon" icoName="green-flag"></jt-svg-ico>
-      <mat-checkbox
-        [(ngModel)]="exercise.atStartOnly">
-        If set will play at start (no preset repetitions)
+
+      <jt-repeat-with-preset-icon class="editor-icon" [disabled]="exercise.atEndOnly || exercise.atStartOnly"> </jt-repeat-with-preset-icon>
+
+      <div title="play at start" class="flag-checkbox">
+        <mat-checkbox
+          labelPosition="before"
+          [(ngModel)]="exercise.atStartOnly">
+        <jt-svg-ico class="editor-icon" icoName="green-flag"></jt-svg-ico>
       </mat-checkbox>
-    </div>
-    <div class="editor__item">
-      <jt-svg-ico class="editor-icon" icoName="crossed-flags"></jt-svg-ico>
-      <mat-checkbox
-        [(ngModel)]="exercise.atEndOnly">
-        If set will play at end (no preset repetitions)
+      </div>
+      <div title="play at end" class="flag-checkbox">
+
+        <mat-checkbox
+          labelPosition="before"
+          [(ngModel)]="exercise.atEndOnly">
+        <jt-svg-ico class="editor-icon" icoName="crossed-flags"></jt-svg-ico>
       </mat-checkbox>
+      </div>
+
+
     </div>
     <div class="editor__item">
       <mat-form-field class="narrow-input">

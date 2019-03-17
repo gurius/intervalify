@@ -50,10 +50,12 @@
         <jt-svg-ico *ngIf="exercise.atStartOnly" icoName="green-flag"></jt-svg-ico>
         <jt-svg-ico *ngIf="exercise.atEndOnly" icoName="crossed-flags"></jt-svg-ico>
         <jt-repeat-with-preset-icon
+          [color]="exercise.color"
           *ngIf="exercise.presetRepetitions"
           [repeat]="exercise.presetRepetitions">
         </jt-repeat-with-preset-icon>
         <jt-repeats-icon
+          [color]="exercise.color"
           *ngIf="exercise.repetitions > 1"
           [val]="exercise.repetitions"
           [title]="'repetitions: ' + exercise.repetitions">
