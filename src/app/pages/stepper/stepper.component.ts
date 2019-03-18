@@ -24,7 +24,7 @@ import { AudioService } from 'src/app/helpers/audio.service';
 @Component({
   selector: 'jt-stepper',
   templateUrl: './stepper.component.html',
-  styleUrls: ['./stepper.component.css'],
+  styleUrls: ['./stepper.component.css', './stepper.component.mobile.css'],
   animations: [
     trigger('fadeToggle', [
       transition(':enter', [
@@ -66,11 +66,11 @@ import { AudioService } from 'src/app/helpers/audio.service';
     trigger('pulsation', [
       transition('* => *', [
         animate('1s', keyframes([
-          style({ textShadow: '0 0  1.3rem white', offset: 0 }),
-          style({ textShadow: '0 0  3rem white', offset: 0.4 }),
-          style({ textShadow: '0 0  6rem white', offset: 0.5 }),
-          style({ textShadow: '0 0  3rem white', offset: 0.6 }),
-          style({ textShadow: '0 0  1.4rem white', offset: 1 }),
+          style({ textShadow: '0 0  1.3rem', offset: 0 }),
+          style({ textShadow: '0 0  3rem', offset: 0.4 }),
+          style({ textShadow: '0 0  6rem', offset: 0.5 }),
+          style({ textShadow: '0 0  3rem', offset: 0.6 }),
+          style({ textShadow: '0 0  1.4rem', offset: 1 }),
         ]))
       ])
     ]),

@@ -13,8 +13,6 @@ import { MaterialModule } from './material/material.module';
 import { AppComponent } from './pages/app/app.component';
 import { reducers, metaReducers } from './root-reducer';
 import { environment } from '../environments/environment';
-import { IconButtonComponent }
-  from './components/icon-button/icon-button.component';
 import { PresetEditorComponent }
   from './pages/preset-editor/preset-editor.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -40,7 +38,6 @@ import { SpaceTriggerDirective } from './directives/space-trigger.directive';
 @NgModule({
   declarations: [
     AppComponent,
-    IconButtonComponent,
     PresetEditorComponent,
     HomeComponent,
     ExerciseEditorComponent,

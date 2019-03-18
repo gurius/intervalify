@@ -5,7 +5,12 @@
     color="accent"
     [value]="stepper.totalProgress">
   </mat-progress-bar>
-  <jt-icon-button (click)="openMenu()"> </jt-icon-button>
+  <button
+    class="menu-btn"
+    (click)="openMenu()"
+    mat-fab color="accent">
+    <mat-icon>menu</mat-icon>
+  </button>
 </header>
 <div  routerLink="/stepper" routerLinkActive #stepperRoute="routerLinkActive"></div>
 <div class="routerOutlet">

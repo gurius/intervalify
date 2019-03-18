@@ -21,8 +21,9 @@ mat-progress-bar{
   height: 100%;
   overflow-x: hidden;
 }
-jt-icon-button{
+.menu-btn{
   position: absolute;
   bottom: 3rem;
   left: 2rem;
+  z-index: 100;
 }

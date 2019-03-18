@@ -1,4 +1,4 @@
-<header [jtSpaceTrigger]="playPause.bind(this)" class="preset-title">
+<header *ngIf="!stepper.running" [jtSpaceTrigger]="playPause.bind(this)" class="preset-title">
   <h1>{{preset.title}}</h1>
 </header>
 <div [@fadeToggle]="stepper.stepNumber" *ngIf="!initial" class="main-body">
@@ -40,19 +40,20 @@
       *ngIf="!stepper.running"
       [disabled]="!stepper.steps.length"
       (click)="play()"
-      mat-icon-button>
+      mat-fab>
       <mat-icon>play_arrow</mat-icon>
     </button>
     <button
       *ngIf="stepper.running"
       (click)="pause()"
-      mat-icon-button>
+      mat-fab>
       <mat-icon>pause</mat-icon>
     </button>
     <button
+      color="warn"
       [disabled]="!stepper.steps.length"
       (click)="stop()"
-      mat-icon-button>
+      mat-fab>
       <mat-icon>stop</mat-icon>
     </button>
   </section>
@@ -74,11 +75,11 @@
     </div>
   </div>
   <div class="time-stat" *ngIf="!launched">
-    <mat-icon>access_time</mat-icon> {{stepper.presetTotalTime.remaining}} =
-    <mat-icon>directions_run</mat-icon> {{stepper.secondsTommssStr(stepper.workTotalTime)}} +
+    <mat-icon color="primary">access_time</mat-icon> {{stepper.presetTotalTime.remaining}} =
+    <mat-icon color="warn">directions_run</mat-icon> {{stepper.secondsTommssStr(stepper.workTotalTime)}} +
     <jt-svg-ico
       class="rest-icon"
-      icoName="resting-man-white">
+      icoName="resting-man-green">
     </jt-svg-ico>
     {{stepper.secondsTommssStr(stepper.restTotalTime)}}
   </div>

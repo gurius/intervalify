@@ -4,12 +4,18 @@
   display: flex;
   flex-flow: column wrap;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   overflow: hidden;
 }
 .section, .main-body{
   font-size: 3rem;
   flex: 1 1;
+}
+.section{
+  height: content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .preset-title{
   flex: 0 1;
@@ -38,18 +44,10 @@
   flex-flow: column;
   justify-content: space-evenly;
   align-items: center;
-  height: 150px;
 }
 .step-current{
   font-weight: bold;
-  text-shadow: 0 0  1.5rem rgb(200, 200, 200);
-}
-button{
-  height: 6rem;
-  width: 6rem;
-}
-mat-icon{
-  transform: scale(2);
+  text-shadow: 0 0  1.5rem;
 }
 .finish{
   position: absolute;
@@ -87,12 +85,17 @@ button.large  {
 }
 
 .section--play-stop{
-  width: 10rem;
   justify-content: space-evenly;
   color: var(--yell);
+  position: fixed;
+  bottom: 3rem;
+}
+.section--play-stop button{
+  margin: 0 1rem;
 }
 
-.replay mat-icon{
+.replay mat-icon,
+.large mat-icon{
   transform: scale(4);
 }
 .elapsed,
@@ -121,7 +124,6 @@ button.large  {
 }
 .time-stat{
   font-size: 1.6rem;
-  color: white;
   display: flex;
   justify-content: center;
   align-items: center;

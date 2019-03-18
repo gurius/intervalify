@@ -9,10 +9,10 @@
       #titleInput
       jtAutofocusInput>
     </mat-form-field>
-    <p class="smart-label" matRipple [hidden]="editingTitle" (click)="editProperty('title')">{{preset.title}}</p>
+    <h2 class="smart-label" matRipple [hidden]="editingTitle" (click)="editProperty('title')">{{preset.title}}</h2>
   </div>
   <div class="workout-repetitions">
-    <mat-form-field *ngIf="editingRepetitions || preset.repetitions === ''">
+    <mat-form-field class="workout-repetitions__form-field" *ngIf="editingRepetitions || preset.repetitions === ''">
       <input matInput
              type="number"
              min="1"
@@ -47,8 +47,8 @@
       [style.color]="exercise.color"
       class="preset-exercises-list__item">
       <div class="icon-wrapper">
-        <jt-svg-ico *ngIf="exercise.atStartOnly" icoName="green-flag"></jt-svg-ico>
-        <jt-svg-ico *ngIf="exercise.atEndOnly" icoName="crossed-flags"></jt-svg-ico>
+        <jt-svg-ico *ngIf="exercise.atStartOnly" icoName="green-flag-black-grip"></jt-svg-ico>
+        <jt-svg-ico *ngIf="exercise.atEndOnly" icoName="crossed-flag"></jt-svg-ico>
         <jt-repeat-with-preset-icon
           [color]="exercise.color"
           *ngIf="exercise.presetRepetitions"
@@ -67,25 +67,26 @@
   </ul>
 </div>
 
-<div class="constructor-element">
-  <div class="centred-bar">
-    <button mat-button (click)="newExercise()"><mat-icon>add</mat-icon></button>
-  </div>
-</div>
+<div class="buttons-bar">
+  <button
+    mat-fab
+    class="editor-button"
+    color="primary"
+    (click)="newExercise()">
+    <mat-icon>add</mat-icon>
+  </button>
 
-<div class="constructor-element constructor-element--buttons-bar">
-  <div class="centred-bar">
-    <button
-      (click)="deletePreset(preset)"
-      class="editor-button"
-      mat-raised-button>
-      <mat-icon>delete</mat-icon>
-    </button>
-    <button
-      class="editor-button"
-      mat-raised-button
-      routerLink="/stepper" [queryParams]="{pId: preset.id}">
-      <mat-icon>play_arrow</mat-icon>
-    </button>
-  </div>
+  <button
+    class="editor-button"
+    (click)="deletePreset(preset)"
+    mat-fab color="warn">
+    <mat-icon>delete</mat-icon>
+  </button>
+
+  <button
+    class="editor-button"
+    mat-fab color="accent"
+    routerLink="/stepper" [queryParams]="{pId: preset.id}">
+    <mat-icon>play_arrow</mat-icon>
+  </button>
 </div>

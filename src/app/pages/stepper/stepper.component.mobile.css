@@ -1,0 +1,10 @@
+@media screen and (max-width: 400px) {
+  .done{
+    font-size: 4rem;
+  }
+}
+@media screen and (max-height: 800px) {
+  .section--progress{
+    align-items: flex-start;
+  }
+}
