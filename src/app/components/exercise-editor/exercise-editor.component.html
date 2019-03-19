@@ -3,13 +3,14 @@
   <div class="editor">
     <div class="editor__item">
       <mat-form-field>
-        <input matInput placeholder="exercise title" [(ngModel)]="exercise.title">
+        <input
+          matInput placeholder="exercise title" [(ngModel)]="exercise.title">
       </mat-form-field>
     </div>
     <div class="editor__item">
-      <mat-form-field class="narrow-input">
+      <mat-form-field >
         <jt-repeats-icon
-          [title]="exercise.repetitions"
+          [title]="'exercise repetitions: '+exercise.repetitions"
           class="input-icon"
           matPrefix
           [val]="exercise.repetitions">
@@ -25,10 +26,15 @@
     </div>
     <div class="editor__item">
 
-      <jt-repeat-with-preset-icon class="editor-icon" [disabled]="exercise.atEndOnly || exercise.atStartOnly"> </jt-repeat-with-preset-icon>
+      <jt-repeat-with-preset-icon
+        title="preset repetitions"
+        class="editor-icon"
+        [disabled]="exercise.atEndOnly || exercise.atStartOnly">
+      </jt-repeat-with-preset-icon>
 
       <div title="play at start" class="flag-checkbox">
         <mat-checkbox
+          title="Play at start(disables preset repetitions)"
           color="primary"
           labelPosition="before"
           [(ngModel)]="exercise.atStartOnly">
@@ -38,6 +44,7 @@
       <div title="play at end" class="flag-checkbox">
 
         <mat-checkbox
+          title="Play at end(disables preset repetitions)"
           color="primary"
           labelPosition="before"
           [(ngModel)]="exercise.atEndOnly">
@@ -48,7 +55,7 @@
 
     </div>
     <div class="editor__item">
-      <mat-form-field class="narrow-input">
+      <mat-form-field title="Choose color for exercise">
         <input matInput type="color" [(ngModel)]="exercise.color">
       </mat-form-field>
     </div>
@@ -56,7 +63,9 @@
     <div class="editor__item">
       <div class="countdowns">
         <jt-countdown *ngFor="let cn of countdowns" [countdown]="cn">
-          <button color="primary" mat-icon-button (click)="deleteCoundown(cn.id)">
+          <button
+            title="remove timer"
+            color="primary" mat-icon-button (click)="deleteCoundown(cn.id)">
             <mat-icon>indeterminate_check_box</mat-icon>
           </button>
         </jt-countdown>
@@ -64,7 +73,9 @@
     </div>
 
     <div class="editor__item editor__item--centred">
-      <button color="primary" mat-icon-button class="add-countdown" (click)="addCoundown()">
+      <button
+        color="primary" title="add timer"
+        mat-icon-button class="add-countdown" (click)="addCoundown()">
         <mat-icon>add_box</mat-icon>
       </button>
     </div>
@@ -72,18 +83,19 @@
 </mat-dialog-content>
 
 <mat-dialog-actions>
-  <div class="editor__item">
-    <button mat-raised-button [mat-dialog-close]="false">Cancel</button>
-  </div>
-  <div class="editor__item">
-    <button
-      mat-raised-button
-      [mat-dialog-close]="{
-        exercise: exercise,
-        countdowns: countdowns,
-        deletedCountdowns: deletedCountdowns
-      }">
-      Save
-    </button>
-  </div>
+
+  <button title="dismiss" mat-raised-button [mat-dialog-close]="false">
+    <mat-icon>cancel</mat-icon>
+  </button>
+
+  <button
+    mat-raised-button title="save"
+    [mat-dialog-close]="{
+      exercise: exercise,
+      countdowns: countdowns,
+      deletedCountdowns: deletedCountdowns
+    }">
+    <mat-icon>save</mat-icon>
+  </button>
+
 </mat-dialog-actions>

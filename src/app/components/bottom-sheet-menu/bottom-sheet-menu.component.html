@@ -4,17 +4,13 @@
     <span mat-line>Create new preset</span>
   </a>
 
-  <a  mat-list-item (click)="openLink($event)">
-    <span routerLink="/home" routerLinkActive mat-line>Presets list</span>
+  <a routerLink="/home" mat-list-item (click)="openLink($event)">
+    <span mat-line>Presets list</span>
     <span mat-line>Go to presets list page</span>
   </a>
 
-  <a mat-list-item (click)="openLink($event)">
-    <span
-      routerLink="/stepper"
-      routerLinkActive
-      #goDefPreset="routerLinkActive"
-      mat-line>
+  <a routerLink="/stepper" mat-list-item (click)="openLink($event)">
+    <span mat-line>
       Activate default preset
     </span>
     <span mat-line>Go to page with default preset preloaded</span>

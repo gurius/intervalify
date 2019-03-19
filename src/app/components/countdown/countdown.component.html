@@ -1,6 +1,11 @@
 <div class="countdown-block">
-  <button class="work-rest-mans" color="warn" mat-icon-button [ngSwitch]="countdown.type">
-    <mat-icon class="work-man" *ngSwitchCase="'work'" (click)="countdown.type = 'rest'">
+  <button
+    title="rest/work"
+    class="work-rest-mans"
+    color="warn" mat-icon-button [ngSwitch]="countdown.type">
+    <mat-icon
+      class="work-man"
+      *ngSwitchCase="'work'" (click)="countdown.type = 'rest'">
       directions_run
     </mat-icon>
     <jt-svg-ico
@@ -9,9 +14,6 @@
       (click)="countdown.type = 'work'"
       icoName="resting-man-green">
     </jt-svg-ico>
-    <!-- <mat-icon *ngSwitchCase="'rest'" (click)="countdown.type = 'work'">
-      airline_seat_recline_extra
-    </mat-icon> -->
   </button>
 </div>
 <div class="countdown-block">

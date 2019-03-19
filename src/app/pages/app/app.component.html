@@ -2,10 +2,11 @@
   <mat-progress-bar
     *ngIf="stepperRoute.isActive"
     mode="determinate"
-    color="accent"
+    color="primary"
     [value]="stepper.totalProgress">
   </mat-progress-bar>
   <button
+    title="menu"
     class="menu-btn"
     (click)="openMenu()"
     mat-fab color="accent">

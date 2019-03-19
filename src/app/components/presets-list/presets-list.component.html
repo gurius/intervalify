@@ -2,28 +2,30 @@
 <button
   color="primary"
   class="add-button"
-  mat-fab
-  (click)="addPreset()" >
+  mat-fab title="add preset"
+  (click)="addPreset()">
   <mat-icon>add</mat-icon>
 </button>
 <ul class="preset-list">
-  <li class="preset-list__item" *ngFor="let preset of presets">
-    <h3>{{preset.title}}</h3>
+  <li title="preset" class="preset-list__item" *ngFor="let preset of presets">
+    <h3 [title]="preset.title">{{preset.title}}</h3>
     <div class="button-panel">
       <ul class="hor-list">
-        <li routerLink="/stepper" [queryParams]="{pId: preset.id}">
+        <li title="launching preset"
+          routerLink="/stepper" [queryParams]="{pId: preset.id}">
           <button mat-icon-button><mat-icon >play_arrow</mat-icon></button>
         </li>
-        <li routerLink="/constructor" [queryParams]="{pId: preset.id}" >
+        <li
+          title="edit preset"
+          routerLink="/constructor" [queryParams]="{pId: preset.id}" >
           <button mat-icon-button><mat-icon >edit</mat-icon></button>
         </li>
-        <li>
+        <li title="delete preset">
           <button (click)="deletePreset(preset)" mat-icon-button>
             <mat-icon>delete</mat-icon>
           </button>
         </li>
       </ul>
     </div>
-
   </li>
 </ul>

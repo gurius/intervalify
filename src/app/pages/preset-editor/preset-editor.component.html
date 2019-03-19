@@ -9,7 +9,10 @@
       #titleInput
       jtAutofocusInput>
     </mat-form-field>
-    <h2 class="smart-label" matRipple [hidden]="editingTitle" (click)="editProperty('title')">{{preset.title}}</h2>
+    <h2
+      class="smart-label" matRipple [hidden]="editingTitle" title="edit title"
+      (click)="editProperty('title')">{{preset.title}}
+    </h2>
   </div>
   <div class="workout-repetitions">
     <mat-form-field class="workout-repetitions__form-field" *ngIf="editingRepetitions || preset.repetitions === ''">
@@ -28,9 +31,8 @@
       [hidden]="editingRepetitions"
       [val]="preset.repetitions"
       (click)="editProperty('repetitions')"
-      [title]="preset.repetitions">
+      [title]="'repetitions: '+preset.repetitions">
     </jt-preset-repeats-icon>
-    <!-- <p class="smart-label" [hidden]="editingRepetitions" (click)="editProperty('repetitions')">{{preset.repetitions}}</p> -->
   </div>
 </div>
 
@@ -41,17 +43,21 @@
     (cdkDropListDropped)="drop($event)"
     class="preset-exercises-list">
     <li
-      matRipple
-      cdkDrag
+      matRipple cdkDrag
+      title="exercise"
       (click)="editExercise(exercise)"
       *ngFor="let exercise of exercises"
       [style.color]="exercise.color"
       class="preset-exercises-list__item">
       <div class="icon-wrapper">
-        <jt-svg-ico *ngIf="exercise.atStartOnly" icoName="green-flag-black-grip"></jt-svg-ico>
+        <jt-svg-ico
+          *ngIf="exercise.atStartOnly" title="Play in the begining"
+          icoName="green-flag-black-grip">
+        </jt-svg-ico>
         <jt-svg-ico *ngIf="exercise.atEndOnly" icoName="crossed-flag"></jt-svg-ico>
         <jt-repeat-with-preset-icon
           [color]="exercise.color"
+          title="involved in repetitions of preset"
           *ngIf="exercise.presetRepetitions"
           [repeat]="exercise.presetRepetitions">
         </jt-repeat-with-preset-icon>
@@ -59,18 +65,18 @@
           [color]="exercise.color"
           *ngIf="exercise.repetitions > 1"
           [val]="exercise.repetitions"
-          [title]="'repetitions: ' + exercise.repetitions">
+          [title]="'exercise repetitions: ' + exercise.repetitions">
         </jt-repeats-icon>
       </div>
-      <span class="title">{{exercise.title}}</span>
-      <mat-icon (click)="deleteExercise(exercise.id)">delete</mat-icon>
+      <span class="title" [title]="exercise.title">{{exercise.title}}</span>
+      <mat-icon title="remove exercise" (click)="deleteExercise(exercise.id)">delete</mat-icon>
     </li>
   </ul>
 </div>
 
 <div class="buttons-bar">
   <button
-    mat-fab
+    mat-fab title="add new exercise"
     class="editor-button"
     color="primary"
     (click)="newExercise()">
@@ -78,6 +84,7 @@
   </button>
 
   <button
+    title="delete preset"
     class="editor-button"
     (click)="deletePreset(preset)"
     mat-fab color="warn">
@@ -85,6 +92,7 @@
   </button>
 
   <button
+    title="launching preset"
     class="editor-button"
     mat-fab color="accent"
     routerLink="/stepper" [queryParams]="{pId: preset.id}">
