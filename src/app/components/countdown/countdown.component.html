@@ -19,6 +19,7 @@
     <input matInput
     type="number"
     min="0"
+    step="1"
     placeholder="minutes"
     (input)="timeCorrector($event)"
     [(ngModel)]="countdown.minutes">
@@ -28,6 +29,7 @@
     <input matInput
     type="number"
     min="0"
+    step="1"
     placeholder="seconds"
     (input)="timeCorrector($event)"
     [(ngModel)]="countdown.seconds">

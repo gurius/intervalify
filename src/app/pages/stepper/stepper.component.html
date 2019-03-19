@@ -1,7 +1,7 @@
-<header *ngIf="!stepper.running" [jtSpaceTrigger]="playPause.bind(this)" class="preset-title">
+<header [jtSpaceTrigger]="playPause.bind(this)" *ngIf="!stepper.running" class="preset-title">
   <h1>{{preset.title}}</h1>
 </header>
-<div [@fadeToggle]="stepper.stepNumber" *ngIf="!initial" class="main-body">
+<div [jtSpaceTrigger]="playPause.bind(this)" [@fadeToggle]="stepper.stepNumber" *ngIf="!initial" class="main-body">
   <section  *ngIf="!initial" class="section section--col">
     <div [@pulsation]="stepper.countdown" [ngStyle]="{'color': stepper.currentStep.type === 'work' ? stepper.currentStep.color : 'var(--rest)'}" class="step-current">
       {{stepper.currentStep.type === 'work' ? stepper.currentStep.title : stepper.currentStep.type}}

@@ -128,7 +128,7 @@ button.large  {
   justify-content: center;
   align-items: center;
   position: absolute;
-  bottom: 3rem;
+  bottom: 0.5rem;
 }
 .time-stat mat-icon{
   transform: scale(1);
