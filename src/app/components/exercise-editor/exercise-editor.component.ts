@@ -9,6 +9,8 @@ import { Countdown } from 'src/app/models/countdown.model';
 import * as countdonwSelectors from '../countdown/countdown.selectors';
 import { CountdownService } from 'src/app/helpers/countdown.service';
 import { first } from 'rxjs/operators';
+import { DialogOptions, DialogTitleTypes }
+  from 'src/app/models/dialog-options.model';
 
 @Component({
   selector: 'jt-exercise-editor',
@@ -17,7 +19,7 @@ import { first } from 'rxjs/operators';
 })
 export class ExerciseEditorComponent implements OnInit, OnDestroy {
   exercise: Exercise;
-  dialogOptions: { title, isNew };
+  dialogOptions: DialogOptions;
   countdowns: Countdown[] = [];
   deletedCountdowns: number[] = [];
 
@@ -69,7 +71,7 @@ export class ExerciseEditorComponent implements OnInit, OnDestroy {
 
   constructor(
     private dialogReference: MatDialogRef<ExerciseEditorComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { exercise, opts },
+    @Inject(MAT_DIALOG_DATA) public data: { exercise: Exercise, opts: DialogOptions },
     private store: Store<rootReducer.State>,
     private cHelper: CountdownService
   ) {

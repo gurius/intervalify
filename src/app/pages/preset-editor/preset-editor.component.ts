@@ -22,6 +22,8 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { sortBySeqNo }
   from '../../components/exercise-editor/exercise-editor.reducer';
+import { DialogOptions, DialogTitleTypes }
+  from 'src/app/models/dialog-options.model';
 
 
 @Component({
@@ -112,14 +114,20 @@ export class PresetEditorComponent implements OnInit, OnDestroy {
 
   newExercise() {
     const exercise = this.eHelper.getBlank(this.preset.id);
-    const options = { title: 'New Exercise', isNew: true };
+    const options: DialogOptions = {
+      title: DialogTitleTypes.NewExercise,
+      isNew: true
+    };
     exercise.seqNo = this.exercises.length;
     this.openDialog(exercise, options);
   }
 
   editExercise(ex) {
     const exercise = Object.assign({}, ex);
-    const options = { title: 'Editing', isNew: false };
+    const options: DialogOptions = {
+      title: DialogTitleTypes.EditExercise,
+      isNew: false
+    };
 
     this.openDialog(exercise as Exercise, options);
   }

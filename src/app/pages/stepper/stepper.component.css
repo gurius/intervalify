@@ -77,6 +77,7 @@
   width: fit-content;
   transform: rotate(-0.05turn);
   padding: 0 1rem;
+  text-transform: uppercase;
 }
 
 button.large  {

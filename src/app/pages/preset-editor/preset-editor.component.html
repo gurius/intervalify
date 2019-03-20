@@ -6,21 +6,23 @@
       value="{{preset.title}}"
       (blur)="onBlur('title', titleInput.value)"
       placeholder="presets title"
+      i18n-placeholder="@@presetsEditor.input.placeholder.presetsTitle"
       #titleInput
       jtAutofocusInput>
     </mat-form-field>
     <h2
-      class="smart-label" matRipple [hidden]="editingTitle" title="edit title"
+      class="smart-label" matRipple [hidden]="editingTitle"
+      i18n-title="@@presetsEditor.title.editTitle" title="edit title"
       (click)="editProperty('title')">{{preset.title}}
     </h2>
   </div>
   <div class="workout-repetitions">
-    <mat-form-field class="workout-repetitions__form-field" *ngIf="editingRepetitions || preset.repetitions === ''">
+    <mat-form-field class="workout-repetitions__form-field" *ngIf="editingRepetitions">
       <input matInput
              type="number"
              min="1"
              step="1"
-             placeholder="repetitions"
+             placeholder="cycles" i18n-placeholder="@@presetsEditor.input.cycles"
              (blur)="onBlur('repetitions', repetitionsInput.value)"
              value="{{preset.repetitions}}"
              #repetitionsInput
@@ -31,7 +33,7 @@
       [hidden]="editingRepetitions"
       [val]="preset.repetitions"
       (click)="editProperty('repetitions')"
-      [title]="'repetitions: '+preset.repetitions">
+      i18n-title="@@presetsEditor.icon.cycles" title="cycles">
     </jt-preset-repeats-icon>
   </div>
 </div>
@@ -44,20 +46,28 @@
     class="preset-exercises-list">
     <li
       matRipple cdkDrag
-      title="exercise"
+      title="exercise" i18n-title="@@presetsEditor.title.exercise"
       (click)="editExercise(exercise)"
       *ngFor="let exercise of exercises"
       [style.color]="exercise.color"
       class="preset-exercises-list__item">
       <div class="icon-wrapper">
         <jt-svg-ico
-          *ngIf="exercise.atStartOnly" title="Play in the begining"
+          *ngIf="exercise.atStartOnly"
+          title="Play in the begining"
+          i18n-title="When exercise will be played @@presetsEditor.icon.title.begining"
           icoName="green-flag-black-grip">
         </jt-svg-ico>
-        <jt-svg-ico *ngIf="exercise.atEndOnly" icoName="crossed-flag"></jt-svg-ico>
+        <jt-svg-ico
+          title="Play in the end"
+          i18n-title="When exercise will be played @@presetsEditor.icon.title.end"
+          *ngIf="exercise.atEndOnly"
+          icoName="crossed-flag">
+        </jt-svg-ico>
         <jt-repeat-with-preset-icon
           [color]="exercise.color"
-          title="involved in repetitions of preset"
+          title="cycled exercise"
+          i18n-title="whether exercise  be repeated in preset @@presetsEditor.icon.title.cycled"
           *ngIf="exercise.presetRepetitions"
           [repeat]="exercise.presetRepetitions">
         </jt-repeat-with-preset-icon>
@@ -65,18 +75,24 @@
           [color]="exercise.color"
           *ngIf="exercise.repetitions > 1"
           [val]="exercise.repetitions"
-          [title]="'exercise repetitions: ' + exercise.repetitions">
+          title="exercise repetitions"
+          i18n-title="@@presetEditor.icon.exercise.reps">
         </jt-repeats-icon>
       </div>
       <span class="title" [title]="exercise.title">{{exercise.title}}</span>
-      <mat-icon title="remove exercise" (click)="deleteExercise(exercise.id)">delete</mat-icon>
+      <mat-icon
+        title="remove exercise" i18n-title="@@presetsEditor.icon.title.removeExercise"
+        (click)="deleteExercise(exercise.id)">
+        delete
+      </mat-icon>
     </li>
   </ul>
 </div>
 
 <div class="buttons-bar">
   <button
-    mat-fab title="add new exercise"
+    mat-fab
+    title="add new exercise" i18n-title="@@presetsEditor.btn.title.addNewExercise"
     class="editor-button"
     color="primary"
     (click)="newExercise()">
@@ -84,7 +100,7 @@
   </button>
 
   <button
-    title="delete preset"
+    title="delete preset" i18n-title="@@presetsEditor.btn.title.deletePreset"
     class="editor-button"
     (click)="deletePreset(preset)"
     mat-fab color="warn">
@@ -92,7 +108,7 @@
   </button>
 
   <button
-    title="launching preset"
+    title="launching preset" i18n-title="@@presetsEditor.btn.title.launchingPreset"
     class="editor-button"
     mat-fab color="accent"
     routerLink="/stepper" [queryParams]="{pId: preset.id}">

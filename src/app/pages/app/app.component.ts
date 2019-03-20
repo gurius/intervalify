@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, LOCALE_ID, Inject } from '@angular/core';
 
 import { Observable, Subscription } from 'rxjs';
 import { Store, select } from '@ngrx/store';
@@ -26,17 +26,20 @@ export class AppComponent {
     menuRef: MatBottomSheetRef<BottomSheetMenuComponent, any>;
     aoSubs: Subscription;
     adSubs: Subscription;
+    l: string;
 
   constructor(
     private store: Store<fromRedusers.State>,
     private stepper: StepperService,
-    private menu: MatBottomSheet
+    private menu: MatBottomSheet,
+    @Inject(LOCALE_ID) locale: string
   ) {
     this.showNav$ = store.pipe(select(fromRedusers.getShowNav));
     this.showNav$.subscribe(sn => this.visibleNav = sn);
     this.store.dispatch(new RequestPresets());
     this.store.dispatch(new RequestExercises());
     this.store.dispatch(new RequestCountdowns());
+    this.l = locale;
   }
 
   openMenu(): void {

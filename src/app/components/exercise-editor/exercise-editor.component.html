@@ -1,16 +1,22 @@
-<h2 mat-dialog-title>{{dialogOptions.title}}</h2>
+<h2 mat-dialog-title i18n="@@exerciseEditor.title">
+  {dialogOptions.title, select, new {New} edit {Editing}}
+</h2>
 <mat-dialog-content>
   <div class="editor">
     <div class="editor__item">
       <mat-form-field>
         <input
-          matInput placeholder="exercise title" [(ngModel)]="exercise.title">
+          matInput
+          placeholder="exercise title"
+          i18n-placeholder="@@exerciseEditor.input.placeholder.exerciseTitle"
+          [(ngModel)]="exercise.title">
       </mat-form-field>
     </div>
     <div class="editor__item">
       <mat-form-field >
         <jt-repeats-icon
-          [title]="'exercise repetitions: '+exercise.repetitions"
+          title="exercise repetitions"
+          i18n-title="@@exerciseEditor.icon.title.exercise.reps"
           class="input-icon"
           matPrefix
           [val]="exercise.repetitions">
@@ -20,6 +26,7 @@
           (input)="inputCorrector($event)"
           type="number"
           placeholder="repetitions"
+          i18n-placeholder="@@exerciseEditor.input.placeholder.reps"
           [(ngModel)]="exercise.repetitions"
           min="1" step="1">
       </mat-form-field>
@@ -27,14 +34,16 @@
     <div class="editor__item">
 
       <jt-repeat-with-preset-icon
-        title="preset repetitions"
+        title="general cycle"
+        i18n-title="@@exerciseEditor.icon.title.presetReps"
         class="editor-icon"
         [disabled]="exercise.atEndOnly || exercise.atStartOnly">
       </jt-repeat-with-preset-icon>
 
       <div title="play at start" class="flag-checkbox">
         <mat-checkbox
-          title="Play at start(disables preset repetitions)"
+          title="execute at the start(excluding from general cycle)"
+          i18n-title="@@exerciseEditor.icon.title.playAtStart"
           color="primary"
           labelPosition="before"
           [(ngModel)]="exercise.atStartOnly">
@@ -44,7 +53,8 @@
       <div title="play at end" class="flag-checkbox">
 
         <mat-checkbox
-          title="Play at end(disables preset repetitions)"
+          title="execute at the end(excluding from general cycle)"
+          i18n-title="@@exerciseEditor.icon.title.playAtEnd"
           color="primary"
           labelPosition="before"
           [(ngModel)]="exercise.atEndOnly">
@@ -55,7 +65,9 @@
 
     </div>
     <div class="editor__item">
-      <mat-form-field title="Choose color for exercise">
+      <mat-form-field
+        title="Choose color for exercise"
+        i18n-title="@@exerciseEditor.input.title.color">
         <input matInput type="color" [(ngModel)]="exercise.color">
       </mat-form-field>
     </div>
@@ -65,6 +77,7 @@
         <jt-countdown *ngFor="let cn of countdowns" [countdown]="cn">
           <button
             title="remove timer"
+            i18n-title="@@exerciseEditor.btn.title.removeTimer"
             color="primary" mat-icon-button (click)="deleteCoundown(cn.id)">
             <mat-icon>indeterminate_check_box</mat-icon>
           </button>
@@ -75,6 +88,7 @@
     <div class="editor__item editor__item--centred">
       <button
         color="primary" title="add timer"
+        i18n-title="@@exerciseEditor.btn.title.addTimer"
         mat-icon-button class="add-countdown" (click)="addCoundown()">
         <mat-icon>add_box</mat-icon>
       </button>
@@ -84,12 +98,15 @@
 
 <mat-dialog-actions>
 
-  <button title="dismiss" mat-raised-button [mat-dialog-close]="false">
+  <button
+    title="dismiss" i18n-title="@@exerciseEditor.btn.title.dialogDismiss"
+    mat-raised-button [mat-dialog-close]="false">
     <mat-icon>cancel</mat-icon>
   </button>
 
   <button
-    mat-raised-button title="save"
+    mat-raised-button
+    title="save" i18n-title="@@exerciseEditor.btn.title.dialogSave"
     [mat-dialog-close]="{
       exercise: exercise,
       countdowns: countdowns,

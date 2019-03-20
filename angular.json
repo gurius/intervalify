@@ -51,6 +51,13 @@
             "scripts": []
           },
           "configurations": {
+            "uk": {
+              "aot": true,
+              "outputPath": "dist/justimer-uk",
+              "i18nFile": "src/locale/messages.uk.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "uk"
+            },
             "production": {
               "fileReplacements": [
                 {
@@ -83,6 +90,9 @@
             "browserTarget": "justimer:build"
           },
           "configurations": {
+            "uk": {
+              "browserTarget": "justimer:build:uk"
+            },
             "production": {
               "browserTarget": "justimer:build:production"
             }

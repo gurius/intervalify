@@ -213,7 +213,7 @@ export class StepperComponent implements OnInit, OnDestroy {
     private router: ActivatedRoute,
     private sHelper: StepsService,
     private pHelper: PresetService,
-    private stepper: StepperService,
+    public stepper: StepperService,
     private soundPlayer: AudioService
   ) {
   }

@@ -1,6 +1,6 @@
 <div class="countdown-block">
   <button
-    title="rest/work"
+    title="rest/work" i18n-title="@@countdown.btn.title.restWork"
     class="work-rest-mans"
     color="warn" mat-icon-button [ngSwitch]="countdown.type">
     <mat-icon
@@ -23,6 +23,7 @@
     min="0"
     step="1"
     placeholder="minutes"
+    i18n-placeholder="@@countdown.input.placeholder.minutes"
     (input)="timeCorrector($event)"
     [(ngModel)]="countdown.minutes">
   </mat-form-field>:
@@ -33,6 +34,7 @@
     min="0"
     step="1"
     placeholder="seconds"
+    i18n-placeholder="@@countdown.input.placeholder.seconds"
     (input)="timeCorrector($event)"
     [(ngModel)]="countdown.seconds">
   </mat-form-field>

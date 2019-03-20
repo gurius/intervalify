@@ -1,18 +1,18 @@
 <mat-nav-list>
-  <a mat-list-item (click)="addPreset($event)">
-    <span mat-line>Add Preset</span>
-    <span mat-line>Create new preset</span>
+  <a mat-list-item (click)="addPreset()">
+    <span mat-line i18n="@@addPreset">Add Preset</span>
+    <span mat-line i18n="@@addPresetDesc">Create new preset</span>
   </a>
 
-  <a routerLink="/home" mat-list-item (click)="openLink($event)">
-    <span mat-line>Presets list</span>
-    <span mat-line>Go to presets list page</span>
+  <a routerLink="/home" mat-list-item (click)="openLink()">
+    <span mat-line i18n="@@presetsList">Presets list</span>
+    <span mat-line i18n="@@presetsListDesc">Go to presets list page</span>
   </a>
 
-  <a routerLink="/stepper" mat-list-item (click)="openLink($event)">
-    <span mat-line>
-      Activate default preset
+  <a routerLink="/stepper" mat-list-item (click)="openLink()">
+    <span mat-line  i18n="@@ActDefPres"> Activate default preset </span>
+    <span mat-line  i18n="@@ActDefPresDesc">
+      Go to page with default preset preloaded
     </span>
-    <span mat-line>Go to page with default preset preloaded</span>
   </a>
 </mat-nav-list>
