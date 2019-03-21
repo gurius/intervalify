@@ -20,7 +20,7 @@ import { BottomSheetMenuComponent } from 'src/app/components/bottom-sheet-menu/b
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'justimer';
+  title = 'intervalify';
   showNav$: Observable<boolean>
   visibleNav: boolean;
     menuRef: MatBottomSheetRef<BottomSheetMenuComponent, any>;

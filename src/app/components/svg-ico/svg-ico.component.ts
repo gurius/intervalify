@@ -11,7 +11,7 @@ export class SvgIcoComponent {
 
   @HostBinding('style.background-image')
   get backgroundImage() {
-    return `url(assets/imges/${this.icoName}.svg)`;
+    return `url(assets/images/${this.icoName}.svg)`;
   }
   constructor() { }
 

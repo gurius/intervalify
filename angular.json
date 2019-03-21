@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "justimer": {
+    "intervalify": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -35,7 +35,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/justimer",
+            "outputPath": "dist/intervalify",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -53,7 +53,7 @@
           "configurations": {
             "uk": {
               "aot": true,
-              "outputPath": "dist/justimer-uk",
+              "outputPath": "dist/intervalify-uk",
               "i18nFile": "src/locale/messages.uk.xlf",
               "i18nFormat": "xlf",
               "i18nLocale": "uk"
@@ -87,21 +87,21 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "justimer:build"
+            "browserTarget": "intervalify:build"
           },
           "configurations": {
             "uk": {
-              "browserTarget": "justimer:build:uk"
+              "browserTarget": "intervalify:build:uk"
             },
             "production": {
-              "browserTarget": "justimer:build:production"
+              "browserTarget": "intervalify:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "justimer:build"
+            "browserTarget": "intervalify:build"
           }
         },
         "test": {
@@ -136,7 +136,7 @@
         }
       }
     },
-    "justimer-e2e": {
+    "intervalify-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "prefix": "",
@@ -145,11 +145,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "justimer:serve"
+            "devServerTarget": "intervalify:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "justimer:serve:production"
+              "devServerTarget": "intervalify:serve:production"
             }
           }
         },
@@ -165,5 +165,5 @@
       }
     }
   },
-  "defaultProject": "justimer"
+  "defaultProject": "intervalify"
 }
