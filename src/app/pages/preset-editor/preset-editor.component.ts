@@ -158,6 +158,7 @@ export class PresetEditorComponent implements OnInit, OnDestroy {
   private openDialog(exercise: Exercise, opts: { title, isNew }): void {
     const dref = this.dialog
       .open(ExerciseEditorComponent, {
+        autoFocus: opts.isNew,
         data: {
           exercise,
           opts
