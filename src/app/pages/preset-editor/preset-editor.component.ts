@@ -98,7 +98,9 @@ export class PresetEditorComponent implements OnInit, OnDestroy {
 
   onBlur(prop, val) {
     this.editProperty(prop, false);
-    this.pHelper.updatePreset(this.preset.id, { [prop]: val });
+    this.pHelper.updatePreset(this.preset.id, {
+      [prop]: this.chechValue(prop, val)
+    });
   }
 
   editProperty(prop, edit = true) {
@@ -110,6 +112,27 @@ export class PresetEditorComponent implements OnInit, OnDestroy {
         this.editingRepetitions = edit;
         break;
     }
+  }
+
+  chechValue(prop, value) {
+    let res;
+
+    switch (prop) {
+      case 'title':
+        res = value;
+        break;
+      case 'repetitions':
+        const v: number = Math.abs(+value);
+        if (v) {
+          res = Math.floor(v);
+          res = res ? res : 1;
+        } else {
+          res = 1;
+        }
+        break;
+    }
+
+    return res;
   }
 
   newExercise() {

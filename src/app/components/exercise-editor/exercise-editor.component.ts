@@ -11,6 +11,7 @@ import { CountdownService } from 'src/app/helpers/countdown.service';
 import { first } from 'rxjs/operators';
 import { DialogOptions, DialogTitleTypes }
   from 'src/app/models/dialog-options.model';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'jt-exercise-editor',
@@ -22,6 +23,7 @@ export class ExerciseEditorComponent implements OnInit, OnDestroy {
   dialogOptions: DialogOptions;
   countdowns: Countdown[] = [];
   deletedCountdowns: number[] = [];
+  exForm: FormGroup;
 
   ngOnInit(): void {
     if (this.dialogOptions.isNew) {
@@ -40,13 +42,7 @@ export class ExerciseEditorComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnDestroy(): void {
-    this.exercise.presetRepetitions
-      = this.exercise.atEndOnly || this.exercise.atStartOnly
-        ? false
-        : true;
-  }
-
+  ngOnDestroy(): void { }
 
   addCoundown() {
     const blank = this.cHelper.getBlank(this.exercise.id);
@@ -62,20 +58,46 @@ export class ExerciseEditorComponent implements OnInit, OnDestroy {
     }
   }
 
-  inputCorrector(event): void {
-    let val = +event.target.value
-    !val && (val = 1);
-    event.target.value = val;
-    this.exercise.repetitions = val;
+  saveEx(): void {
+    this.exForm;
+    const presetRepetitions
+      = this.exForm.value.atEndOnly || this.exForm.value.atStartOnly
+        ? false
+        : true;
+    const data = {
+      exercise: Object.assign({}, this.exercise, this.exForm.value, { presetRepetitions }),
+      countdowns: this.countdowns,
+      deletedCountdowns: this.deletedCountdowns
+    }
+    this.dialogReference.close(data)
+  }
+
+  static isNumFractional = (c: FormControl): null | { fractional: boolean } => {
+    const n: number = c.value;
+    const fractional: boolean = (n - Math.floor(n)) !== 0;
+    return fractional ? { fractional } : null;
   }
 
   constructor(
     private dialogReference: MatDialogRef<ExerciseEditorComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { exercise: Exercise, opts: DialogOptions },
     private store: Store<rootReducer.State>,
-    private cHelper: CountdownService
+    private cHelper: CountdownService,
+    private fb: FormBuilder
   ) {
     this.exercise = Object.assign({}, this.data.exercise);
     this.dialogOptions = this.data.opts;
+
+    this.exForm = fb.group({
+      title: fb.control(this.exercise.title, [Validators.required]),
+      repetitions: fb.control(this.exercise.repetitions, [
+        Validators.required,
+        Validators.min(1),
+        ExerciseEditorComponent.isNumFractional
+      ]),
+      color: fb.control(this.exercise.color),
+      atStartOnly: fb.control(this.exercise.atStartOnly),
+      atEndOnly: fb.control(this.exercise.atEndOnly)
+    })
   }
 }

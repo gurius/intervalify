@@ -24,8 +24,8 @@
     step="1"
     placeholder="minutes"
     i18n-placeholder="@@countdown.input.placeholder.minutes"
-    (input)="timeCorrector($event)"
-    [(ngModel)]="countdown.minutes">
+    (blur)="timeCorrector($event, 'minutes')"
+    [value]="countdown.minutes">
   </mat-form-field>:
 
   <mat-form-field class="countdown-input">
@@ -35,8 +35,8 @@
     step="1"
     placeholder="seconds"
     i18n-placeholder="@@countdown.input.placeholder.seconds"
-    (input)="timeCorrector($event)"
-    [(ngModel)]="countdown.seconds">
+    (blur)="timeCorrector($event, 'seconds')"
+    [value]="countdown.seconds">
   </mat-form-field>
 </div>
 <div class="countdown-block">

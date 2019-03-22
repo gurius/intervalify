@@ -11,21 +11,19 @@ export class CountdownComponent implements OnInit {
 
   @Input() countdown: Countdown;
 
-  minutes: number;
-  seconds: number;
-
   ngOnInit() { }
 
-  timeCorrector(event) {
-    let val = +event.target.value;
-    if (val < 0) {
-      event.target.value = 0;
-    } else if (val > 59) {
-      event.target.value = 59;
-    } else {
-      event.target.value = +val;
-    }
+  timeCorrector(event, prop) {
+    let val = Math.abs(+event.target.value);
+    val = Math.floor(val);
 
+    if (val > 59) {
+      event.target.value = 59;
+      this.countdown[prop] = 59;
+    } else {
+      event.target.value = val;
+      this.countdown[prop] = val;
+    }
   }
 
   constructor() { }

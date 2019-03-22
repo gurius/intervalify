@@ -1,7 +1,7 @@
 <h2 mat-dialog-title i18n="@@exerciseEditor.title">
   {dialogOptions.title, select, new {New} edit {Editing}}
 </h2>
-<mat-dialog-content>
+<mat-dialog-content [formGroup]="exForm">
   <div class="editor">
     <div class="editor__item">
       <mat-form-field>
@@ -9,7 +9,7 @@
           matInput
           placeholder="exercise title"
           i18n-placeholder="@@exerciseEditor.input.placeholder.exerciseTitle"
-          [(ngModel)]="exercise.title">
+          formControlName="title">
       </mat-form-field>
     </div>
     <div class="editor__item">
@@ -19,15 +19,14 @@
           i18n-title="@@exerciseEditor.icon.title.exercise.reps"
           class="input-icon"
           matPrefix
-          [val]="exercise.repetitions">
+          [val]="exForm.value.repetitions">
         </jt-repeats-icon>
         <input
           matInput
-          (input)="inputCorrector($event)"
           type="number"
           placeholder="repetitions"
           i18n-placeholder="@@exerciseEditor.input.placeholder.reps"
-          [(ngModel)]="exercise.repetitions"
+          formControlName="repetitions"
           min="1" step="1">
       </mat-form-field>
     </div>
@@ -37,7 +36,7 @@
         title="general cycle"
         i18n-title="@@exerciseEditor.icon.title.presetReps"
         class="editor-icon"
-        [disabled]="exercise.atEndOnly || exercise.atStartOnly">
+        [disabled]="exForm.value.atEndOnly || exForm.value.atStartOnly">
       </jt-repeat-with-preset-icon>
 
       <div title="play at start" class="flag-checkbox">
@@ -46,7 +45,7 @@
           i18n-title="@@exerciseEditor.icon.title.playAtStart"
           color="primary"
           labelPosition="before"
-          [(ngModel)]="exercise.atStartOnly">
+          formControlName="atStartOnly">
         <jt-svg-ico class="editor-icon" icoName="green-flag"></jt-svg-ico>
       </mat-checkbox>
       </div>
@@ -57,7 +56,7 @@
           i18n-title="@@exerciseEditor.icon.title.playAtEnd"
           color="primary"
           labelPosition="before"
-          [(ngModel)]="exercise.atEndOnly">
+          formControlName="atEndOnly">
         <jt-svg-ico class="editor-icon" icoName="crossed-flag"></jt-svg-ico>
       </mat-checkbox>
       </div>
@@ -68,7 +67,7 @@
       <mat-form-field
         title="Choose color for exercise"
         i18n-title="@@exerciseEditor.input.title.color">
-        <input matInput type="color" [(ngModel)]="exercise.color">
+        <input matInput type="color" formControlName="color">
       </mat-form-field>
     </div>
 
@@ -105,13 +104,9 @@
   </button>
 
   <button
-    mat-raised-button
-    title="save" i18n-title="@@exerciseEditor.btn.title.dialogSave"
-    [mat-dialog-close]="{
-      exercise: exercise,
-      countdowns: countdowns,
-      deletedCountdowns: deletedCountdowns
-    }">
+    [disabled]="exForm.invalid"
+    mat-raised-button (click)="saveEx()"
+    title="save" i18n-title="@@exerciseEditor.btn.title.dialogSave">
     <mat-icon>save</mat-icon>
   </button>
 
