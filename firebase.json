@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/intervalify",
+    "public": "dist/intervalify-uk",
     "ignore": [
       "firebase.json",
       "**/.*",

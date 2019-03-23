@@ -12,20 +12,22 @@ html, body {
 }
 body { margin: 0; font-family: 'Exo 2', sans-serif; }
 /*
-  font-family: 'Faster One', cursive;
   font-family: 'Allerta Stencil', sans-serif;
+  font-family: 'Play', sans-serif;
  */
 header{
   text-align: center;
 }
 h1{
-  font-family: 'Faster One', cursive;
+  font-family: 'Play', sans-serif;
   font-size: 4rem;
   margin: unset;
+  color: var(--yell);
 }
 h2{
-  font-family: 'Faster One', cursive;
+  font-family: 'Play', sans-serif;
   font-size: 3rem;
+  color: var(--yell);
 }
 h3{
   font-size: 2rem;
@@ -46,6 +48,10 @@ ul{
 }
 li{
   cursor: pointer;
+}
+noscript{
+  color: var(--yell);
+  font-size: 3rem;
 }
 @media screen and (max-width: 400px) {
   html{

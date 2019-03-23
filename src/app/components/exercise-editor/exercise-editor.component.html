@@ -48,6 +48,9 @@
           formControlName="atStartOnly">
         <jt-svg-ico class="editor-icon" icoName="green-flag"></jt-svg-ico>
       </mat-checkbox>
+      <span class="flag-checkbox__label" i18n="@@exerciseEditor.icon.title.playAtStart">
+        execute at the start(excluding from general cycle)
+      </span>
       </div>
       <div title="play at end" class="flag-checkbox">
 
@@ -59,6 +62,9 @@
           formControlName="atEndOnly">
         <jt-svg-ico class="editor-icon" icoName="crossed-flag"></jt-svg-ico>
       </mat-checkbox>
+      <span class="flag-checkbox__label" i18n="@@exerciseEditor.icon.title.playAtEnd">
+        execute at the end(excluding from general cycle)
+      </span>
       </div>
 
 
@@ -67,7 +73,10 @@
       <mat-form-field
         title="Choose color for exercise"
         i18n-title="@@exerciseEditor.input.title.color">
-        <input matInput type="color" formControlName="color">
+        <input matInput type="color"
+          placeholder="Choose color for exercise"
+          i18n-placeholder="@@exerciseEditor.input.title.color"
+          formControlName="color">
       </mat-form-field>
     </div>
 

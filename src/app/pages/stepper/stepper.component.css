@@ -68,7 +68,7 @@
   flex-flow: column;
 }
 .done{
-  font-family: 'Faster One', cursive;
+  font-family: 'Play', sans-serif;
   font-size: 5rem;
   font-weight: bold;
   color: var(--yell);

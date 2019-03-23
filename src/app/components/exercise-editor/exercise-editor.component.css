@@ -16,7 +16,7 @@
 }
 .flag-checkbox{
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: row wrap;
   align-items: center;
   justify-content: center;
   width: 9rem;
@@ -42,4 +42,10 @@ mat-form-field{
 
 .editor__item--centred{
   justify-content: center;
+}
+
+.flag-checkbox__label{
+  font-size: 1rem;
+  text-align: right;
+  margin-bottom: 2rem;
 }

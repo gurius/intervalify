@@ -18,6 +18,8 @@ import {
   group,
   sequence
 } from '@angular/animations';
+
+import * as NoSleep from 'node_modules/nosleep.js/src/index.js'
 import { Sound } from 'src/app/types/sound.type';
 import { AudioService } from 'src/app/helpers/audio.service';
 
@@ -122,6 +124,7 @@ export class StepperComponent implements OnInit, OnDestroy {
   launched: boolean = false;
   startIntervalId: any;
   prestartPhase: boolean;
+  screenLock: any;
 
 
   ngOnInit() {
@@ -134,7 +137,10 @@ export class StepperComponent implements OnInit, OnDestroy {
         this.stepper.reset();
         this.stepper.doStep();
         this.stepper.getState().subscribe(s => {
-          s.accomplished && (this.stage = 'accomplished');
+          if (s.accomplished) {
+            this.stage = 'accomplished';
+            this.screenLock.disable();
+          }
         });
         this.reset();
       })
@@ -149,20 +155,23 @@ export class StepperComponent implements OnInit, OnDestroy {
 
   play() {
     this.stepper.play();
+    this.screenLock.enable();
   }
   stop() {
     this.stepper.stop();
     this.stepper.reset();
     this.stepper.doStep();
     this.reset();
+    this.screenLock.disable();
   }
   pause() {
     this.stepper.pause();
+    this.screenLock.disable();
   }
 
   playPause(): void {
     if (this.prestartPhase) return;
-    if (!this.launched){
+    if (!this.launched) {
       this.start();
     } else if (this.stepper.running) {
       this.pause()
@@ -188,6 +197,7 @@ export class StepperComponent implements OnInit, OnDestroy {
         clearInterval(this.startIntervalId);
         this.initial = false;
         this.stepper.play();
+        this.screenLock.enable();
       }
     }, 1000)
   }
@@ -216,5 +226,6 @@ export class StepperComponent implements OnInit, OnDestroy {
     public stepper: StepperService,
     private soundPlayer: AudioService
   ) {
+    this.screenLock = new NoSleep();
   }
 }

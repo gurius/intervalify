@@ -9,6 +9,9 @@ export class PresetRepeatsIconComponent implements OnInit {
   @Input()
   val: number;
 
+  @Input()
+  color: string = '#a1a1a1';
+
   constructor() { }
 
   ngOnInit() {

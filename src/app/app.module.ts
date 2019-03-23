@@ -34,6 +34,7 @@ import { RepeatWithPresetIconComponent } from './components/repeat-with-preset-i
 import { PresetRepeatsIconComponent } from './components/preset-repeats-icon/preset-repeats-icon.component';
 import { SvgIcoComponent } from './components/svg-ico/svg-ico.component';
 import { SpaceTriggerDirective } from './directives/space-trigger.directive';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { SpaceTriggerDirective } from './directives/space-trigger.directive';
       PresetEditorEffects,
       ExerciseEditorEffects,
       CountdownEffects
-    ])
+    ]),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [],
   bootstrap: [AppComponent],
