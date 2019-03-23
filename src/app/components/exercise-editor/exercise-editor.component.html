@@ -15,8 +15,8 @@
     <div class="editor__item">
       <mat-form-field >
         <jt-repeats-icon
-          title="exercise repetitions"
-          i18n-title="@@exerciseEditor.icon.title.exercise.reps"
+          matTooltip="exercise repetitions"
+          i18n-matTooltip="@@exerciseEditor.icon.title.exercise.reps"
           class="input-icon"
           matPrefix
           [val]="exForm.value.repetitions">
@@ -33,46 +33,40 @@
     <div class="editor__item">
 
       <jt-repeat-with-preset-icon
-        title="general cycle"
-        i18n-title="@@exerciseEditor.icon.title.presetReps"
+        matTooltip="general cycle"
+        i18n-matTooltip="@@exerciseEditor.icon.title.presetReps"
         class="editor-icon"
         [disabled]="exForm.value.atEndOnly || exForm.value.atStartOnly">
       </jt-repeat-with-preset-icon>
 
-      <div title="play at start" class="flag-checkbox">
+      <div class="flag-checkbox">
         <mat-checkbox
-          title="execute at the start(excluding from general cycle)"
-          i18n-title="@@exerciseEditor.icon.title.playAtStart"
+          matTooltip="execute at the start(excluding from general cycle)"
+          i18n-matTooltip="@@exerciseEditor.icon.title.playAtStart"
           color="primary"
           labelPosition="before"
           formControlName="atStartOnly">
         <jt-svg-ico class="editor-icon" icoName="green-flag"></jt-svg-ico>
       </mat-checkbox>
-      <span class="flag-checkbox__label" i18n="@@exerciseEditor.icon.title.playAtStart">
-        execute at the start(excluding from general cycle)
-      </span>
       </div>
-      <div title="play at end" class="flag-checkbox">
+      <div class="flag-checkbox">
 
         <mat-checkbox
-          title="execute at the end(excluding from general cycle)"
-          i18n-title="@@exerciseEditor.icon.title.playAtEnd"
+          i18n-matTooltip="@@exerciseEditor.icon.title.playAtEnd"
+          matTooltip="execute at the end(excluding from general cycle)"
           color="primary"
           labelPosition="before"
           formControlName="atEndOnly">
         <jt-svg-ico class="editor-icon" icoName="crossed-flag"></jt-svg-ico>
       </mat-checkbox>
-      <span class="flag-checkbox__label" i18n="@@exerciseEditor.icon.title.playAtEnd">
-        execute at the end(excluding from general cycle)
-      </span>
       </div>
 
 
     </div>
     <div class="editor__item">
       <mat-form-field
-        title="Choose color for exercise"
-        i18n-title="@@exerciseEditor.input.title.color">
+        matTooltip="Choose color for exercise"
+        i18n-matTooltip="@@exerciseEditor.input.title.color">
         <input matInput type="color"
           placeholder="Choose color for exercise"
           i18n-placeholder="@@exerciseEditor.input.title.color"
@@ -84,8 +78,8 @@
       <div class="countdowns">
         <jt-countdown *ngFor="let cn of countdowns" [countdown]="cn">
           <button
-            title="remove timer"
-            i18n-title="@@exerciseEditor.btn.title.removeTimer"
+            matTooltip="remove timer"
+            i18n-matTooltip="@@exerciseEditor.btn.title.removeTimer"
             color="primary" mat-icon-button (click)="deleteCoundown(cn.id)">
             <mat-icon>indeterminate_check_box</mat-icon>
           </button>
@@ -95,8 +89,8 @@
 
     <div class="editor__item editor__item--centred">
       <button
-        color="primary" title="add timer"
-        i18n-title="@@exerciseEditor.btn.title.addTimer"
+        color="primary" matTooltip="add timer"
+        i18n-matTooltip="@@exerciseEditor.btn.title.addTimer"
         mat-icon-button class="add-countdown" (click)="addCoundown()">
         <mat-icon>add_box</mat-icon>
       </button>
@@ -107,7 +101,7 @@
 <mat-dialog-actions>
 
   <button
-    title="dismiss" i18n-title="@@exerciseEditor.btn.title.dialogDismiss"
+    matTooltip="dismiss" i18n-matTooltip="@@exerciseEditor.btn.title.dialogDismiss"
     mat-raised-button [mat-dialog-close]="false">
     <mat-icon>cancel</mat-icon>
   </button>
@@ -115,7 +109,7 @@
   <button
     [disabled]="exForm.invalid"
     mat-raised-button (click)="saveEx()"
-    title="save" i18n-title="@@exerciseEditor.btn.title.dialogSave">
+    matTooltip="save" i18n-matTooltip="@@exerciseEditor.btn.title.dialogSave">
     <mat-icon>save</mat-icon>
   </button>
 

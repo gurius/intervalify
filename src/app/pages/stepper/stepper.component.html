@@ -1,15 +1,15 @@
 <header
   [jtSpaceTrigger]="playPause.bind(this)"
   *ngIf="!stepper.running" class="preset-title">
-  <h1 [title]="preset.title">{{preset.title}}</h1>
+  <h1 [matTooltip]="preset.title">{{preset.title}}</h1>
 </header>
 <div
   [jtSpaceTrigger]="playPause.bind(this)"
   [@fadeToggle]="stepper.stepNumber" *ngIf="!initial" class="main-body">
   <section  *ngIf="!initial" class="section section--col">
     <div
-      title="exercise in progress"
-      i18n-title="@@stepper.current.exercise.title.exerciseInProgress"
+      matTooltip="exercise in progress"
+      i18n-matTooltip="@@stepper.current.exercise.title.exerciseInProgress"
       [@pulsation]="stepper.countdown"
       [ngStyle]="{
         'color': stepper.currentStep.type === 'work'
@@ -30,8 +30,8 @@
       }
     </div>
     <mat-icon
-      title="next exercise"
-      i18n-title="@@stepper.next.exercise.title.nextExercise"
+      matTooltip="next exercise"
+      i18n-matTooltip="@@stepper.next.exercise.title.nextExercise"
       class="arrow"
       [ngStyle]="{
         'color': stepper.nextStep.type === 'work'
@@ -43,8 +43,8 @@
       arrow_downward
     </mat-icon>
     <div
-      title="next exercise"
-      i18n-title="@@stepper.next.exercise.title.nextExercise"
+      matTooltip="next exercise"
+      i18n-matTooltip="@@stepper.next.exercise.title.nextExercise"
       class="step-next"
       [ngStyle]="{
         'color': stepper.nextStep.type === 'work'
@@ -78,12 +78,12 @@
     </div>
     <div class="">
       <div
-        title="time elapsed" i18n-title="@@stepper.time.elapsed"
+        matTooltip="time elapsed" i18n-matTooltip="@@stepper.time.elapsed"
         class="elapsed">
         {{stepper.presetTotalTime.elapsed}}
       </div>
       <div
-        title="time remaining" i18n-title="@@stepper.time.remaining"
+        matTooltip="time remaining" i18n-matTooltip="@@stepper.time.remaining"
         class="remaining">
         {{stepper.presetTotalTime.remaining}}
       </div>
@@ -91,7 +91,7 @@
   </section>
   <section  *ngIf="!initial" class="section section--progress">
     <div
-      title="timers elapsed" i18n-title="@@stepper.timers.elapsed"
+      matTooltip="timers elapsed" i18n-matTooltip="@@stepper.timers.elapsed"
       class="current-number">
       {{stepper.stepNumber}}
     </div>
@@ -102,14 +102,14 @@
       </mat-progress-spinner>
     </div>
     <div
-      title="timers remaining" i18n-title="@@stepper.timers.remaining"
+      matTooltip="timers remaining" i18n-matTooltip="@@stepper.timers.remaining"
       class="current-number">
       {{stepper.steps.length - stepper.stepNumber}}
     </div>
   </section>
   <section  *ngIf="!initial" class="section section--play-stop">
     <button
-      title="play" i18n-title="@@stepper.btn.title.play"
+      matTooltip="play" i18n-matTooltip="@@stepper.btn.title.play"
       *ngIf="!stepper.running"
       [disabled]="!stepper.steps.length"
       (click)="play()"
@@ -117,14 +117,14 @@
       <mat-icon>play_arrow</mat-icon>
     </button>
     <button
-      title="pause" i18n-title="@@stepper.btn.title.pause"
+      matTooltip="pause" i18n-matTooltip="@@stepper.btn.title.pause"
       *ngIf="stepper.running"
       (click)="pause()"
       mat-fab>
       <mat-icon>pause</mat-icon>
     </button>
     <button
-      title="stop" i18n-title="@@stepper.btn.title.stop"
+      matTooltip="stop" i18n-matTooltip="@@stepper.btn.title.stop"
       color="warn"
       [disabled]="!stepper.steps.length"
       (click)="stop()"
@@ -136,7 +136,7 @@
 <section *ngIf="initial" class="section section--prestart">
   <div [@prestart]="stage">
     <button
-      title="start" i18n-title="@@stepper.btn.title.start"
+      matTooltip="start" i18n-matTooltip="@@stepper.btn.title.start"
       class="large"
       *ngIf="!launched"
       (click)="start()"
@@ -145,26 +145,27 @@
       <mat-icon>play_arrow</mat-icon>
     </button>
     <div
+      i18n="@@stepper.stages"
       *ngIf="stage !== 'button'"
       class="prestart-countdown">
-      {{stage}}
+      {stage, select, GO! {GO!} other {{{stage}}}}
     </div>
   </div>
   <div class="time-stat" *ngIf="!launched">
     <mat-icon
-      title="total time of preset" i18n-title="@@stepper.stat.title.totalTime"
+      matTooltip="total time of preset" i18n-matTooltip="@@stepper.stat.title.totalTime"
       color="primary">
       access_time
     </mat-icon>
       {{stepper.presetTotalTime.remaining}} =
     <mat-icon
-      title="total work time" i18n-title="@@stepper.stat.title.totalWorkTime"
+      matTooltip="total work time" i18n-matTooltip="@@stepper.stat.title.totalWorkTime"
       color="warn">
       directions_run
     </mat-icon>
     {{stepper.secondsTommssStr(stepper.workTotalTime)}} +
     <jt-svg-ico
-      title="total rest time" i18n-title="@@stepper.stat.title.totalRestTime"
+      matTooltip="total rest time" i18n-matTooltip="@@stepper.stat.title.totalRestTime"
       class="rest-icon"
       icoName="resting-man-green">
     </jt-svg-ico>
@@ -176,7 +177,7 @@
     accomplished
   </div>
   <button
-    title="reset" i18n-title="@@stepper.btn.title.reset"
+    matTooltip="reset" i18n-matTooltip="@@stepper.btn.title.reset"
     class="replay large"
     (click)="stop()"
     mat-icon-button>

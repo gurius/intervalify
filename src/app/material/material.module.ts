@@ -12,7 +12,8 @@ import { MatListModule } from '@angular/material/list';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatRippleModule } from '@angular/material/core';
 import { MatChipsModule } from '@angular/material/chips';
-import {MatRadioModule} from '@angular/material/radio';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   imports: [
@@ -29,7 +30,8 @@ import {MatRadioModule} from '@angular/material/radio';
     DragDropModule,
     MatRippleModule,
     MatChipsModule,
-    MatRadioModule
+    MatRadioModule,
+    MatTooltipModule
   ],
   exports: [
     MatInputModule,
@@ -45,7 +47,8 @@ import {MatRadioModule} from '@angular/material/radio';
     DragDropModule,
     MatRippleModule,
     MatChipsModule,
-    MatRadioModule
+    MatRadioModule,
+    MatTooltipModule
   ]
 })
 export class MaterialModule { }
