@@ -31,7 +31,7 @@ export const allCountdownsOfExercises = (ids: number[]) => createSelector(
 
     for (let key in countdownState.entities) {
       const entity = countdownState.entities[key];
-      ids.includes(entity.id) && filtered.push(entity)
+      ids.includes(entity.belongsToExercises[0]) && filtered.push(entity)
     }
 
     return filtered;

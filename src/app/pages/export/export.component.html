@@ -1,0 +1,37 @@
+<div *ngIf="loading" class="spinner-wrapper">
+  <mat-progress-spinner
+      class="example-margin"
+      color="primary"
+      mode="indeterminate">
+  </mat-progress-spinner>
+</div>
+<div *ngIf="!loading" class="preset-wrapper">
+  <h2>{{preset.title}}
+    <span *ngIf="preset.repetitions > 1"> x {{ preset.repetitions}}</span>
+  </h2>
+  <ol class="exercises-list">
+    <li
+      [ngClass]="{'start': ex.atStartOnly, 'end': ex.atEndOnly}"
+      *ngFor="let ex of exercises">
+      <h3 matTooltip="{{ex.title}}">{{ex.title}} </h3>
+      (<span
+        *ngFor="let cd of getCountdowns(ex.countdownsIds)"
+        [ngStyle]="{'color': (cd.type === 'rest' ? 'var(--rest)' : 'red')}"
+        i18n>
+        {cd.type, select, rest {rest} work {work}}
+        : {{cd.minutes}}:{{cd.seconds}}
+      </span>)
+      <span *ngIf="ex.repetitions > 1"> x {{ex.repetitions}} repetitions</span>
+    </li>
+  </ol>
+</div>
+<footer></footer>
+<button
+  class="save"
+  color="primary"
+  mat-fab
+  i18n-matTooltip="@@export.btn.save"
+  matTooltip="Save to 'Preset list'"
+  (click)="save()">
+  <mat-icon>save_alt</mat-icon>
+</button>

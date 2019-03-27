@@ -1,0 +1,26 @@
+:host {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+.preset-wrapper,
+.spinner-wrapper,
+.exercises-list{
+  display: flex;
+  flex-flow: column;
+  align-items: flex-start;
+  height: 100%;
+  flex-shrink: 0;
+}
+.spinner-wrapper{
+  justify-content: center;
+}
+footer{
+  height: 5rem;
+}
+.save{
+  position: fixed;
+  bottom: 3rem;
+}

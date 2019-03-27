@@ -35,6 +35,8 @@ import { PresetRepeatsIconComponent } from './components/preset-repeats-icon/pre
 import { SvgIcoComponent } from './components/svg-ico/svg-ico.component';
 import { SpaceTriggerDirective } from './directives/space-trigger.directive';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { TextCopyComponent } from './components/text-copy/text-copy.component';
+import { ExportComponent } from './pages/export/export.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +53,9 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     RepeatWithPresetIconComponent,
     PresetRepeatsIconComponent,
     SvgIcoComponent,
-    SpaceTriggerDirective
+    SpaceTriggerDirective,
+    TextCopyComponent,
+    ExportComponent
   ],
   imports: [
     BrowserModule,
@@ -73,6 +77,6 @@ import { ServiceWorkerModule } from '@angular/service-worker';
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [ExerciseEditorComponent, BottomSheetMenuComponent]
+  entryComponents: [ExerciseEditorComponent, BottomSheetMenuComponent, TextCopyComponent]
 })
 export class AppModule { }

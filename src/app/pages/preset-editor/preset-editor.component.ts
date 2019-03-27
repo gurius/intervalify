@@ -24,6 +24,9 @@ import { sortBySeqNo }
   from '../../components/exercise-editor/exercise-editor.reducer';
 import { DialogOptions, DialogTitleTypes }
   from 'src/app/models/dialog-options.model';
+import { ShareService } from 'src/app/helpers/share.service';
+import { TextCopyComponent } from 'src/app/components/text-copy/text-copy.component';
+import { Countdown } from 'src/app/models/countdown.model';
 
 
 @Component({
@@ -42,6 +45,8 @@ export class PresetEditorComponent implements OnInit, OnDestroy {
   @ViewChild('repetitionsInput') repetitionsInput: ElementRef<HTMLInputElement>;
   exercises: Exercise[];
   exercisesSubscription: Subscription;
+  countdownsSubscription: Subscription;
+  countdowns: Countdown[];
 
   constructor(
     private store: Store<fromReducers.State>,
@@ -50,7 +55,8 @@ export class PresetEditorComponent implements OnInit, OnDestroy {
     private eHelper: ExerciseService,
     private cHelper: CountdownService,
     private ar: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private share: ShareService
   ) { }
 
   ngOnInit() {
@@ -71,10 +77,16 @@ export class PresetEditorComponent implements OnInit, OnDestroy {
                 ).subscribe(exercises => {
                   this.exercises = exercises.sort(sortBySeqNo);
                 });
+              this.countdownsSubscription = this.store
+                .pipe(
+                  select(countdonwSelectors.allCountdownsOfExercises(this.preset.exercisesIds))
+                )
+                .subscribe(countdowns => this.countdowns = countdowns)
             }
           });
 
-        this.presetSubscription.add(this.exercisesSubscription)
+        this.presetSubscription.add(this.exercisesSubscription);
+        this.presetSubscription.add(this.countdownsSubscription);
       });
 
   }
@@ -184,6 +196,32 @@ export class PresetEditorComponent implements OnInit, OnDestroy {
 
       drefSubs.unsubscribe();
     });
+  }
+
+  sharePreset(): void {
+    let data: string = this.share.construct(this.preset, this.exercises, this.countdowns)
+    data = btoa(encodeURI(data));
+
+    const sended = this.share.preset(data);
+
+    if (typeof sended !== 'boolean') {
+      sended
+        .then(() => console.log('Successful share'))
+        .catch((error) => {
+          this.openLinkDialog(data);
+          console.log('Error sharing', error)
+        })
+    } else {
+      this.openLinkDialog(data);
+    }
+  }
+
+  openLinkDialog(data) {
+    this.dialog.open(TextCopyComponent, {
+      height: '10rem',
+      width: '80%',
+      data: { link: `${new URL(document.location.href).origin}/export?preset=${data}` }
+    })
   }
 
   deleteExercise(id) {

@@ -115,4 +115,13 @@
     routerLink="/stepper" [queryParams]="{pId: preset.id}">
     <mat-icon>play_arrow</mat-icon>
   </button>
+
+  <button
+    mat-fab
+    class="editor-button"
+    matTooltip="share the preset"
+    i18n-matTooltip="@@presetsEditor.btn.title.sharePreset"
+    (click)="sharePreset()">
+    <mat-icon>share</mat-icon>
+  </button>
 </div>

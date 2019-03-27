@@ -5,6 +5,7 @@ import { PresetEditorComponent }
   from './pages/preset-editor/preset-editor.component';
 import { HomeComponent } from './pages/home/home.component';
 import { StepperComponent } from './pages/stepper/stepper.component';
+import { ExportComponent } from './pages/export/export.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,9 @@ const routes: Routes = [
   },
   {
     path: 'constructor', component: PresetEditorComponent
+  },
+  {
+    path: 'export', component: ExportComponent
   }
 ];
 

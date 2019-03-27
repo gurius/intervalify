@@ -53,6 +53,10 @@ noscript{
   color: var(--yell);
   font-size: 3rem;
 }
+.saved-notify{
+  background-color: black;
+  color: var(--yell);
+}
 @media screen and (max-width: 400px) {
   html{
     font-size: 8px;

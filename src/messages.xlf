@@ -158,6 +158,20 @@
           <context context-type="linenumber">112</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="textCopy.input.link" datatype="html">
+        <source>Link</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/text-copy/text-copy.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="textCopy.btn.copy" datatype="html">
+        <source>Copy</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/text-copy/text-copy.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="presetsEditor.input.placeholder.presetsTitle" datatype="html">
         <source>presets title</source>
         <context-group purpose="location">
@@ -250,6 +264,13 @@
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/preset-editor/preset-editor.component.html</context>
           <context context-type="linenumber">112</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="presetsEditor.btn.title.sharePreset" datatype="html">
+        <source>share the preset</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/preset-editor/preset-editor.component.html</context>
+          <context context-type="linenumber">122</context>
         </context-group>
       </trans-unit>
       <trans-unit id="countdown.btn.title.restWork" datatype="html">
@@ -473,6 +494,30 @@
         <context-group purpose="location">
           <context context-type="sourcefile">app/components/presets-list/presets-list.component.html</context>
           <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="48912b66bb8b5ae4660a3322c25874bcba6a7a93" datatype="html">
+        <source>
+        <x id="ICU" equiv-text="{cd.type, select, rest {...} work {...}}"/>
+        : <x id="INTERPOLATION" equiv-text="{{cd.minutes}}"/>:<x id="INTERPOLATION_1" equiv-text="{{cd.seconds}}"/>
+      </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/export/export.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4d0dca832eb28f7c49ea9dd8dd476cfd9a580506" datatype="html">
+        <source>{VAR_SELECT, select, rest {rest} work {work} }</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/export/export.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="export.btn.save" datatype="html">
+        <source>Save to &apos;Preset list&apos;</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/export/export.component.html</context>
+          <context context-type="linenumber">34</context>
         </context-group>
       </trans-unit>
     </body>

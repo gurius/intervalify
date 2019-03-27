@@ -1,0 +1,14 @@
+<mat-form-field class="link-to-copy">
+  <input
+    matInput
+    placeholder="Link"
+    i18n-placeholder="@@textCopy.input.link"
+    [(ngModel)]="link" #linkInput>
+</mat-form-field>
+<button
+  mat-icon-button
+  matTooltip="Copy"
+  i18n-matTooltip="@@textCopy.btn.copy"
+  (click)="copy(linkInput)">
+  <mat-icon color="primary">file_copy</mat-icon>
+</button>

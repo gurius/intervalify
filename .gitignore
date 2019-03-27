@@ -45,4 +45,4 @@ Thumbs.db
 
 # firebase
 firebase-debug.log
-.firebase/hosting.*.cache
+/.firebase
