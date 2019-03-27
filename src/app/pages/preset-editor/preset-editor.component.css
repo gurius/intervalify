@@ -46,7 +46,7 @@ mat-form-field{
   align-items: center;
 }
 .editor-button{
-  margin: 0 1rem 0 1rem;
+  margin: 0.5rem 0;
 }
 .smart-label{
   cursor: pointer;
@@ -80,5 +80,13 @@ mat-form-field{
   display: flex;
   position: fixed;
   bottom: 3rem;
-  /* left: 5rem; */
+  right: 2rem;
+}
+
+.buttons-menu{
+  display: flex;
+  flex-flow: column;
+  position: absolute;
+  bottom: 7rem;
+  height: content;
 }

@@ -61,4 +61,7 @@ noscript{
   html{
     font-size: 8px;
   }
+  button.mat-fab{
+    transform: scale(0.8);
+  }
 }

@@ -47,6 +47,7 @@ export class PresetEditorComponent implements OnInit, OnDestroy {
   exercisesSubscription: Subscription;
   countdownsSubscription: Subscription;
   countdowns: Countdown[];
+  optionsIsVisible: boolean = false;
 
   constructor(
     private store: Store<fromReducers.State>,
@@ -199,6 +200,9 @@ export class PresetEditorComponent implements OnInit, OnDestroy {
   }
 
   sharePreset(): void {
+
+    this.showOptions();
+
     let data: string = this.share.construct(this.preset, this.exercises, this.countdowns)
     data = btoa(encodeURI(data));
 
@@ -222,6 +226,10 @@ export class PresetEditorComponent implements OnInit, OnDestroy {
       width: '80%',
       data: { link: `${new URL(document.location.href).origin}/export?preset=${data}` }
     })
+  }
+
+  showOptions() {
+    this.optionsIsVisible = !this.optionsIsVisible
   }
 
   deleteExercise(id) {
