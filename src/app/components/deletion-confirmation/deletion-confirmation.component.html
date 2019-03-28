@@ -1,0 +1,23 @@
+<mat-dialog-content>
+  <h3 i18n="@@deletionConfirmation.h3">
+    Do you shure, you want to remove
+    {object, select, preset { preset } exercise { esercise }}
+    - {{title}}?
+  </h3>
+  <h4 i18n="@@deletionConfirmation.h4">
+    After confirmation
+    {object, select, preset { preset } exercise { esercise }}
+    cannot be recovered!
+  </h4>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button color="warn" mat-raised-button [mat-dialog-close]="true"
+    i18n="@@deletionConfirmation.btn.Iunderstand">
+    I understand!
+  </button>
+  <button mat-raised-button mat-dialog-close
+    matTooltip="cancel"
+    i18n-matTooltip="@@deletionConfirmation.btn.cancel">
+    <mat-icon>cancel</mat-icon>
+  </button>
+</mat-dialog-actions>

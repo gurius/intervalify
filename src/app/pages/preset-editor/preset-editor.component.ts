@@ -27,6 +27,7 @@ import { DialogOptions, DialogTitleTypes }
 import { ShareService } from 'src/app/helpers/share.service';
 import { TextCopyComponent } from 'src/app/components/text-copy/text-copy.component';
 import { Countdown } from 'src/app/models/countdown.model';
+import { DeletionConfirmationComponent } from 'src/app/components/deletion-confirmation/deletion-confirmation.component';
 
 
 @Component({
@@ -105,8 +106,22 @@ export class PresetEditorComponent implements OnInit, OnDestroy {
   }
 
   deletePreset(preset) {
-    this.pHelper.deletePreset(preset);
-    this.router.navigate(['/home']);
+    const dref = this.dialog
+      .open(DeletionConfirmationComponent, {
+        autoFocus: false,
+        data: {
+          object: 'preset',
+          title: preset.title
+        }
+      });
+
+    const drefSubs = dref.afterClosed().subscribe(data => {
+      if (!data) return;
+
+      this.pHelper.deletePreset(preset);
+      this.router.navigate(['/home']);
+      drefSubs.unsubscribe();
+    });
   }
 
   onBlur(prop, val) {
@@ -232,9 +247,25 @@ export class PresetEditorComponent implements OnInit, OnDestroy {
     this.optionsIsVisible = !this.optionsIsVisible
   }
 
-  deleteExercise(id) {
-    this.eHelper.removeExercise(id, this.preset.id);
-    this.exercises.forEach((ex, i) => ex.seqNo = i)
+  deleteExercise(ex, event) {
+    event.preventDefault()
+    event.stopPropagation();
+    const dref = this.dialog
+      .open(DeletionConfirmationComponent, {
+        autoFocus: false,
+        data: {
+          object: 'exercise',
+          title: ex.title
+        }
+      });
+
+    const drefSubs = dref.afterClosed().subscribe(data => {
+      if (!data) return;
+
+      this.eHelper.removeExercise(ex.id, this.preset.id);
+      this.exercises.forEach((ex, i) => ex.seqNo = i)
+      drefSubs.unsubscribe();
+    });
   }
 
   getCountdownsBy(exerciseId) {

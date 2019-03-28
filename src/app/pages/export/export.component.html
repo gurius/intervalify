@@ -17,11 +17,11 @@
       (<span
         *ngFor="let cd of getCountdowns(ex.countdownsIds)"
         [ngStyle]="{'color': (cd.type === 'rest' ? 'var(--rest)' : 'red')}"
-        i18n>
+        i18n="@@export.exercise.type">
         {cd.type, select, rest {rest} work {work}}
         : {{cd.minutes}}:{{cd.seconds}}
       </span>)
-      <span *ngIf="ex.repetitions > 1"> x {{ex.repetitions}} repetitions</span>
+      <span *ngIf="ex.repetitions > 1"> x {{ex.repetitions}}</span>
     </li>
   </ol>
 </div>

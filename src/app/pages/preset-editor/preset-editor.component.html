@@ -85,7 +85,7 @@
       <span class="title" [matTooltip]="exercise.title">{{exercise.title}}</span>
       <mat-icon
         matTooltip="remove exercise" i18n-matTooltip="@@presetsEditor.icon.title.removeExercise"
-        (click)="deleteExercise(exercise.id)">
+        (click)="deleteExercise(exercise, $event)">
         delete
       </mat-icon>
     </li>

@@ -38,6 +38,8 @@ import { TextCopyComponent } from './components/text-copy/text-copy.component';
 import { ExportComponent } from './pages/export/export.component';
 import { InfoComponent } from './pages/info/info.component';
 import { HttpClientModule } from '@angular/common/http';
+import { DeletionConfirmationComponent }
+  from './components/deletion-confirmation/deletion-confirmation.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +58,8 @@ import { HttpClientModule } from '@angular/common/http';
     SpaceTriggerDirective,
     TextCopyComponent,
     ExportComponent,
-    InfoComponent
+    InfoComponent,
+    DeletionConfirmationComponent
   ],
   imports: [
     BrowserModule,
@@ -79,6 +82,11 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [ExerciseEditorComponent, BottomSheetMenuComponent, TextCopyComponent]
+  entryComponents: [
+    ExerciseEditorComponent,
+    BottomSheetMenuComponent,
+    TextCopyComponent,
+    DeletionConfirmationComponent
+  ]
 })
 export class AppModule { }

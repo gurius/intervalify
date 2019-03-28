@@ -3,28 +3,24 @@
   <file source-language="en" datatype="plaintext" original="ng2.template">
     <body>
       <trans-unit id="addPreset" datatype="html">
-        <source>Add Preset</source>
+        <source>add preset</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/components/bottom-sheet-menu/bottom-sheet-menu.component.html</context>
-          <context context-type="linenumber">3</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/components/presets-list/presets-list.component.html</context>
-          <context context-type="linenumber">6</context>
+          <context context-type="linenumber">7</context>
         </context-group>
       </trans-unit>
       <trans-unit id="addPresetDesc" datatype="html">
         <source>Create new preset</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/components/bottom-sheet-menu/bottom-sheet-menu.component.html</context>
-          <context context-type="linenumber">4</context>
+          <context context-type="linenumber">8</context>
         </context-group>
       </trans-unit>
       <trans-unit id="presetsList" datatype="html">
         <source>Presets list</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/components/bottom-sheet-menu/bottom-sheet-menu.component.html</context>
-          <context context-type="linenumber">8</context>
+          <context context-type="linenumber">17</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">app/components/presets-list/presets-list.component.html</context>
@@ -35,30 +31,14 @@
         <source>Go to presets list page</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/components/bottom-sheet-menu/bottom-sheet-menu.component.html</context>
-          <context context-type="linenumber">9</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="ActDefPres" datatype="html">
-        <source> Activate default preset </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/components/bottom-sheet-menu/bottom-sheet-menu.component.html</context>
-          <context context-type="linenumber">13</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="ActDefPresDesc" datatype="html">
-        <source>
-      Go to page with default preset preloaded
-    </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/components/bottom-sheet-menu/bottom-sheet-menu.component.html</context>
-          <context context-type="linenumber">14</context>
+          <context context-type="linenumber">19</context>
         </context-group>
       </trans-unit>
       <trans-unit id="home.btn.title.menu" datatype="html">
         <source>menu</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/app/app.component.html</context>
-          <context context-type="linenumber">9</context>
+          <context context-type="linenumber">11</context>
         </context-group>
       </trans-unit>
       <trans-unit id="exerciseEditor.title" datatype="html">
@@ -204,7 +184,7 @@
         <source>Play in the begining</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/preset-editor/preset-editor.component.html</context>
-          <context context-type="linenumber">58</context>
+          <context context-type="linenumber">59</context>
         </context-group>
         <note priority="1" from="description">When exercise will be played </note>
       </trans-unit>
@@ -212,7 +192,7 @@
         <source>Play in the end</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/preset-editor/preset-editor.component.html</context>
-          <context context-type="linenumber">63</context>
+          <context context-type="linenumber">65</context>
         </context-group>
         <note priority="1" from="description">When exercise will be played </note>
       </trans-unit>
@@ -220,7 +200,7 @@
         <source>cycled exercise</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/preset-editor/preset-editor.component.html</context>
-          <context context-type="linenumber">70</context>
+          <context context-type="linenumber">72</context>
         </context-group>
         <note priority="1" from="description">whether exercise  be repeated in preset </note>
       </trans-unit>
@@ -228,14 +208,14 @@
         <source>exercise repetitions</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/preset-editor/preset-editor.component.html</context>
-          <context context-type="linenumber">79</context>
+          <context context-type="linenumber">81</context>
         </context-group>
       </trans-unit>
       <trans-unit id="presetsEditor.icon.title.removeExercise" datatype="html">
         <source>remove exercise</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/preset-editor/preset-editor.component.html</context>
-          <context context-type="linenumber">85</context>
+          <context context-type="linenumber">87</context>
         </context-group>
       </trans-unit>
       <trans-unit id="presetsEditor.title.exercise" datatype="html">
@@ -249,28 +229,42 @@
         <source>add new exercise</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/preset-editor/preset-editor.component.html</context>
-          <context context-type="linenumber">96</context>
+          <context context-type="linenumber">99</context>
         </context-group>
       </trans-unit>
       <trans-unit id="presetsEditor.btn.title.deletePreset" datatype="html">
         <source>delete preset</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/preset-editor/preset-editor.component.html</context>
-          <context context-type="linenumber">104</context>
+          <context context-type="linenumber">107</context>
         </context-group>
       </trans-unit>
       <trans-unit id="presetsEditor.btn.title.launchingPreset" datatype="html">
         <source>launching preset</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/preset-editor/preset-editor.component.html</context>
-          <context context-type="linenumber">112</context>
+          <context context-type="linenumber">115</context>
         </context-group>
       </trans-unit>
       <trans-unit id="presetsEditor.btn.title.sharePreset" datatype="html">
         <source>share the preset</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/preset-editor/preset-editor.component.html</context>
-          <context context-type="linenumber">122</context>
+          <context context-type="linenumber">125</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="presetsEditor.btn.title.options" datatype="html">
+        <source>options</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/preset-editor/preset-editor.component.html</context>
+          <context context-type="linenumber">135</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="presetsEditor.btn.title.close" datatype="html">
+        <source>close</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/preset-editor/preset-editor.component.html</context>
+          <context context-type="linenumber">145</context>
         </context-group>
       </trans-unit>
       <trans-unit id="countdown.btn.title.restWork" datatype="html">
@@ -468,35 +462,84 @@
           <context context-type="linenumber">180</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="deletionConfirmation.h3" datatype="html">
+        <source>
+    Do you shure, you want to remove
+    <x id="ICU" equiv-text="{object, select, preset {...} exercise {...}}"/>
+    - <x id="INTERPOLATION" equiv-text="{{title}}"/>?
+  </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/deletion-confirmation/deletion-confirmation.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1d1f0ed30dd13d5c45d8d4469a6ad3955149d294" datatype="html">
+        <source>{VAR_SELECT, select, preset {preset } exercise {esercise } }</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/deletion-confirmation/deletion-confirmation.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/deletion-confirmation/deletion-confirmation.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="deletionConfirmation.h4" datatype="html">
+        <source>
+    After confirmation
+    <x id="ICU" equiv-text="{object, select, preset {...} exercise {...}}"/>
+    cannot be recovered!
+  </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/deletion-confirmation/deletion-confirmation.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="deletionConfirmation.btn.Iunderstand" datatype="html">
+        <source>
+    I understand!
+  </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/deletion-confirmation/deletion-confirmation.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="deletionConfirmation.btn.cancel" datatype="html">
+        <source>cancel</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/deletion-confirmation/deletion-confirmation.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="launchingPreset" datatype="html">
         <source>launching preset</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/components/presets-list/presets-list.component.html</context>
-          <context context-type="linenumber">17</context>
+          <context context-type="linenumber">10</context>
         </context-group>
       </trans-unit>
       <trans-unit id="editPreset" datatype="html">
         <source>edit preset</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/components/presets-list/presets-list.component.html</context>
-          <context context-type="linenumber">22</context>
+          <context context-type="linenumber">15</context>
         </context-group>
       </trans-unit>
       <trans-unit id="deletePreset" datatype="html">
         <source>delete preset</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/components/presets-list/presets-list.component.html</context>
-          <context context-type="linenumber">26</context>
+          <context context-type="linenumber">19</context>
         </context-group>
       </trans-unit>
       <trans-unit id="preset" datatype="html">
         <source>preset</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/components/presets-list/presets-list.component.html</context>
-          <context context-type="linenumber">12</context>
+          <context context-type="linenumber">5</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="48912b66bb8b5ae4660a3322c25874bcba6a7a93" datatype="html">
+      <trans-unit id="export.exercise.type" datatype="html">
         <source>
         <x id="ICU" equiv-text="{cd.type, select, rest {...} work {...}}"/>
         : <x id="INTERPOLATION" equiv-text="{{cd.minutes}}"/>:<x id="INTERPOLATION_1" equiv-text="{{cd.seconds}}"/>
@@ -517,7 +560,7 @@
         <source>Save to &apos;Preset list&apos;</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/export/export.component.html</context>
-          <context context-type="linenumber">34</context>
+          <context context-type="linenumber">35</context>
         </context-group>
       </trans-unit>
     </body>
