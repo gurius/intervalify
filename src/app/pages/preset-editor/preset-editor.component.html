@@ -53,18 +53,20 @@
       [style.color]="exercise.color"
       class="preset-exercises-list__item">
       <div class="icon-wrapper">
-        <jt-svg-ico
+        <mat-icon
+          class="flag-icon"
           *ngIf="exercise.atStartOnly"
           matTooltip="Play in the begining"
           i18n-matTooltip="When exercise will be played @@presetsEditor.icon.title.begining"
-          icoName="green-flag-black-grip">
-        </jt-svg-ico>
-        <jt-svg-ico
+          svgIcon="green-flag-black-grip">
+        </mat-icon>
+        <mat-icon
+          class="flag-icon"
           matTooltip="Play in the end"
           i18n-matTooltip="When exercise will be played @@presetsEditor.icon.title.end"
           *ngIf="exercise.atEndOnly"
-          icoName="crossed-flag">
-        </jt-svg-ico>
+          svgIcon="crossed-flag">
+        </mat-icon>
         <jt-repeat-with-preset-icon
           [color]="exercise.color"
           matTooltip="cycled exercise"

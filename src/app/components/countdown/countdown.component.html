@@ -8,12 +8,12 @@
       *ngSwitchCase="'work'" (click)="countdown.type = 'rest'">
       directions_run
     </mat-icon>
-    <jt-svg-ico
+    <mat-icon
       class="rest-icon"
       *ngSwitchCase="'rest'"
       (click)="countdown.type = 'work'"
-      icoName="resting-man-green">
-    </jt-svg-ico>
+      svgIcon="resting-man-green">
+    </mat-icon>
   </button>
 </div>
 <div class="countdown-block">

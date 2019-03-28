@@ -11,8 +11,9 @@ import { RequestExercises }
 import { RequestCountdowns }
   from 'src/app/components/countdown/countdown.actions';
 import { StepperService } from '../stepper/stepper.service';
-import { MatBottomSheet, MatBottomSheetRef } from '@angular/material';
+import { MatBottomSheet, MatBottomSheetRef, MatIconRegistry } from '@angular/material';
 import { BottomSheetMenuComponent } from 'src/app/components/bottom-sheet-menu/bottom-sheet-menu.component';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'jt-root',
@@ -32,8 +33,34 @@ export class AppComponent {
     private store: Store<fromRedusers.State>,
     private stepper: StepperService,
     private menu: MatBottomSheet,
-    @Inject(LOCALE_ID) locale: string
+    @Inject(LOCALE_ID) locale: string,
+    private mIRegiser: MatIconRegistry,
+    private domSanitizer: DomSanitizer
   ) {
+    mIRegiser.addSvgIcon( 'presets-list',
+      domSanitizer
+        .bypassSecurityTrustResourceUrl('assets/images/preset_list.svg')
+    );
+    mIRegiser.addSvgIcon( 'resting-man-green',
+      domSanitizer
+        .bypassSecurityTrustResourceUrl('assets/images/resting-man-green.svg')
+    );
+    mIRegiser.addSvgIcon( 'green-flag-black-grip',
+      domSanitizer
+        .bypassSecurityTrustResourceUrl('assets/images/green-flag-black-grip.svg')
+    );
+    mIRegiser.addSvgIcon( 'crossed-flag',
+      domSanitizer
+        .bypassSecurityTrustResourceUrl('assets/images/crossed-flag.svg')
+    );
+    mIRegiser.addSvgIcon( 'resting-man-green',
+      domSanitizer
+        .bypassSecurityTrustResourceUrl('assets/images/resting-man-green.svg')
+    );
+    mIRegiser.addSvgIcon( 'icon-512x512',
+      domSanitizer
+        .bypassSecurityTrustResourceUrl('assets/images/icon-512x512.svg')
+    );
     this.showNav$ = store.pipe(select(fromRedusers.getShowNav));
     this.showNav$.subscribe(sn => this.visibleNav = sn);
     this.store.dispatch(new RequestPresets());

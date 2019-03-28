@@ -6,7 +6,6 @@
   flex-flow: column nowrap;
   justify-content: flex-start;
   align-items: stretch;
-  overflow-y: auto;
 }
 .editor__item{
   display: flex;
@@ -36,8 +35,8 @@ mat-form-field{
 }
 
 .editor-icon{
-  background-color: unset;
-  margin: 0 0.5rem 0 0;
+  height: 4.8rem;
+  width: 4.8rem;
 }
 
 .editor__item--centred{

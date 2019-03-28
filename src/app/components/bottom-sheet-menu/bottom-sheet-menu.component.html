@@ -9,9 +9,15 @@
     </div>
   </a>
 
-  <a routerLink="/home" mat-list-item (click)="openLink()">
-    <span mat-line i18n="@@presetsList">Presets list</span>
-    <span mat-line i18n="@@presetsListDesc">Go to presets list page</span>
+  <a mat-list-item routerLink="/home" (click)="openLink()">
+    <div class="menu-item">
+      <mat-icon
+        color="primary"
+        i18n-matTooltip="@@presetsList"
+        matTooltip="Presets list"
+        svgIcon="presets-list"></mat-icon>
+      <span mat-line i18n="@@presetsListDesc">Go to presets list page</span>
+    </div>
   </a>
 
   <!-- <a routerLink="/stepper" mat-list-item (click)="openLink()">

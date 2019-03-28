@@ -32,12 +32,12 @@ import { BottomSheetMenuComponent } from './components/bottom-sheet-menu/bottom-
 import { RepeatsIconComponent } from './components/repeats-icon/repeats-icon.component';
 import { RepeatWithPresetIconComponent } from './components/repeat-with-preset-icon/repeat-with-preset-icon.component';
 import { PresetRepeatsIconComponent } from './components/preset-repeats-icon/preset-repeats-icon.component';
-import { SvgIcoComponent } from './components/svg-ico/svg-ico.component';
 import { SpaceTriggerDirective } from './directives/space-trigger.directive';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { TextCopyComponent } from './components/text-copy/text-copy.component';
 import { ExportComponent } from './pages/export/export.component';
 import { InfoComponent } from './pages/info/info.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -53,7 +53,6 @@ import { InfoComponent } from './pages/info/info.component';
     RepeatsIconComponent,
     RepeatWithPresetIconComponent,
     PresetRepeatsIconComponent,
-    SvgIcoComponent,
     SpaceTriggerDirective,
     TextCopyComponent,
     ExportComponent,
@@ -75,7 +74,8 @@ import { InfoComponent } from './pages/info/info.component';
       ExerciseEditorEffects,
       CountdownEffects
     ]),
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent],
