@@ -5,11 +5,11 @@ import { Injectable } from '@angular/core';
 })
 export class ShareService {
 
-  preset(data: string): Promise<{}> | boolean {
+  preset(data: string, title: string): Promise<{}> | boolean {
     const windowNavigator = (window.navigator as any)
     if (windowNavigator.share) {
       return windowNavigator.share({
-        title: 'preset title',
+        title,
         url: `${new URL(document.location.href).origin}/export?preset=${data}`,
       });
 

@@ -37,6 +37,7 @@ import { SpaceTriggerDirective } from './directives/space-trigger.directive';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { TextCopyComponent } from './components/text-copy/text-copy.component';
 import { ExportComponent } from './pages/export/export.component';
+import { InfoComponent } from './pages/info/info.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { ExportComponent } from './pages/export/export.component';
     SvgIcoComponent,
     SpaceTriggerDirective,
     TextCopyComponent,
-    ExportComponent
+    ExportComponent,
+    InfoComponent
   ],
   imports: [
     BrowserModule,

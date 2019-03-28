@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { TonusData } from 'src/app/models/tonus-data.model';
 import { Preset } from 'src/app/models/preset.model';
 import { Exercise } from 'src/app/models/exercise.model';
@@ -24,11 +24,13 @@ export class ExportComponent implements OnInit {
   preset: Preset;
   exercises: Exercise[];
   countdowns: Countdown[];
+    isAdded: boolean;
 
   constructor(
     private ar: ActivatedRoute,
     private store: Store<fromReducers.State>,
-    private sBar: MatSnackBar
+    private sBar: MatSnackBar,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -48,7 +50,6 @@ export class ExportComponent implements OnInit {
   }
 
   clone() {
-    this.loading = true;
     this.preset.id = Date.now();
     this.exercises.forEach(ex => {
 
@@ -71,14 +72,6 @@ export class ExportComponent implements OnInit {
       this.store.dispatch(new AddExercise({ exercise: ex }));
 
     });
-    setTimeout(() => {
-      this.loading = false;
-      this.sBar.open('saved', 'ok!', {
-        duration: 2000,
-        horizontalPosition: 'right',
-        panelClass: 'saved-notify'
-      })
-    }, 1000);
   }
 
   getCountdowns(ids: number[]): Countdown[] {
@@ -86,8 +79,20 @@ export class ExportComponent implements OnInit {
   }
 
   save() {
+    this.isAdded = true;
+    this.loading = true;
     this.clone();
     this.store.dispatch(new AddPreset({ preset: this.preset }));
     this.store.dispatch(new UpsertCountdowns({ countdowns: this.countdowns }));
+
+    setTimeout(() => {
+      this.loading = false;
+      this.sBar.open('saved', 'ok!', {
+        duration: 2000,
+        horizontalPosition: 'right',
+        panelClass: 'saved-notify'
+      })
+      this.router.navigate(['/constructor'], { queryParams: { pId: this.preset.id } });
+    }, 1000);
   }
 }

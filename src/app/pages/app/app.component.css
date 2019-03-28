@@ -6,7 +6,7 @@
   height: 100%;
   width: 100%;
 }
-header{
+.progress-wrapper{
   width: 100%;
 }
 mat-progress-bar{

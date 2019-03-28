@@ -1,20 +1,22 @@
-<header lang="{{l}}">
+<div class="progress-wrapper" lang="{{l}}">
   <mat-progress-bar
     *ngIf="stepperRoute.isActive"
     mode="determinate"
     color="primary"
     [value]="stepper.totalProgress">
   </mat-progress-bar>
-  <button
-    matTooltip="menu"
-    i18n-matTooltip="@@home.btn.title.menu"
-    class="menu-btn"
-    (click)="openMenu()"
-    mat-fab color="accent">
-    <mat-icon>menu</mat-icon>
-  </button>
-</header>
+</div>
+<button
+  *ngIf="!infoRoute.isActive"
+  matTooltip="menu"
+  i18n-matTooltip="@@home.btn.title.menu"
+  class="menu-btn"
+  (click)="openMenu()"
+  mat-fab color="accent">
+  <mat-icon>menu</mat-icon>
+</button>
 <div  routerLink="/stepper" routerLinkActive #stepperRoute="routerLinkActive"></div>
+<div  routerLink="/info" routerLinkActive #infoRoute="routerLinkActive"></div>
 <div [lang]="l" class="routerOutlet">
   <router-outlet></router-outlet>
 </div>

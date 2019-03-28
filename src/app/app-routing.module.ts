@@ -6,6 +6,7 @@ import { PresetEditorComponent }
 import { HomeComponent } from './pages/home/home.component';
 import { StepperComponent } from './pages/stepper/stepper.component';
 import { ExportComponent } from './pages/export/export.component';
+import { InfoComponent } from './pages/info/info.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,9 @@ const routes: Routes = [
   },
   {
     path: 'export', component: ExportComponent
+  },
+  {
+    path: 'info', component: InfoComponent
   }
 ];
 

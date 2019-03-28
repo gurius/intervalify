@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef, MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'jt-text-copy',
@@ -9,13 +9,22 @@ import { MAT_DIALOG_DATA } from '@angular/material';
 export class TextCopyComponent implements OnInit {
   link: string;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data) {
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data,
+    private dialogReference: MatDialogRef<TextCopyComponent>,
+    private sBar: MatSnackBar,
+  ) {
     this.link = data.link;
   }
 
   copy(link): void {
     link.select();
     document.execCommand("copy");
+    this.dialogReference.close();
+    this.sBar.open('copied', 'ok!', {
+      duration: 2000,
+      panelClass: 'saved-notify'
+    })
   }
 
   ngOnInit() {

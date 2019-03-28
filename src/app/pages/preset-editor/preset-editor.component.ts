@@ -206,7 +206,7 @@ export class PresetEditorComponent implements OnInit, OnDestroy {
     let data: string = this.share.construct(this.preset, this.exercises, this.countdowns)
     data = btoa(encodeURI(data));
 
-    const sended = this.share.preset(data);
+    const sended = this.share.preset(data, this.preset.title);
 
     if (typeof sended !== 'boolean') {
       sended
