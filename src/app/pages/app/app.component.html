@@ -7,13 +7,14 @@
   </mat-progress-bar>
 </div>
 <button
-  *ngIf="!infoRoute.isActive"
+  @duckToggle
+  *ngIf="!infoRoute.isActive && (btnVisibilityState$ | async)"
   matTooltip="menu"
   i18n-matTooltip="@@home.btn.title.menu"
   class="menu-btn"
   (click)="openMenu()"
   mat-fab color="accent">
-  <mat-icon>menu</mat-icon>
+  <mat-icon [@btnTrigger]="btnAppearanceState$ | async">{{ btnAppearanceState$ | async }}</mat-icon>
 </button>
 <div  routerLink="/stepper" routerLinkActive #stepperRoute="routerLinkActive"></div>
 <div  routerLink="/info" routerLinkActive #infoRoute="routerLinkActive"></div>

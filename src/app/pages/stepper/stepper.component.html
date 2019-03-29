@@ -1,5 +1,6 @@
 <header
   [jtSpaceTrigger]="playPause.bind(this)"
+  @fadeToggle
   *ngIf="!stepper.running" class="preset-title">
   <h1 [matTooltip]="preset.title">{{preset.title}}</h1>
 </header>

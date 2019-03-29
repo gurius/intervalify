@@ -22,6 +22,9 @@ import {
 import * as NoSleep from 'node_modules/nosleep.js/src/index.js'
 import { Sound } from 'src/app/types/sound.type';
 import { AudioService } from 'src/app/helpers/audio.service';
+import { HideMenuBtn, ShowMenuBtn } from '../app/menu-btn.actions';
+import { Store } from '@ngrx/store';
+import * as fromRedusers from '../../root-reducer';
 
 @Component({
   selector: 'jt-stepper',
@@ -154,10 +157,12 @@ export class StepperComponent implements OnInit, OnDestroy {
   }
 
   play() {
+    this.store.dispatch(new HideMenuBtn());
     this.stepper.play();
     this.screenLock.enable();
   }
   stop() {
+    this.store.dispatch(new ShowMenuBtn());
     this.stepper.stop();
     this.stepper.reset();
     this.stepper.doStep();
@@ -165,6 +170,7 @@ export class StepperComponent implements OnInit, OnDestroy {
     this.screenLock.disable();
   }
   pause() {
+    this.store.dispatch(new ShowMenuBtn());
     this.stepper.pause();
     this.screenLock.disable();
   }
@@ -181,6 +187,7 @@ export class StepperComponent implements OnInit, OnDestroy {
   }
 
   start() {
+    this.store.dispatch(new HideMenuBtn());
     this.launched = true;
     this.prestartPhase = true;
     this.startIntervalId = setInterval(() => {
@@ -224,7 +231,8 @@ export class StepperComponent implements OnInit, OnDestroy {
     private sHelper: StepsService,
     private pHelper: PresetService,
     public stepper: StepperService,
-    private soundPlayer: AudioService
+    private soundPlayer: AudioService,
+    private store: Store<fromRedusers.State>,
   ) {
     this.screenLock = new NoSleep();
   }

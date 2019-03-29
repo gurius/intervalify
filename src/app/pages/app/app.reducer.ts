@@ -1,4 +1,4 @@
-import { AppActions, AppActionTypes } from './/app.actions';
+import { AppActions, AppActionTypes } from './app.actions';
 
 
 export interface State {
