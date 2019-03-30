@@ -38,7 +38,7 @@
         <source>menu</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/app/app.component.html</context>
-          <context context-type="linenumber">11</context>
+          <context context-type="linenumber">12</context>
         </context-group>
       </trans-unit>
       <trans-unit id="exerciseEditor.title" datatype="html">
@@ -150,6 +150,55 @@
         <context-group purpose="location">
           <context context-type="sourcefile">app/components/text-copy/text-copy.component.html</context>
           <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="deletionConfirmation.h3" datatype="html">
+        <source>
+    Do you shure, you want to remove
+    <x id="ICU" equiv-text="{object, select, preset {...} exercise {...}}"/>
+    - <x id="INTERPOLATION" equiv-text="{{title}}"/>?
+  </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/deletion-confirmation/deletion-confirmation.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1d1f0ed30dd13d5c45d8d4469a6ad3955149d294" datatype="html">
+        <source>{VAR_SELECT, select, preset {preset } exercise {esercise } }</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/deletion-confirmation/deletion-confirmation.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/deletion-confirmation/deletion-confirmation.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="deletionConfirmation.h4" datatype="html">
+        <source>
+    After confirmation
+    <x id="ICU" equiv-text="{object, select, preset {...} exercise {...}}"/>
+    cannot be recovered!
+  </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/deletion-confirmation/deletion-confirmation.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="deletionConfirmation.btn.Iunderstand" datatype="html">
+        <source>
+    Yes, remove!
+  </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/deletion-confirmation/deletion-confirmation.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="deletionConfirmation.btn.cancel" datatype="html">
+        <source>cancel</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/deletion-confirmation/deletion-confirmation.component.html</context>
+          <context context-type="linenumber">19</context>
         </context-group>
       </trans-unit>
       <trans-unit id="presetsEditor.input.placeholder.presetsTitle" datatype="html">
@@ -297,7 +346,7 @@
     </source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/stepper/stepper.component.html</context>
-          <context context-type="linenumber">19</context>
+          <context context-type="linenumber">20</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3e2546c2548cf01f7533e96c155b64c9dea1613d" datatype="html">
@@ -308,25 +357,25 @@
         } }</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/stepper/stepper.component.html</context>
-          <context context-type="linenumber">20</context>
+          <context context-type="linenumber">21</context>
         </context-group>
       </trans-unit>
       <trans-unit id="stepper.current.exercise.title.exerciseInProgress" datatype="html">
         <source>exercise in progress</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/stepper/stepper.component.html</context>
-          <context context-type="linenumber">11</context>
+          <context context-type="linenumber">12</context>
         </context-group>
       </trans-unit>
       <trans-unit id="stepper.next.exercise.title.nextExercise" datatype="html">
         <source>next exercise</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/stepper/stepper.component.html</context>
-          <context context-type="linenumber">33</context>
+          <context context-type="linenumber">34</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/stepper/stepper.component.html</context>
-          <context context-type="linenumber">46</context>
+          <context context-type="linenumber">47</context>
         </context-group>
       </trans-unit>
       <trans-unit id="stepper.next.exercise.title" datatype="html">
@@ -338,7 +387,7 @@
     </source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/stepper/stepper.component.html</context>
-          <context context-type="linenumber">54</context>
+          <context context-type="linenumber">55</context>
         </context-group>
       </trans-unit>
       <trans-unit id="df540ed79bd877e99bfb4fe4dfe435f4d3f04897" datatype="html">
@@ -350,63 +399,63 @@
         } }</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/stepper/stepper.component.html</context>
-          <context context-type="linenumber">55</context>
+          <context context-type="linenumber">56</context>
         </context-group>
       </trans-unit>
       <trans-unit id="stepper.time.elapsed" datatype="html">
         <source>time elapsed</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/stepper/stepper.component.html</context>
-          <context context-type="linenumber">81</context>
+          <context context-type="linenumber">82</context>
         </context-group>
       </trans-unit>
       <trans-unit id="stepper.time.remaining" datatype="html">
         <source>time remaining</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/stepper/stepper.component.html</context>
-          <context context-type="linenumber">86</context>
+          <context context-type="linenumber">87</context>
         </context-group>
       </trans-unit>
       <trans-unit id="stepper.timers.elapsed" datatype="html">
         <source>timers elapsed</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/stepper/stepper.component.html</context>
-          <context context-type="linenumber">94</context>
+          <context context-type="linenumber">95</context>
         </context-group>
       </trans-unit>
       <trans-unit id="stepper.timers.remaining" datatype="html">
         <source>timers remaining</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/stepper/stepper.component.html</context>
-          <context context-type="linenumber">105</context>
+          <context context-type="linenumber">106</context>
         </context-group>
       </trans-unit>
       <trans-unit id="stepper.btn.title.play" datatype="html">
         <source>play</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/stepper/stepper.component.html</context>
-          <context context-type="linenumber">112</context>
+          <context context-type="linenumber">113</context>
         </context-group>
       </trans-unit>
       <trans-unit id="stepper.btn.title.pause" datatype="html">
         <source>pause</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/stepper/stepper.component.html</context>
-          <context context-type="linenumber">120</context>
+          <context context-type="linenumber">121</context>
         </context-group>
       </trans-unit>
       <trans-unit id="stepper.btn.title.stop" datatype="html">
         <source>stop</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/stepper/stepper.component.html</context>
-          <context context-type="linenumber">127</context>
+          <context context-type="linenumber">128</context>
         </context-group>
       </trans-unit>
       <trans-unit id="stepper.btn.title.start" datatype="html">
         <source>start</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/stepper/stepper.component.html</context>
-          <context context-type="linenumber">139</context>
+          <context context-type="linenumber">140</context>
         </context-group>
       </trans-unit>
       <trans-unit id="stepper.stages" datatype="html">
@@ -415,35 +464,35 @@
     </source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/stepper/stepper.component.html</context>
-          <context context-type="linenumber">150</context>
+          <context context-type="linenumber">151</context>
         </context-group>
       </trans-unit>
       <trans-unit id="39d00ec91da60903eae38f2d4c550c4c5e23c2be" datatype="html">
         <source>{VAR_SELECT, select, GO! {GO!} other {<x id="INTERPOLATION" equiv-text="{{stage}}"/>} }</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/stepper/stepper.component.html</context>
-          <context context-type="linenumber">151</context>
+          <context context-type="linenumber">152</context>
         </context-group>
       </trans-unit>
       <trans-unit id="stepper.stat.title.totalTime" datatype="html">
         <source>total time of preset</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/stepper/stepper.component.html</context>
-          <context context-type="linenumber">156</context>
+          <context context-type="linenumber">157</context>
         </context-group>
       </trans-unit>
       <trans-unit id="stepper.stat.title.totalWorkTime" datatype="html">
         <source>total work time</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/stepper/stepper.component.html</context>
-          <context context-type="linenumber">162</context>
+          <context context-type="linenumber">163</context>
         </context-group>
       </trans-unit>
       <trans-unit id="stepper.stat.title.totalRestTime" datatype="html">
         <source>total rest time</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/stepper/stepper.component.html</context>
-          <context context-type="linenumber">168</context>
+          <context context-type="linenumber">169</context>
         </context-group>
       </trans-unit>
       <trans-unit id="stepper.done.title" datatype="html">
@@ -452,63 +501,14 @@
   </source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/stepper/stepper.component.html</context>
-          <context context-type="linenumber">176</context>
+          <context context-type="linenumber">177</context>
         </context-group>
       </trans-unit>
       <trans-unit id="stepper.btn.title.reset" datatype="html">
         <source>reset</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/stepper/stepper.component.html</context>
-          <context context-type="linenumber">180</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="deletionConfirmation.h3" datatype="html">
-        <source>
-    Do you shure, you want to remove
-    <x id="ICU" equiv-text="{object, select, preset {...} exercise {...}}"/>
-    - <x id="INTERPOLATION" equiv-text="{{title}}"/>?
-  </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/components/deletion-confirmation/deletion-confirmation.component.html</context>
-          <context context-type="linenumber">2</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="1d1f0ed30dd13d5c45d8d4469a6ad3955149d294" datatype="html">
-        <source>{VAR_SELECT, select, preset {preset } exercise {esercise } }</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/components/deletion-confirmation/deletion-confirmation.component.html</context>
-          <context context-type="linenumber">4</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/components/deletion-confirmation/deletion-confirmation.component.html</context>
-          <context context-type="linenumber">9</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="deletionConfirmation.h4" datatype="html">
-        <source>
-    After confirmation
-    <x id="ICU" equiv-text="{object, select, preset {...} exercise {...}}"/>
-    cannot be recovered!
-  </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/components/deletion-confirmation/deletion-confirmation.component.html</context>
-          <context context-type="linenumber">7</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="deletionConfirmation.btn.Iunderstand" datatype="html">
-        <source>
-    I understand!
-  </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/components/deletion-confirmation/deletion-confirmation.component.html</context>
-          <context context-type="linenumber">15</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="deletionConfirmation.btn.cancel" datatype="html">
-        <source>cancel</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/components/deletion-confirmation/deletion-confirmation.component.html</context>
-          <context context-type="linenumber">19</context>
+          <context context-type="linenumber">181</context>
         </context-group>
       </trans-unit>
       <trans-unit id="launchingPreset" datatype="html">
