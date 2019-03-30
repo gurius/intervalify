@@ -10,22 +10,22 @@ import { InfoComponent } from './pages/info/info.component';
 
 const routes: Routes = [
   {
-    path: 'home', component: HomeComponent
+    path: 'home', component: HomeComponent, data: { animate: 'home' }
   },
   {
     path: '', redirectTo: '/home', pathMatch: 'full'
   },
   {
-    path: 'stepper', component: StepperComponent
+    path: 'stepper', component: StepperComponent, data: { animate: 'stepper' }
   },
   {
-    path: 'constructor', component: PresetEditorComponent
+    path: 'constructor', component: PresetEditorComponent, data: { animate: 'editor' }
   },
   {
-    path: 'export', component: ExportComponent
+    path: 'export', component: ExportComponent, data: { animate: 'export' }
   },
   {
-    path: 'info', component: InfoComponent
+    path: 'info', component: InfoComponent, data: { animate: 'info' }
   }
 ];
 

@@ -18,6 +18,6 @@
 </button>
 <div  routerLink="/stepper" routerLinkActive #stepperRoute="routerLinkActive"></div>
 <div  routerLink="/info" routerLinkActive #infoRoute="routerLinkActive"></div>
-<div [lang]="l" class="routerOutlet">
-  <router-outlet></router-outlet>
+<div [@routeSliding]="getRouteName(outlet)" [lang]="l" class="routerOutlet">
+  <router-outlet #outlet="outlet"></router-outlet>
 </div>

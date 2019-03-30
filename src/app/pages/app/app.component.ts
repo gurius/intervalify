@@ -16,12 +16,15 @@ import { BottomSheetMenuComponent } from 'src/app/components/bottom-sheet-menu/b
 import { DomSanitizer } from '@angular/platform-browser';
 import { OpenMenuBtn, CloseMenuBtn } from './menu-btn.actions';
 import { trigger, transition, style, animate } from '@angular/animations';
+import { RouterOutlet } from '@angular/router';
+import { routeAnimation } from 'src/app/animations';
 
 @Component({
   selector: 'jt-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
   animations: [
+    routeAnimation,
     trigger('duckToggle', [
       transition(':enter', [
         style({ transform: 'translateY(7rem)' }),
@@ -36,7 +39,7 @@ import { trigger, transition, style, animate } from '@angular/animations';
         animate('0.2s ease-in', style({ transform: 'rotateZ(0.25turn)' })),
       ]),
       transition('close => menu', [
-        style({ transform: 'rotateZ(0.25turn)'}),
+        style({ transform: 'rotateZ(0.25turn)' }),
         animate('0.2s ease-in', style({ transform: '*' })),
       ])
     ]),
@@ -114,5 +117,10 @@ export class AppComponent {
     })
   }
 
+  getRouteName(outlet: RouterOutlet): string {
+      return outlet
+        && outlet.activatedRouteData
+        && outlet.activatedRouteData['animate'];
+  }
 
 }
