@@ -2,11 +2,18 @@
 
 <ul class="preset-list">
   <li
+    (swipeleft)="onSwipeLeft(preset.id, $event)"
+    (swiperight)="onSwipeRight(preset.id, $event)"
     matTooltip="preset" i18n-matTooltip="@@preset"
     class="preset-list__item" *ngFor="let preset of presets">
     <h3 [matTooltip]="preset.title">{{preset.title}}</h3>
     <div class="button-panel">
-      <ul class="hor-list">
+      <button
+        [matMenuTriggerData]="{ preset: preset }"
+        mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <!-- <ul class="hor-list">
         <li i18n-matTooltip="@@launchingPreset" matTooltip="launching preset"
           routerLink="/stepper" [queryParams]="{pId: preset.id}">
           <button mat-icon-button><mat-icon >play_arrow</mat-icon></button>
@@ -21,7 +28,27 @@
             <mat-icon>delete</mat-icon>
           </button>
         </li>
-      </ul>
+      </ul> -->
     </div>
   </li>
 </ul>
+<mat-menu #menu="matMenu">
+  <ng-template matMenuContent let-preset="preset">
+    <button
+      routerLink="/stepper" [queryParams]="{pId: preset.id}"
+      mat-menu-item>
+      <mat-icon>play_arrow</mat-icon>
+      <span i18n="@@launchingPreset">launching preset</span>
+    </button>
+    <button
+      routerLink="/constructor" [queryParams]="{pId: preset.id}"
+      mat-menu-item>
+      <mat-icon>edit</mat-icon>
+      <span i18n="@@editPreset">edit preset</span>
+    </button>
+    <button (click)="deletePreset(preset)" mat-menu-item>
+      <mat-icon color="warn">delete</mat-icon>
+      <span i18n="@@deletePreset">delete preset</span>
+    </button>
+  </ng-template>
+</mat-menu>

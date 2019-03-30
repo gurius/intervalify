@@ -40,6 +40,15 @@ export class PresetsListComponent implements OnInit {
       drefSubs.unsubscribe();
     });
   }
+
+  onSwipeLeft(pId, event) {
+    this.router.navigate(['/stepper'], { queryParams: { pId } });
+  }
+
+  onSwipeRight(pId, event) {
+    this.router.navigate(['/constructor'], { queryParams: { pId } });
+  }
+
   ngOnInit() { }
   constructor(
     private pHelper: PresetService,

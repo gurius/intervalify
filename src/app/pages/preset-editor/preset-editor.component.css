@@ -1,3 +1,4 @@
+.root-wrapper,
 :host{
   display: flex;
   flex-flow: column;
@@ -6,6 +7,9 @@
   width: 80%;
   height: 100%;
   font-size: 2rem;
+}
+.root-wrapper{
+  width: 100%;
 }
 .workout-title{
   width: 100%;

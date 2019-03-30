@@ -273,4 +273,13 @@ export class PresetEditorComponent implements OnInit, OnDestroy {
       select(countdonwSelectors.allExerciseCountdowns(exerciseId))
     );
   }
+
+  onSwipeLeft(event) {
+    this.router.navigate(['/stepper'], { queryParams: { pId: this.preset.id } });
+  }
+
+  onSwipeRight(event) {
+    this.router.navigate(['/home']);
+  }
+
 }
