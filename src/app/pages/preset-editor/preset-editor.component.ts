@@ -28,12 +28,14 @@ import { ShareService } from 'src/app/helpers/share.service';
 import { TextCopyComponent } from 'src/app/components/text-copy/text-copy.component';
 import { Countdown } from 'src/app/models/countdown.model';
 import { DeletionConfirmationComponent } from 'src/app/components/deletion-confirmation/deletion-confirmation.component';
+import { btnTrigger } from 'src/app/animations';
 
 
 @Component({
   selector: 'jt-preset-editor',
   templateUrl: './preset-editor.component.html',
-  styleUrls: ['./preset-editor.component.css']
+  styleUrls: ['./preset-editor.component.css'],
+  animations: [btnTrigger]
 })
 export class PresetEditorComponent implements OnInit, OnDestroy {
   preset: Preset;
@@ -216,8 +218,6 @@ export class PresetEditorComponent implements OnInit, OnDestroy {
 
   sharePreset(): void {
 
-    this.showOptions();
-
     let data: string = this.share.construct(this.preset, this.exercises, this.countdowns)
     data = btoa(encodeURI(data));
 
@@ -243,8 +243,11 @@ export class PresetEditorComponent implements OnInit, OnDestroy {
     })
   }
 
-  showOptions() {
-    this.optionsIsVisible = !this.optionsIsVisible
+  onOptsMenuOpen() {
+    this.optionsIsVisible = true;
+  }
+  onOptsMenuClose() {
+    this.optionsIsVisible = false;
   }
 
   deleteExercise(ex, event) {

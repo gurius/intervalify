@@ -15,36 +15,14 @@ import { MatBottomSheet, MatBottomSheetRef, MatIconRegistry } from '@angular/mat
 import { BottomSheetMenuComponent } from 'src/app/components/bottom-sheet-menu/bottom-sheet-menu.component';
 import { DomSanitizer } from '@angular/platform-browser';
 import { OpenMenuBtn, CloseMenuBtn } from './menu-btn.actions';
-import { trigger, transition, style, animate } from '@angular/animations';
 import { RouterOutlet } from '@angular/router';
-import { routeAnimation } from 'src/app/animations';
+import { routeAnimation, duckToggle, btnTrigger } from 'src/app/animations';
 
 @Component({
   selector: 'jt-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  animations: [
-    routeAnimation,
-    trigger('duckToggle', [
-      transition(':enter', [
-        style({ transform: 'translateY(7rem)' }),
-        animate('0.3s ease-in', style({ transform: '*' })),
-      ]),
-      transition(':leave', [
-        animate('0.3s ease-out', style({ transform: 'translateY(7rem)' }))
-      ])
-    ]),
-    trigger('btnTrigger', [
-      transition('menu => close', [
-        animate('0.2s ease-in', style({ transform: 'rotateZ(0.25turn)' })),
-      ]),
-      transition('close => menu', [
-        style({ transform: 'rotateZ(0.25turn)' }),
-        animate('0.2s ease-in', style({ transform: '*' })),
-      ])
-    ]),
-  ]
-
+  animations: [ routeAnimation, duckToggle, btnTrigger]
 })
 export class AppComponent {
   title = 'intervalify';

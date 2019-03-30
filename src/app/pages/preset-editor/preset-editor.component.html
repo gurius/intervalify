@@ -85,6 +85,7 @@
         </div>
         <span class="title" [matTooltip]="exercise.title">{{exercise.title}}</span>
         <mat-icon
+          class="delete-icon"
           matTooltip="remove exercise" i18n-matTooltip="@@presetsEditor.icon.title.removeExercise"
           (click)="deleteExercise(exercise, $event)">
           delete
@@ -94,7 +95,35 @@
   </div>
 
   <div class="buttons-bar">
-    <div *ngIf="optionsIsVisible" class="buttons-menu">
+    <!-- <div *ngIf="optionsIsVisible" class="buttons-menu">
+
+    </div> -->
+
+    <button
+      [@btnTrigger]="optionsIsVisible ? 'close' : 'menu'"
+      mat-fab
+      class="editor-button"
+      color="accent"
+      (menuOpened)="onOptsMenuOpen()"
+      (menuClosed)="onOptsMenuClose()"
+      [matMenuTriggerFor]="menu">
+      <mat-icon
+        matTooltip="options" i18n-matTooltip="@@presetsEditor.btn.title.options"
+        *ngIf="!optionsIsVisible">
+        more_vert</mat-icon>
+      <mat-icon
+        matTooltip="close" i18n-matTooltip="@@presetsEditor.btn.title.close"
+        *ngIf="optionsIsVisible">
+        close</mat-icon>
+    </button>
+
+  </div>
+
+</div>
+
+<mat-menu class="transp-menu" #menu="matMenu">
+  <ul>
+    <li >
       <button
         mat-fab
         matTooltip="add new exercise" i18n-matTooltip="@@presetsEditor.btn.title.addNewExercise"
@@ -103,7 +132,8 @@
         (click)="newExercise()">
         <mat-icon>add</mat-icon>
       </button>
-
+    </li>
+    <li >
       <button
         matTooltip="delete preset" i18n-matTooltip="@@presetsEditor.btn.title.deletePreset"
         class="editor-button"
@@ -111,7 +141,8 @@
         mat-fab color="warn">
         <mat-icon>delete</mat-icon>
       </button>
-
+    </li>
+    <li >
       <button
         matTooltip="launching preset" i18n-matTooltip="@@presetsEditor.btn.title.launchingPreset"
         class="editor-button"
@@ -119,7 +150,8 @@
         routerLink="/stepper" [queryParams]="{pId: preset.id}">
         <mat-icon>play_arrow</mat-icon>
       </button>
-
+    </li>
+    <li >
       <button
         mat-fab
         class="editor-button"
@@ -128,28 +160,7 @@
         (click)="sharePreset()">
         <mat-icon>share</mat-icon>
       </button>
-    </div>
+    </li>
+  </ul>
 
-    <button
-      *ngIf="!optionsIsVisible"
-      mat-fab
-      matTooltip="options" i18n-matTooltip="@@presetsEditor.btn.title.options"
-      class="editor-button"
-      color="accent"
-      (click)="showOptions()">
-      <mat-icon>more_vert</mat-icon>
-    </button>
-
-    <button
-      *ngIf="optionsIsVisible"
-      mat-fab
-      matTooltip="close" i18n-matTooltip="@@presetsEditor.btn.title.close"
-      class="editor-button"
-      color="accent"
-      (click)="showOptions()">
-      <mat-icon>close</mat-icon>
-    </button>
-
-  </div>
-
-</div>
+</mat-menu>

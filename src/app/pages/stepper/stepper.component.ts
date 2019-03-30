@@ -150,6 +150,7 @@ export class StepperComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.store.dispatch(new ShowMenuBtn());
     this.stepper.stop();
     this.stepper.reset();
     this.stepper.steps = [];

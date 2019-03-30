@@ -57,11 +57,17 @@ noscript{
   background-color: black;
   color: var(--yell);
 }
+
+.transp-menu{
+  background-color: transparent;
+  box-shadow: none;
+  min-width: unset!important;
+}
 @media screen and (max-width: 400px) {
   html{
     font-size: 8px;
   }
-  button.mat-fab{
+  /* button.mat-fab{
     transform: scale(0.8);
-  }
+  } */
 }

@@ -95,7 +95,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="exerciseEditor.icon.title.exercise.reps" datatype="html">
-        <source>exercise repetitions</source>
+        <source>repetitions of the exercise</source>
         <target>повторення вправи</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/components/exercise-editor/exercise-editor.component.html</context>
@@ -103,8 +103,8 @@
         </context-group>
       </trans-unit>
       <trans-unit id="exerciseEditor.input.placeholder.reps" datatype="html">
-        <source>repetitions</source>
-        <target>повторення</target>
+        <source>repetitions of the exercise</source>
+        <target>повторення вправи</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/components/exercise-editor/exercise-editor.component.html</context>
           <context context-type="linenumber">27</context>
@@ -204,7 +204,7 @@
       </trans-unit>
       <trans-unit id="deletionConfirmation.h3" datatype="html">
         <source>
-          Do you shure, you want to remove
+          Are you shure you want to remove this
           <x id="ICU" equiv-text="{object, select, preset {...} exercise {...}}"/>
           - <x id="INTERPOLATION" equiv-text="{{title}}"/>?
         </source>
@@ -271,7 +271,7 @@
         <target>Назва тренування</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/preset-editor/preset-editor.component.html</context>
-          <context context-type="linenumber">8</context>
+          <context context-type="linenumber">9</context>
         </context-group>
       </trans-unit>
       <trans-unit id="presetsEditor.title.editTitle" datatype="html">
@@ -279,7 +279,7 @@
         <target>Відредагувати назву</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/preset-editor/preset-editor.component.html</context>
-          <context context-type="linenumber">15</context>
+          <context context-type="linenumber">16</context>
         </context-group>
       </trans-unit>
       <trans-unit id="presetsEditor.input.cycles" datatype="html">
@@ -287,7 +287,7 @@
         <target>цикли</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/preset-editor/preset-editor.component.html</context>
-          <context context-type="linenumber">25</context>
+          <context context-type="linenumber">26</context>
         </context-group>
       </trans-unit>
       <trans-unit id="presetsEditor.icon.cycles" datatype="html">
@@ -295,7 +295,7 @@
         <target>цикли</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/preset-editor/preset-editor.component.html</context>
-          <context context-type="linenumber">37</context>
+          <context context-type="linenumber">38</context>
         </context-group>
       </trans-unit>
       <trans-unit id="presetsEditor.icon.title.begining" datatype="html">
@@ -303,7 +303,7 @@
         <target>Виконувати спочатку</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/preset-editor/preset-editor.component.html</context>
-          <context context-type="linenumber">59</context>
+          <context context-type="linenumber">60</context>
         </context-group>
         <note priority="1" from="description">When exercise will be played </note>
       </trans-unit>
@@ -312,7 +312,7 @@
         <target>Виконувати в кінці</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/preset-editor/preset-editor.component.html</context>
-          <context context-type="linenumber">65</context>
+          <context context-type="linenumber">66</context>
         </context-group>
         <note priority="1" from="description">When exercise will be played </note>
       </trans-unit>
@@ -321,7 +321,7 @@
         <target>циклічна вправа</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/preset-editor/preset-editor.component.html</context>
-          <context context-type="linenumber">72</context>
+          <context context-type="linenumber">73</context>
         </context-group>
         <note priority="1" from="description">whether exercise  be repeated in preset </note>
       </trans-unit>
@@ -330,7 +330,7 @@
         <target>повторення вправи</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/preset-editor/preset-editor.component.html</context>
-          <context context-type="linenumber">81</context>
+          <context context-type="linenumber">82</context>
         </context-group>
       </trans-unit>
       <trans-unit id="presetsEditor.icon.title.removeExercise" datatype="html">
@@ -338,7 +338,7 @@
         <target>видалити вправу</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/preset-editor/preset-editor.component.html</context>
-          <context context-type="linenumber">87</context>
+          <context context-type="linenumber">88</context>
         </context-group>
       </trans-unit>
       <trans-unit id="presetsEditor.title.exercise" datatype="html">
@@ -346,39 +346,7 @@
         <target>вправа</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/preset-editor/preset-editor.component.html</context>
-          <context context-type="linenumber">50</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="presetsEditor.btn.title.addNewExercise" datatype="html">
-        <source>add new exercise</source>
-        <target>додати нову вправу</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/pages/preset-editor/preset-editor.component.html</context>
-          <context context-type="linenumber">99</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="presetsEditor.btn.title.deletePreset" datatype="html">
-        <source>delete preset</source>
-        <target>видалити тренування</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/pages/preset-editor/preset-editor.component.html</context>
-          <context context-type="linenumber">107</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="presetsEditor.btn.title.launchingPreset" datatype="html">
-        <source>launching preset</source>
-        <target>перейти до тренування</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/pages/preset-editor/preset-editor.component.html</context>
-          <context context-type="linenumber">115</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="presetsEditor.btn.title.sharePreset" datatype="html">
-        <source>share the preset</source>
-        <target>поділитися тренуванням</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/pages/preset-editor/preset-editor.component.html</context>
-          <context context-type="linenumber">125</context>
+          <context context-type="linenumber">51</context>
         </context-group>
       </trans-unit>
       <trans-unit id="presetsEditor.btn.title.options" datatype="html">
@@ -386,7 +354,7 @@
         <target>опції</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/preset-editor/preset-editor.component.html</context>
-          <context context-type="linenumber">135</context>
+          <context context-type="linenumber">110</context>
         </context-group>
       </trans-unit>
       <trans-unit id="presetsEditor.btn.title.close" datatype="html">
@@ -394,7 +362,39 @@
         <target>закрити</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/preset-editor/preset-editor.component.html</context>
-          <context context-type="linenumber">145</context>
+          <context context-type="linenumber">114</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="presetsEditor.btn.title.addNewExercise" datatype="html">
+        <source>add new exercise</source>
+        <target>додати нову вправу</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/preset-editor/preset-editor.component.html</context>
+          <context context-type="linenumber">128</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="presetsEditor.btn.title.deletePreset" datatype="html">
+        <source>delete preset</source>
+        <target>видалити тренування</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/preset-editor/preset-editor.component.html</context>
+          <context context-type="linenumber">137</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="presetsEditor.btn.title.launchingPreset" datatype="html">
+        <source>launching preset</source>
+        <target>перейти до тренування</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/preset-editor/preset-editor.component.html</context>
+          <context context-type="linenumber">146</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="presetsEditor.btn.title.sharePreset" datatype="html">
+        <source>share the preset</source>
+        <target>поділитися тренуванням</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/preset-editor/preset-editor.component.html</context>
+          <context context-type="linenumber">157</context>
         </context-group>
       </trans-unit>
       <trans-unit id="countdown.btn.title.restWork" datatype="html">
@@ -638,12 +638,20 @@
           <context context-type="linenumber">181</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="preset" datatype="html">
+        <source>preset</source>
+        <target>тренування</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/presets-list/presets-list.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="launchingPreset" datatype="html">
         <source>launching preset</source>
         <target>перейти до тренування</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/components/presets-list/presets-list.component.html</context>
-          <context context-type="linenumber">10</context>
+          <context context-type="linenumber">41</context>
         </context-group>
       </trans-unit>
       <trans-unit id="editPreset" datatype="html">
@@ -651,7 +659,7 @@
         <target>відредагувати тренування</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/components/presets-list/presets-list.component.html</context>
-          <context context-type="linenumber">15</context>
+          <context context-type="linenumber">47</context>
         </context-group>
       </trans-unit>
       <trans-unit id="deletePreset" datatype="html">
@@ -659,15 +667,7 @@
         <target>видалити тренування</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/components/presets-list/presets-list.component.html</context>
-          <context context-type="linenumber">19</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="preset" datatype="html">
-        <source>preset</source>
-        <target>тренування</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/components/presets-list/presets-list.component.html</context>
-          <context context-type="linenumber">5</context>
+          <context context-type="linenumber">51</context>
         </context-group>
       </trans-unit>
       <trans-unit id="export.exercise.type" datatype="html">

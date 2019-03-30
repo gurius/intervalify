@@ -117,6 +117,28 @@ export const routeAnimation =
     ])
   ]);
 
+export const duckToggle =
+  trigger('duckToggle', [
+    transition(':enter', [
+      style({ transform: 'translateY(7rem)' }),
+      animate('0.3s ease-in', style({ transform: '*' })),
+    ]),
+    transition(':leave', [
+      animate('0.3s ease-out', style({ transform: 'translateY(7rem)' }))
+    ])
+  ]);
+
+export const btnTrigger =
+  trigger('btnTrigger', [
+    transition('menu => close', [
+      animate('0.2s ease-in', style({ transform: 'rotateZ(0.25turn)' })),
+    ]),
+    transition('close => menu', [
+      style({ transform: 'rotateZ(0.25turn)' }),
+      animate('0.2s ease-in', style({ transform: '*' })),
+    ])
+  ]);
+
   // trigger('routeSliding', [
   //   transition('editor => stepper', slideHorizontallyTo('left')),
   //   transition('editor => home', slideHorizontallyTo('right')),
