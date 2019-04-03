@@ -285,4 +285,29 @@ export class PresetEditorComponent implements OnInit, OnDestroy {
     this.router.navigate(['/home']);
   }
 
+
+
+  changeReps(type, action) {
+    switch (type) {
+      case 'click':
+        if (action === 'increase') {
+          this.preset.repetitions++;
+        } else if (action === 'decrease') {
+          this.preset.repetitions--;
+        }
+        break;
+      case 'swipe':
+        if (action === 'increase') {
+          this.preset.repetitions += 10;
+        } else if (action === 'decrease') {
+          this.preset.repetitions -= 10;
+        }
+        break;
+    }
+    const val = this.preset.repetitions;
+    this.pHelper.updatePreset(this.preset.id, {
+      repetitions: val > 0 ? val : 1
+    });
+  }
+
 }

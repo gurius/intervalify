@@ -29,18 +29,30 @@
                #repetitionsInput
                jtAutofocusInput>
       </mat-form-field>
-      <jt-preset-repeats-icon
-        matRipple
-        [hidden]="editingRepetitions"
-        [val]="preset.repetitions"
-        color="#ffb300"
-        (click)="editProperty('repetitions')"
-        i18n-matTooltip="@@presetsEditor.icon.cycles" matTooltip="cycles">
-      </jt-preset-repeats-icon>
+      <div
+        (swipeup)="changeReps('swipe', 'increase')"
+        (swipedown)="changeReps('swipe', 'decrease')"
+        class="adjuster">
+        <button mat-icon-button>
+          <mat-icon color="primary" (click)="changeReps('click', 'increase')">arrow_drop_up</mat-icon>
+        </button>
+
+        <jt-preset-repeats-icon
+
+          [hidden]="editingRepetitions"
+          [val]="preset.repetitions"
+          color="#ffb300"
+          (click)="editProperty('repetitions')"
+          i18n-matTooltip="@@presetsEditor.icon.cycles" matTooltip="cycles">
+        </jt-preset-repeats-icon>
+        <button mat-icon-button>
+          <mat-icon color="primary" (click)="changeReps('click', 'decrease')">arrow_drop_down</mat-icon>
+        </button>
+    </div>
     </div>
   </div>
 
-  <div class="constructor-element">
+  <div class="constructor-element constructor-element--exercises">
     <ul
       cdkDropList
       [cdkDropListData]="exercises"

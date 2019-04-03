@@ -13,6 +13,7 @@
 }
 .workout-title{
   width: 100%;
+  align-self: center;
 }
 .workout-repetitions{
   display: flex;
@@ -34,6 +35,9 @@ mat-form-field{
   flex-flow: row;
   justify-content: space-between;
   margin: 1.5rem 0 1rem 0;
+}
+.constructor-element--exercises{
+  margin-bottom: 13rem;
 }
 .editor__item{
   display: flex;
@@ -101,4 +105,10 @@ mat-form-field{
 }
 .delete-icon{
   margin-right: 1rem;
+}
+.adjuster{
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  align-items: center;
 }
