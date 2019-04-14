@@ -18,7 +18,7 @@ import { CountdownTypes } from '../models/countdown.model';
 export class StepsService {
 
   getBlankStep(): Step {
-    return Object.assign({}, {
+    return {
       id: Date.now(),
       title: '',
       type: CountdownTypes.Work,
@@ -28,7 +28,7 @@ export class StepsService {
       presetRepetitions: true,
       color: '#1c9bba',
       belongsToExercises: []
-    })
+    }
   }
 
   steps: Step[] = [];

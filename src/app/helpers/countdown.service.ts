@@ -14,14 +14,14 @@ import { DeleteCountdowns, UpsertCountdowns }
 export class CountdownService {
 
   getBlank(exerciseId): Countdown {
-    return Object.assign({}, {
+    return {
       id: Date.now(),
       type: CountdownTypes.Work,
       minutes: 0,
       seconds: 0,
       seqNo: 1,
       belongsToExercises: [exerciseId]
-    })
+    }
   }
 
   removeCountdowns(exerciseId, deletedCountdowns) {

@@ -17,12 +17,12 @@ import { RelatedDataManagerService } from './related-data-manager.service';
 export class PresetService {
 
   getBlank(): Preset {
-    return Object.assign({}, {
+    return {
       id: Date.now(),
       title: 'untitled',
       exercisesIds: [],
       repetitions: 1
-    })
+    }
   }
 
   addPreset(preset: Preset): void {

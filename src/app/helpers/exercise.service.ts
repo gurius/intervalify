@@ -13,7 +13,7 @@ import { RelatedDataManagerService } from './related-data-manager.service';
 export class ExerciseService {
 
   getBlank(presetId): Exercise {
-    return Object.assign({}, {
+    return {
       id: Date.now(),
       title: 'untitled',
       color: '#ffcd06',
@@ -24,7 +24,7 @@ export class ExerciseService {
       atEndOnly: false,
       presetRepetitions: true,
       belongsToPresets: [presetId]
-    })
+    }
   }
 
   public addExercise(exercise, presetId): void {

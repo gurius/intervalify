@@ -10,7 +10,6 @@ import { UpdateExercise, DeleteExercises }
   from '../components/exercise-editor/exercise-editor.actions';
 import * as countdonwSelectors
   from 'src/app/components/countdown/countdown.selectors';
-import { Countdown } from '../models/countdown.model';
 import { DeleteCountdowns } from '../components/countdown/countdown.actions';
 
 @Injectable({
