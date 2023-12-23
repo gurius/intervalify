@@ -2,6 +2,9 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
+  "cli": {
+    "schematicCollections": ["@schematics/angular", "@ngrx/schematics"]
+  },
   "projects": {
     "intervalify": {
       "i18n": {
@@ -41,14 +44,14 @@
       },
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
             "allowedCommonJsDependencies": ["nosleep.js"],
             "aot": true,
             "outputPath": "dist/intervalify",
             "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
+            "browser": "src/main.ts",
+            "polyfills": ["src/polyfills.ts"],
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
@@ -83,8 +86,6 @@
               "sourceMap": false,
               "namedChunks": false,
               "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
               "budgets": [
                 {
                   "type": "initial",
@@ -96,7 +97,7 @@
                   "maximumWarning": "6kb"
                 }
               ],
-              "serviceWorker": true
+              "serviceWorker": "true"
             },
             "production": {
               "fileReplacements": [
@@ -111,8 +112,6 @@
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
               "budgets": [
                 {
                   "type": "initial",
@@ -124,7 +123,7 @@
                   "maximumWarning": "6kb"
                 }
               ],
-              "serviceWorker": true
+              "serviceWorker": "true"
             },
             "development": {}
           },
@@ -173,7 +172,7 @@
     "intervalify-e2e": {
       "root": "e2e/",
       "projectType": "application",
-      "prefix": "",
+      "prefix": "jt",
       "architect": {
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
