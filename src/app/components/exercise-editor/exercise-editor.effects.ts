@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 
 import {
   RequestExercises,
@@ -17,8 +17,8 @@ import { DataSourceService } from 'src/app/data-source.service';
 @Injectable()
 export class ExerciseEditorEffects {
 
-  @Effect()
-  loadExercises$ = this.actions$
+  
+  loadExercises$ = createEffect(() => this.actions$
     .pipe(
 
       ofType<RequestExercises>(ExerciseActionTypes.RequestExercises),
@@ -30,10 +30,10 @@ export class ExerciseEditorEffects {
 
       catchError(() => of({ type: ExerciseActionTypes.ExercisesLoadingError }))
 
-    );
+    ));
 
-  @Effect()
-  addExercise$ = this.actions$
+  
+  addExercise$ = createEffect(() => this.actions$
     .pipe(
 
       ofType<AddExercise>(ExerciseActionTypes.AddExercise),
@@ -46,10 +46,10 @@ export class ExerciseEditorEffects {
 
       catchError(() => of({ type: ExerciseActionTypes.ExerciseAddingError }))
 
-    );
+    ));
 
-  @Effect()
-  updateExercise$ = this.actions$
+  
+  updateExercise$ = createEffect(() => this.actions$
     .pipe(
 
       ofType<UpdateExercise>(ExerciseActionTypes.UpdateExercise),
@@ -61,10 +61,10 @@ export class ExerciseEditorEffects {
 
       catchError(() => of({ tupe: ExerciseActionTypes.ExerciseUpdatingError }))
 
-    );
+    ));
 
-  @Effect()
-  deleteExercise$ = this.actions$
+  
+  deleteExercise$ = createEffect(() => this.actions$
     .pipe(
 
       ofType<DeleteExercise>(ExerciseActionTypes.DeleteExercise),
@@ -75,10 +75,10 @@ export class ExerciseEditorEffects {
       }),
 
       catchError(() => of({ tupe: ExerciseActionTypes.ExerciseDeletionError }))
-    )
+    ))
 
-  @Effect()
-  deleteExercises$ = this.actions$
+  
+  deleteExercises$ = createEffect(() => this.actions$
     .pipe(
 
       ofType<DeleteExercises>(ExerciseActionTypes.DeleteExercises),
@@ -89,7 +89,7 @@ export class ExerciseEditorEffects {
       }),
 
       catchError(() => of({ tupe: ExerciseActionTypes.ExerciseDeletionError }))
-    )
+    ))
 
   constructor(
     private actions$: Actions,

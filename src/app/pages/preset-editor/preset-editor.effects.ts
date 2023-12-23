@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { of } from 'rxjs';
 import { catchError, mergeMap, map } from 'rxjs/operators'
-import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 
 import {
   PresetActionTypes,
@@ -24,8 +24,8 @@ import { DataSourceService } from 'src/app/data-source.service';
 @Injectable()
 export class PresetEditorEffects {
 
-  @Effect()
-  loadPreset$ = this.actions$.pipe(
+  
+  loadPreset$ = createEffect(() => this.actions$.pipe(
 
     ofType<RequestPresets>(PresetActionTypes.RequestPresets),
 
@@ -36,10 +36,10 @@ export class PresetEditorEffects {
 
     catchError(() => of({ type: PresetActionTypes.PresetsLoadingError }))
 
-  );
+  ));
 
-  @Effect()
-  addPreset$ = this.actions$
+  
+  addPreset$ = createEffect(() => this.actions$
     .pipe(
 
       ofType<AddPreset>(PresetActionTypes.AddPreset),
@@ -51,10 +51,10 @@ export class PresetEditorEffects {
 
       catchError(() => of({ type: PresetActionTypes.PresetAddingError }))
 
-    );
+    ));
 
-  @Effect()
-  updatePreset$ = this.actions$
+  
+  updatePreset$ = createEffect(() => this.actions$
     .pipe(
 
       ofType<UpdatePreset>(PresetActionTypes.UpdatePreset),
@@ -73,10 +73,10 @@ export class PresetEditorEffects {
 
       catchError(() => of({ type: PresetActionTypes.PresetUpdatingError }))
 
-    );
+    ));
 
-  @Effect()
-  deletePreset$ = this.actions$
+  
+  deletePreset$ = createEffect(() => this.actions$
     .pipe(
 
       ofType<DeletePreset>(PresetActionTypes.DeletePreset),
@@ -86,7 +86,7 @@ export class PresetEditorEffects {
       }),
 
       catchError(() => of(new PresetDeletionError()))
-    );
+    ));
 
   constructor(
     private actions$: Actions,

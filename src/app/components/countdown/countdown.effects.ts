@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import {
   RequestCountdowns,
   CountdownActionTypes,
@@ -14,8 +14,8 @@ import { DataSourceService } from 'src/app/data-source.service';
 @Injectable()
 export class CountdownEffects {
 
-  @Effect()
-  requestCountdowns$ = this.actions$
+  
+  requestCountdowns$ = createEffect(() => this.actions$
     .pipe(
 
       ofType<RequestCountdowns>(CountdownActionTypes.RequestCountdowns),
@@ -30,10 +30,10 @@ export class CountdownEffects {
         payload: { error: { err, description: 'Loading Error' } }
       }))
 
-    )
+    ))
 
-  @Effect()
-  upsertCountdows$ = this.actions$
+  
+  upsertCountdows$ = createEffect(() => this.actions$
     .pipe(
 
       ofType<UpsertCountdowns>(CountdownActionTypes.UpsertCountdowns),
@@ -47,10 +47,10 @@ export class CountdownEffects {
         type: CountdownActionTypes.CountdownsError,
         payload: { error: { err, description: 'Adding Error' } }
       }))
-    )
+    ))
 
-  @Effect()
-  deleteCountdowns$ = this.actions$
+  
+  deleteCountdowns$ = createEffect(() => this.actions$
     .pipe(
 
       ofType<DeleteCountdowns>(CountdownActionTypes.DeleteCountdowns),
@@ -65,7 +65,7 @@ export class CountdownEffects {
         payload: { error: { err, description: 'Deletion Error' } }
       }))
 
-    )
+    ))
 
   constructor(
     private actions$: Actions,
