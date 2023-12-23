@@ -4,6 +4,14 @@
   "newProjectRoot": "projects",
   "projects": {
     "intervalify": {
+      "i18n": {
+        "locales": {
+          "uk": {
+            "translation": "src/locale/messages.uk.xlf",
+            "baseHref": ""
+          }
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -35,6 +43,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "aot": true,
             "outputPath": "dist/intervalify",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -54,16 +63,20 @@
           "configurations": {
             "uk": {
               "aot": true,
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist/intervalify-uk",
               "i18nFile": "src/locale/messages.uk.xlf",
-              "i18nFormat": "xlf",
               "i18nLocale": "uk"
             },
             "uk-production": {
               "aot": true,
               "outputPath": "dist/intervalify-uk",
               "i18nFile": "src/locale/messages.uk.xlf",
-              "i18nFormat": "xlf",
               "i18nLocale": "uk",
               "fileReplacements": [
                 {
@@ -84,6 +97,10 @@
                   "type": "initial",
                   "maximumWarning": "2mb",
                   "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
                 }
               ],
               "serviceWorker": true
@@ -109,6 +126,10 @@
                   "type": "initial",
                   "maximumWarning": "2mb",
                   "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
                 }
               ],
               "serviceWorker": true
