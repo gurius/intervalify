@@ -11,7 +11,7 @@ import { CountdownService } from 'src/app/helpers/countdown.service';
 import { first } from 'rxjs/operators';
 import { DialogOptions, DialogTitleTypes }
   from 'src/app/models/dialog-options.model';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators, UntypedFormControl } from '@angular/forms';
 
 @Component({
   selector: 'jt-exercise-editor',
@@ -23,7 +23,7 @@ export class ExerciseEditorComponent implements OnInit, OnDestroy {
   dialogOptions: DialogOptions;
   countdowns: Countdown[] = [];
   deletedCountdowns: number[] = [];
-  exForm: FormGroup;
+  exForm: UntypedFormGroup;
 
   ngOnInit(): void {
     if (this.dialogOptions.isNew) {
@@ -72,7 +72,7 @@ export class ExerciseEditorComponent implements OnInit, OnDestroy {
     this.dialogReference.close(data)
   }
 
-  static isNumFractional = (c: FormControl): null | { fractional: boolean } => {
+  static isNumFractional = (c: UntypedFormControl): null | { fractional: boolean } => {
     const n: number = c.value;
     const fractional: boolean = (n - Math.floor(n)) !== 0;
     return fractional ? { fractional } : null;
@@ -83,7 +83,7 @@ export class ExerciseEditorComponent implements OnInit, OnDestroy {
     @Inject(MAT_DIALOG_DATA) public data: { exercise: Exercise, opts: DialogOptions },
     private store: Store<rootReducer.State>,
     private cHelper: CountdownService,
-    private fb: FormBuilder
+    private fb: UntypedFormBuilder
   ) {
     this.exercise = Object.assign({}, this.data.exercise);
     this.dialogOptions = this.data.opts;
