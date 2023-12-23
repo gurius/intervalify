@@ -142,13 +142,13 @@
           },
           "configurations": {
             "uk": {
-              "browserTarget": "intervalify:build:uk"
+              "buildTarget": "intervalify:build:uk"
             },
             "production": {
-              "browserTarget": "intervalify:build:production"
+              "buildTarget": "intervalify:build:production"
             },
             "development": {
-              "browserTarget": "intervalify:build:development"
+              "buildTarget": "intervalify:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -156,7 +156,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "intervalify:build"
+            "buildTarget": "intervalify:build"
           }
         },
         "test": {

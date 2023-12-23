@@ -60,7 +60,7 @@ import { DeletionConfirmationComponent } from "./components/deletion-confirmatio
     AppRoutingModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     !environment.production
-      ? StoreDevtoolsModule.instrument({ maxAge: 10 })
+      ? StoreDevtoolsModule.instrument({ maxAge: 10 , connectInZone: true})
       : [],
     BrowserAnimationsModule,
     FormsModule,
