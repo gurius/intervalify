@@ -133,13 +133,14 @@
                 }
               ],
               "serviceWorker": true
-            }
-          }
+            },
+            "development": {}
+          },
+          "defaultConfiguration": "production"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "intervalify:build"
           },
           "configurations": {
             "uk": {
@@ -147,8 +148,12 @@
             },
             "production": {
               "browserTarget": "intervalify:build:production"
+            },
+            "development": {
+              "browserTarget": "intervalify:build:development"
             }
-          }
+          },
+          "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
@@ -197,14 +202,17 @@
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
-            "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "intervalify:serve"
+            "protractorConfig": "e2e/protractor.conf.js"
           },
           "configurations": {
             "production": {
               "devServerTarget": "intervalify:serve:production"
+            },
+            "development": {
+              "devServerTarget": "intervalify:serve:development"
             }
-          }
+          },
+          "defaultConfiguration": "development"
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
