@@ -43,6 +43,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": ["nosleep.js"],
             "aot": true,
             "outputPath": "dist/intervalify",
             "index": "src/index.html",
