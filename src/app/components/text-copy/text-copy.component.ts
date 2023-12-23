@@ -1,10 +1,11 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef, MatSnackBar } from '@angular/material';
+import { Component, OnInit, Inject } from "@angular/core";
+import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
-  selector: 'jt-text-copy',
-  templateUrl: './text-copy.component.html',
-  styleUrls: ['./text-copy.component.css']
+  selector: "jt-text-copy",
+  templateUrl: "./text-copy.component.html",
+  styleUrls: ["./text-copy.component.css"],
 })
 export class TextCopyComponent implements OnInit {
   link: string;
@@ -21,13 +22,11 @@ export class TextCopyComponent implements OnInit {
     link.select();
     document.execCommand("copy");
     this.dialogReference.close();
-    this.sBar.open('copied', 'ok!', {
+    this.sBar.open("copied", "ok!", {
       duration: 2000,
-      panelClass: 'saved-notify'
-    })
+      panelClass: "saved-notify",
+    });
   }
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }
