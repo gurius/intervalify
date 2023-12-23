@@ -44,8 +44,8 @@ export class PresetEditorComponent implements OnInit, OnDestroy {
   editingRepetitions: boolean;
   presetSubscription: Subscription;
 
-  @ViewChild('titleInput') titleInput: ElementRef<HTMLInputElement>;
-  @ViewChild('repetitionsInput') repetitionsInput: ElementRef<HTMLInputElement>;
+  @ViewChild('titleInput', { static: false }) titleInput: ElementRef<HTMLInputElement>;
+  @ViewChild('repetitionsInput', { static: false }) repetitionsInput: ElementRef<HTMLInputElement>;
   exercises: Exercise[];
   exercisesSubscription: Subscription;
   countdownsSubscription: Subscription;
