@@ -39,7 +39,7 @@ export class AppComponent {
 
   constructor(
     private store: Store<fromRedusers.State>,
-    private stepper: StepperService,
+    protected stepper: StepperService,
     private menu: MatBottomSheet,
     @Inject(LOCALE_ID) locale: string,
     private mIRegiser: MatIconRegistry,

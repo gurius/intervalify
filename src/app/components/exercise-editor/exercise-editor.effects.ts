@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Injectable } from "@angular/core";
+import { Actions, createEffect, ofType } from "@ngrx/effects";
 
 import {
   RequestExercises,
@@ -8,91 +8,100 @@ import {
   UpdateExercise,
   DeleteExercise,
   DeleteExercises,
-
-} from 'src/app/components/exercise-editor/exercise-editor.actions';
-import { mergeMap, catchError } from 'rxjs/operators';
-import { of } from 'rxjs';
-import { DataSourceService } from 'src/app/data-source.service';
+} from "src/app/components/exercise-editor/exercise-editor.actions";
+import { mergeMap, catchError } from "rxjs/operators";
+import { of } from "rxjs";
+import { DataSourceService } from "src/app/data-source.service";
 
 @Injectable()
 export class ExerciseEditorEffects {
+  loadExercises$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType<RequestExercises>(ExerciseActionTypes.RequestExercises),
 
-  
-  loadExercises$ = createEffect(() => this.actions$
-    .pipe(
+        mergeMap(() =>
+          of({
+            type: ExerciseActionTypes.LoadExercises,
+            payload: { exercises: this.dataSource.getExercises() },
+          }),
+        ),
 
-      ofType<RequestExercises>(ExerciseActionTypes.RequestExercises),
-
-      mergeMap(() => of({
-        type: ExerciseActionTypes.LoadExercises,
-        payload: { exercises: this.dataSource.getExercises() }
-      })),
-
-      catchError(() => of({ type: ExerciseActionTypes.ExercisesLoadingError }))
-
-    ));
-
-  
-  addExercise$ = createEffect(() => this.actions$
-    .pipe(
-
-      ofType<AddExercise>(ExerciseActionTypes.AddExercise),
-
-      mergeMap(action => {
-        this.dataSource.addExercise(action.payload.exercise);
-        return of({ type: ExerciseActionTypes.ExerciseAdded })
-      }
+        catchError(() =>
+          of({ type: ExerciseActionTypes.ExercisesLoadingError }),
+        ),
       ),
+    { useEffectsErrorHandler: false },
+  );
 
-      catchError(() => of({ type: ExerciseActionTypes.ExerciseAddingError }))
+  addExercise$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType<AddExercise>(ExerciseActionTypes.AddExercise),
 
-    ));
+        mergeMap((action) => {
+          this.dataSource.addExercise(action.payload.exercise);
+          return of({ type: ExerciseActionTypes.ExerciseAdded });
+        }),
 
-  
-  updateExercise$ = createEffect(() => this.actions$
-    .pipe(
+        catchError(() => of({ type: ExerciseActionTypes.ExerciseAddingError })),
+      ),
+    { useEffectsErrorHandler: false },
+  );
 
-      ofType<UpdateExercise>(ExerciseActionTypes.UpdateExercise),
+  updateExercise$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType<UpdateExercise>(ExerciseActionTypes.UpdateExercise),
 
-      mergeMap(action => {
-        this.dataSource.updateExercise(action.payload.exercise);
-        return of({ type: ExerciseActionTypes.ExerciseUpdated });
-      }),
+        mergeMap((action) => {
+          this.dataSource.updateExercise(action.payload.exercise);
+          return of({ type: ExerciseActionTypes.ExerciseUpdated });
+        }),
 
-      catchError(() => of({ tupe: ExerciseActionTypes.ExerciseUpdatingError }))
+        catchError(() =>
+          of({ type: ExerciseActionTypes.ExerciseUpdatingError }),
+        ),
+      ),
+    { useEffectsErrorHandler: false },
+  );
 
-    ));
+  deleteExercise$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType<DeleteExercise>(ExerciseActionTypes.DeleteExercise),
 
-  
-  deleteExercise$ = createEffect(() => this.actions$
-    .pipe(
+        mergeMap((action) => {
+          this.dataSource.deleteExercise(action.payload.id);
+          return of({ type: ExerciseActionTypes.ExerciseDeleted });
+        }),
 
-      ofType<DeleteExercise>(ExerciseActionTypes.DeleteExercise),
+        catchError(() =>
+          of({ type: ExerciseActionTypes.ExerciseDeletionError }),
+        ),
+      ),
+    { useEffectsErrorHandler: false },
+  );
 
-      mergeMap(action => {
-        this.dataSource.deleteExercise(action.payload.id);
-        return of({ type: ExerciseActionTypes.ExerciseDeleted })
-      }),
+  deleteExercises$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType<DeleteExercises>(ExerciseActionTypes.DeleteExercises),
 
-      catchError(() => of({ tupe: ExerciseActionTypes.ExerciseDeletionError }))
-    ))
+        mergeMap((action) => {
+          this.dataSource.deleteExercises(action.payload.ids);
+          return of({ type: ExerciseActionTypes.ExercisesDeleted });
+        }),
 
-  
-  deleteExercises$ = createEffect(() => this.actions$
-    .pipe(
-
-      ofType<DeleteExercises>(ExerciseActionTypes.DeleteExercises),
-
-      mergeMap(action => {
-        this.dataSource.deleteExercises(action.payload.ids);
-        return of({ type: ExerciseActionTypes.ExercisesDeleted })
-      }),
-
-      catchError(() => of({ tupe: ExerciseActionTypes.ExerciseDeletionError }))
-    ))
+        catchError(() =>
+          of({ type: ExerciseActionTypes.ExerciseDeletionError }),
+        ),
+      ),
+    { useEffectsErrorHandler: false },
+  );
 
   constructor(
     private actions$: Actions,
-    private dataSource: DataSourceService
-  ) { }
+    private dataSource: DataSourceService,
+  ) {}
 }

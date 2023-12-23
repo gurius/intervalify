@@ -104,7 +104,7 @@ export class PresetEditorComponent implements OnInit, OnDestroy {
     this.presetSubscription.unsubscribe();
   }
 
-  drop(event: CdkDragDrop<string[]>) {
+  drop(event: CdkDragDrop<Exercise[]>) {
     moveItemInArray(this.exercises, event.previousIndex, event.currentIndex);
     this.exercises.forEach((ex, i) => {
       ex.seqNo = i;

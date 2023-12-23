@@ -1,21 +1,19 @@
-import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
-import { Countdown } from '../../models/countdown.model';
-import { CountdownActions, CountdownActionTypes } from './countdown.actions';
+import { EntityState, EntityAdapter, createEntityAdapter } from "@ngrx/entity";
+import { Countdown } from "../../models/countdown.model";
+import { CountdownActions, CountdownActionTypes } from "./countdown.actions";
 
 export interface State extends EntityState<Countdown> {
   // additional entities state properties
 }
 
-export const adapter: EntityAdapter<Countdown> = createEntityAdapter<Countdown>();
+export const adapter: EntityAdapter<Countdown> =
+  createEntityAdapter<Countdown>();
 
 export const initialState: State = adapter.getInitialState({
   // additional entity state properties
 });
 
-export function reducer(
-  state = initialState,
-  action: CountdownActions
-): State {
+export function reducer(state = initialState, action: CountdownActions): State {
   switch (action.type) {
     case CountdownActionTypes.AddCountdown: {
       return adapter.addOne(action.payload.countdown, state);
@@ -33,7 +31,6 @@ export function reducer(
       return adapter.upsertMany(action.payload.countdowns, state);
     }
 
-
     case CountdownActionTypes.UpdateCountdowns: {
       return adapter.updateMany(action.payload.countdowns, state);
     }
@@ -47,7 +44,7 @@ export function reducer(
     }
 
     case CountdownActionTypes.LoadCountdowns: {
-      return adapter.addAll(action.payload.countdowns, state);
+      return adapter.setAll(action.payload.countdowns, state);
     }
 
     case CountdownActionTypes.ClearCountdowns: {
@@ -60,9 +57,5 @@ export function reducer(
   }
 }
 
-export const {
-  selectIds,
-  selectEntities,
-  selectAll,
-  selectTotal,
-} = adapter.getSelectors();
+export const { selectIds, selectEntities, selectAll, selectTotal } =
+  adapter.getSelectors();

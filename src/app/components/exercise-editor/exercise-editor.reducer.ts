@@ -1,14 +1,17 @@
-import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
+import { EntityState, EntityAdapter, createEntityAdapter } from "@ngrx/entity";
 
-import { Exercise } from '../../models/exercise.model';
-import { ExerciseActions, ExerciseActionTypes } from './exercise-editor.actions';
+import { Exercise } from "../../models/exercise.model";
+import {
+  ExerciseActions,
+  ExerciseActionTypes,
+} from "./exercise-editor.actions";
 
 export interface State extends EntityState<Exercise> {
   // additional entities state properties
 }
 
 export const adapter: EntityAdapter<Exercise> = createEntityAdapter<Exercise>({
-  sortComparer: sortBySeqNo
+  sortComparer: sortBySeqNo,
 });
 
 export const initialState: State = adapter.getInitialState({
@@ -19,10 +22,7 @@ export function sortBySeqNo(e1: Exercise, e2: Exercise): number {
   return e1.seqNo - e2.seqNo;
 }
 
-export function reducer(
-  state = initialState,
-  action: ExerciseActions
-): State {
+export function reducer(state = initialState, action: ExerciseActions): State {
   switch (action.type) {
     case ExerciseActionTypes.AddExercise: {
       return adapter.addOne(action.payload.exercise, state);
@@ -57,14 +57,15 @@ export function reducer(
     }
 
     case ExerciseActionTypes.LoadExercises: {
-      return adapter.addAll(action.payload.exercises, state);
+      return adapter.setAll(action.payload.exercises, state);
     }
 
     case ExerciseActionTypes.ClearExercises: {
       return adapter.removeAll(state);
     }
 
-    case ExerciseActionTypes.ExerciseAdded: { }
+    case ExerciseActionTypes.ExerciseAdded: {
+    }
 
     default: {
       return state;
@@ -72,9 +73,5 @@ export function reducer(
   }
 }
 
-export const {
-  selectIds,
-  selectEntities,
-  selectAll,
-  selectTotal,
-} = adapter.getSelectors();
+export const { selectIds, selectEntities, selectAll, selectTotal } =
+  adapter.getSelectors();

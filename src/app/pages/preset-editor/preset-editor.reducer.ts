@@ -1,8 +1,7 @@
-import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
+import { EntityState, EntityAdapter, createEntityAdapter } from "@ngrx/entity";
 
-import { Preset } from '../../models/preset.model';
-import { PresetActions, PresetActionTypes } from './preset-editor.actions';
-
+import { Preset } from "../../models/preset.model";
+import { PresetActions, PresetActionTypes } from "./preset-editor.actions";
 
 export interface State extends EntityState<Preset> {
   // additional entities state properties
@@ -14,10 +13,7 @@ export const initialState: State = adapter.getInitialState({
   // additional entity state properties
 });
 
-export function reducer(
-  state = initialState,
-  action: PresetActions
-): State {
+export function reducer(state = initialState, action: PresetActions): State {
   switch (action.type) {
     case PresetActionTypes.AddPreset: {
       return adapter.addOne(action.payload.preset, state);
@@ -52,17 +48,16 @@ export function reducer(
     }
 
     case PresetActionTypes.LoadPresets: {
-      return adapter.addAll(action.payload.presets, state);
+      return adapter.setAll(action.payload.presets, state);
     }
 
     case PresetActionTypes.PresetsLoaded: {
       if (action.payload.presets) {
-        return adapter.addAll(action.payload.presets, state);
+        return adapter.setAll(action.payload.presets, state);
       }
     }
 
     case PresetActionTypes.PresetsLoadingError: {
-
     }
 
     case PresetActionTypes.ClearPresets: {
@@ -75,9 +70,5 @@ export function reducer(
   }
 }
 
-export const {
-  selectIds,
-  selectEntities,
-  selectAll,
-  selectTotal,
-} = adapter.getSelectors();
+export const { selectIds, selectEntities, selectAll, selectTotal } =
+  adapter.getSelectors();

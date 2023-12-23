@@ -1,42 +1,53 @@
 <div class="countdown-block">
   <button
-    matTooltip="rest/work" i18n-matTooltip="@@countdown.btn.title.restWork"
+    matTooltip="rest/work"
+    i18n-matTooltip="@@countdown.btn.title.restWork"
     class="work-rest-mans"
-    color="warn" mat-icon-button [ngSwitch]="countdown.type">
+    color="warn"
+    mat-icon-button
+    [ngSwitch]="countdown.type"
+  >
     <mat-icon
       class="work-man"
-      *ngSwitchCase="'work'" (click)="countdown.type = 'rest'">
+      *ngSwitchCase="'work'"
+      (click)="toggleWorkRest(countdown, 'rest')"
+    >
       directions_run
     </mat-icon>
     <mat-icon
       class="rest-icon"
       *ngSwitchCase="'rest'"
-      (click)="countdown.type = 'work'"
-      svgIcon="resting-man-green">
+      (click)="toggleWorkRest(countdown, 'work')"
+      svgIcon="resting-man-green"
+    >
     </mat-icon>
   </button>
 </div>
 <div class="countdown-block">
   <mat-form-field class="countdown-input">
-    <input matInput
-    type="number"
-    min="0"
-    step="1"
-    placeholder="minutes"
-    i18n-placeholder="@@countdown.input.placeholder.minutes"
-    (blur)="timeCorrector($event, 'minutes')"
-    [value]="countdown.minutes">
-  </mat-form-field>:
+    <input
+      matInput
+      type="number"
+      min="0"
+      step="1"
+      placeholder="minutes"
+      i18n-placeholder="@@countdown.input.placeholder.minutes"
+      (blur)="timeCorrector($event, 'minutes')"
+      [value]="countdown.minutes"
+    /> </mat-form-field
+  >:
 
   <mat-form-field class="countdown-input">
-    <input matInput
-    type="number"
-    min="0"
-    step="1"
-    placeholder="seconds"
-    i18n-placeholder="@@countdown.input.placeholder.seconds"
-    (blur)="timeCorrector($event, 'seconds')"
-    [value]="countdown.seconds">
+    <input
+      matInput
+      type="number"
+      min="0"
+      step="1"
+      placeholder="seconds"
+      i18n-placeholder="@@countdown.input.placeholder.seconds"
+      (blur)="timeCorrector($event, 'seconds')"
+      [value]="countdown.seconds"
+    />
   </mat-form-field>
 </div>
 <div class="countdown-block">
